@@ -390,8 +390,6 @@ footer {
     overflow: hidden;
 }
 
-
-
 .swiper.mySwiper {
     width: 100%;
     /* prend toute la largeur du container parent */
@@ -463,7 +461,6 @@ footer {
 .swiper-slide .btn-discover,
 .swiper-slide .btn-add-wishlist {
     pointer-events: auto;
-    /* réactive seulement sur les éléments cliquables */
 }
 
 .sunrise-logo {
@@ -474,7 +471,6 @@ footer {
 
 .craftiny-logo {
     width: clamp(150px, 20vw, 500px);
-    /* rétrécit plus vite */
     height: auto;
     object-fit: contain;
     object-position: left;
@@ -498,7 +494,6 @@ footer {
 .craftiny-logo-wrapper {
     position: absolute;
     top: clamp(8%, 10vw, 30%);
-    /* plus bas */
     left: 8%;
     right: 8%;
     min-width: 0;
@@ -507,7 +502,6 @@ footer {
     flex-direction: column;
     align-items: flex-start;
     gap: clamp(4px, 0.6vw, 8px);
-    /* gap plus serré */
     overflow: visible;
 }
 
@@ -559,8 +553,8 @@ footer {
 }
 
 .available-now-content svg {
-    width: clamp(20px, 1.5vw, 22px);
-    height: clamp(20px, 1.5vw, 22px);
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
 }
 
@@ -600,8 +594,8 @@ footer {
 }
 
 .btn-buy-now {
-    width: clamp(175px, 14vw, 180px);
-    height: clamp(53px, 4vw, 55px);
+    width: 180px;
+    height: 55px;
     border-radius: 10px;
     display: inline-flex;
     justify-content: center;
@@ -622,8 +616,8 @@ footer {
 }
 
 .btn-add-wishlist {
-    width: clamp(245px, 20vw, 250px);
-    height: clamp(53px, 4vw, 55px);
+    width: 250px;
+    height: 55px;
     border-radius: 10px;
     display: inline-flex;
     justify-content: center;
@@ -651,13 +645,13 @@ footer {
 
 .btn-buy-now svg,
 .btn-add-wishlist svg {
-    width: clamp(26px, 2vw, 28px);
-    height: clamp(26px, 2vw, 28px);
+    width: 28px;
+    height: 28px;
 }
 
 .btn-discover {
-    width: clamp(250px, 20vw, 250px);
-    height: clamp(50px, 4vw, 55px);
+    width: 250px;
+    height: 55px;
     border-radius: 10px;
     display: inline-flex;
     justify-content: center;
@@ -1445,7 +1439,7 @@ footer {
 }
 
 .sunrise-content-logo {
-    width: clamp(400px, 30vw, 450px);
+    width: clamp(300px, 30vw, 450px);
     max-width: 450px;
     height: auto;
 }
@@ -1470,8 +1464,8 @@ footer {
 }
 
 .btn-big-buy-now {
-    width: clamp(190px, 14vw, 220px);
-    height: clamp(53px, 4vw, 70px);
+    width: 220px;
+    height: 70px;
     border-radius: 10px;
     display: inline-flex;
     justify-content: center;
@@ -1482,8 +1476,8 @@ footer {
 }
 
 .btn-trailer {
-    width: clamp(250px, 14vw, 280px);
-    height: clamp(53px, 4vw, 70px);
+    width: 280px;
+    height: 70px;
     border-radius: 10px;
     display: inline-flex;
     justify-content: center;
@@ -1503,10 +1497,6 @@ footer {
     font-weight: 900;
 }
 
-.btn-trailer:hover {
-    transform: scale(1.02);
-    opacity: 0.9;
-}
 
 .btn-trailer svg {
     display: block;
@@ -1528,8 +1518,8 @@ footer {
 
 .btn-big-buy-now svg,
 .btn-trailer svg {
-    width: clamp(26px, 2vw, 40px);
-    height: clamp(26px, 2vw, 40px);
+    width: 40px;
+    height: 40px;
 }
 
 .btn-beige-dark {
@@ -1545,7 +1535,7 @@ footer {
 .informations {
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: stretch;
     justify-content: center;
     gap: clamp(10px, 8vw, 30px);
     padding-bottom: 200px;
@@ -1557,6 +1547,7 @@ footer {
     flex-direction: column;
     align-items: flex-end;
     gap: 30px;
+    justify-content: flex-end;
 }
 
 .informations-left {
@@ -1564,6 +1555,7 @@ footer {
     flex-direction: column;
     align-items: flex-start;
     gap: 30px;
+    justify-content: space-between;
 }
 
 .informations-left img {
@@ -1573,6 +1565,7 @@ footer {
     flex-shrink: 0;
     aspect-ratio: 135/158;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 .sunrise-box {
@@ -1585,7 +1578,7 @@ footer {
     justify-content: center;
     align-items: flex-start;
     gap: 50px;
-    padding: 30px 60px;
+    padding: 50px 60px;
     border-radius: 25px;
 }
 
@@ -1706,6 +1699,13 @@ footer {
     height: 0;
     overflow: hidden;
     border-radius: 12px;
+    margin-top: 20px;
+    max-height: 400px;
+}
+
+.iframe-wrapper.video-container {
+    padding-bottom: 56.25%;
+    max-height: 350px;
 }
 
 .iframe-wrapper iframe {
@@ -1716,8 +1716,368 @@ footer {
     border: 0;
 }
 
+.iframe-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 12px;
+    background-color: #000;
+}
+
+.title-and-download {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-download {
+    width: 190px;
+    height: 50px;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-download span {
+    background: var(--Gradient-Sunrises-Order, linear-gradient(270deg, #C68749 0%, #875028 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.btn-download:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.btn-download svg {
+    display: block;
+    margin-top: 4px;
+    transition: transform 0.2s ease;
+}
+
+.btn-download:hover svg {
+    transform: translateY(2px);
+}
+
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    min-height: 150px;
+}
+
+.logo-image {
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Thumbnail hover effects */
+.thumbnail-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-container:hover .thumbnail-image {
+    transform: scale(1.08);
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) -0.02%, rgba(0, 0, 0, 0.30) 99.96%), radial-gradient(57.92% 50.85% at 50% 50%, rgba(254, 235, 220, 0.15) 0%, rgba(135, 80, 40, 0.50) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.thumbnail-container:hover .thumbnail-overlay {
+    opacity: 1;
+}
+
+.thumbnail-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.thumbnail-container:hover .thumbnail-content {
+    opacity: 1;
+}
+
+.enlarge-text-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.enlarge-text {
+    color: #FFF;
+    text-align: center;
+    text-shadow: 
+        -2px -2px 0 #875028,
+        2px -2px 0 #875028,
+        -2px 2px 0 #875028,
+        2px 2px 0 #875028,
+        -2px 0 0 #875028,
+        2px 0 0 #875028,
+        0 -2px 0 #875028,
+        0 2px 0 #875028;
+    font-family: Asap;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.enlarge-icon {
+    fill: #FFF;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Image Modal Styles */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.image-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    cursor: default;
+}
+
+.modal-content {
+    position: relative;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    background: transparent;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 90vw;
+    max-height: 90vh;
+    animation: slideUp 0.4s ease-in-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    border-radius: 42.5px;
+    border: 2px solid var(--Gradient-Sunrises-Order, #C68749);
+    background: #FFF;
+    cursor: pointer;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    transform: scale(1.1);
+}
+
+.modal-close-btn svg {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80vw;
+    max-height: 70vh;
+    overflow: visible;
+    border-radius: 15px;
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 15px;
+    animation: zoomIn 0.4s ease-in-out;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.modal-download-btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+
+.download-btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.download-btn:hover {
+    transform: scale(1.15);
+}
+
+.download-btn svg {
+    width: 100%;
+    height: 100%;
+}
+
+.download-btn:hover path {
+    transform: translateY(3px);
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-container .download-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    pointer-events: auto;
+    z-index: 4;
+}
+
+.thumbnail-container:hover .download-btn {
+    opacity: 1;
+}
+
+.modal-footer .download-btn {
+    pointer-events: auto;
+}
+
 /* Media queries pour les écrans de 1400px et moins */
 @media (max-width: 1400px) {
+
+    .informations {
+        padding-bottom: 150px;
+        gap: clamp(10px, 6vw, 25px);
+    }
+    
+    .right-info {
+        width: 100%;
+        max-width: 600px;
+        padding: 25px 50px;
+    }
+    
+    .btn-sunrise-informations-buy-now {
+        max-width: 100%;
+    }
+    
+    .factsheet {
+        padding: 40px 50px;
+    }
 
     .socials-and-credits {
         display: flex;
@@ -1742,9 +2102,89 @@ footer {
         left: 1%;
         width: 380px;
     }
+
+    .informations-right {
+        justify-content: space-between;
+    }
+
+    .download-btn {
+        width: 100%;
+        max-width: 492px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .download-btn svg {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 @media (max-width: 1205px) {
+
+    .btn-big-buy-now {
+    padding: 0px 0px;
+    }
+
+    .informations {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        padding-top: 60px;
+        padding: 100px 0px;
+        margin: 0 6vh;
+    }
+    
+    .informations-left {
+        width: 100%;
+        max-width: none;
+        align-items: center;
+    }
+    
+    .informations-right {
+        width: 100%;
+        max-width: none;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .informations-left img {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .btn-sunrise-informations-buy-now {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .factsheet {
+        width: 100%;
+        max-width: none;
+        padding: 30px 40px;
+        gap: 40px;
+    }
+    
+    .right-info {
+        width: 100%;
+        max-width: none;
+        padding: 25px 40px;
+    }
+
+    .thumbnail-container {
+        width: 100%;
+        max-width: none;
+    }
+
+    .price-factsheet {
+        width: 100%;
+        max-width: none;
+    }
+
     .bubble {
         width: 100%;
         height: 20%;
@@ -1853,7 +2293,6 @@ footer {
         flex-direction: column;
         gap: 30px;
         padding: 0 2vw;
-        /* espace gauche/droite responsive */
     }
 
     .game-card {
@@ -1953,7 +2392,6 @@ footer {
             linear-gradient(180deg, rgba(255, 255, 255, 0.00) 40%, #FFF 100%),
             linear-gradient(270deg, rgba(255, 255, 255, 0.00) 70%, rgba(91, 171, 205, 0.60) 85%, rgba(218, 159, 190, 0.60) 95%, rgba(120, 77, 110, 0.60) 100%);
     }
-
 
     .game-gradient-sunrise {
         display: none;
@@ -2086,10 +2524,80 @@ footer {
         margin: 0;
         display: block;
     }
+
+    .informations {
+        flex-direction: column;
+        padding-bottom: 80px;
+        padding-top: 40px;
+        gap: 30px;
+        margin: 0px 6vh;
+    }
+    
+    .informations-left {
+        width: 100%;
+    }
+    
+    .informations-right {
+        width: 100%;
+    }
+    
+    .factsheet {
+        width: 100%;
+        padding: 25px 35px;
+        gap: 30px;
+    }
+
+    .factsheet-text h3 {
+        font-size: 30px;
+    }
+    
+    .right-info {
+        width: 100%;
+        padding: 20px 35px;
+    }
+    
+    .right-info-text h3 {
+        font-size: 30px;
+    }
+    
+    .right-info-text p, .right-info-text ul li {
+        font-size: 18px;
+    }
+    
+    .price-factsheet {
+        width: 100%;
+        margin-left: 0;
+        max-width: 450px;
+    }
 }
 
 /* à 768px — cache aussi les liens de nav du header */
 @media (max-width: 768px) {
+    .sunrise-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .modal-content {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .modal-close-btn {
+        top: -55px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .modal-image-container {
+        max-width: 95vw;
+        max-height: 60vh;
+    }
+
+    .modal-image {
+        max-height: 60vh;
+    }
+
     .bubble {
         width: 100%;
         height: 60%;
@@ -2158,14 +2666,10 @@ footer {
         display: none;
     }
 
-    /* montre les liens de nav dans le sidebar */
     .sidebar-nav {
         display: flex;
     }
 
-
-
-    /* 1. description → arrête de casser la largeur */
     .game-description {
         width: 100%;
         max-width: 100%;
@@ -2173,7 +2677,6 @@ footer {
         font-size: 22px;
     }
 
-    /* 2. wrappers → enlève la pression des côtés */
     .sunrise-logo-wrapper,
     .craftiny-logo-wrapper {
         left: 20px;
@@ -2182,32 +2685,139 @@ footer {
         width: auto;
     }
 
-    /* 3. covers → full width clean */
     .sunrise-cover,
     .craftiny-cover {
         width: 100%;
         margin-left: 0;
     }
 
-    /* 4. boutons → évite qu’ils push le layout */
     .game-buttons {
         flex-wrap: wrap;
         justify-content: center;
     }
 
-    /* 5. sécurité globale anti-débordement */
     .swiper-slide {
         overflow-x: hidden;
     }
 
-    /* 6. au cas où un enfant est trop large */
     .swiper-slide * {
         max-width: 100%;
     }
 
     #logo-Misstic-footer {
         width: clamp(220px, 50vw, 280px);
-        /* 220px sur mobile, 280px sur tablette */
+    }
+
+    /* Sunrise Order Page */
+    .informations {
+        flex-direction: column;
+        padding-bottom: 40px;
+        padding-top: 20px;
+        gap: 15px;
+        padding: 100px 0px;
+        margin: 0 4vh;
+    }
+
+    .informations-left {
+        width: 100%;
+        gap: 20px;
+    }
+
+    .informations-right {
+        width: 100%;
+        gap: 20px;
+    }
+
+    .informations-left img {
+        width: 100%;
+        height: auto;
+    }
+
+    .btn-sunrise-informations-buy-now {
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+    }
+
+    .btn-sunrise-informations-buy-now span {
+        font-size: 25px;
+    }
+
+    .factsheet {
+        width: 100%;
+        padding: 15px 20px;
+        gap: 20px;
+        border-radius: 15px;
+    }
+
+    .factsheet-text h3{
+        font-size: 25px;
+    }
+
+    .factsheet-text p{
+        font-size: 16px;
+    }
+
+    .price-factsheet {
+        width: 100%;
+        height: auto;
+        padding: 12px;
+        margin-left: 0;
+    }
+
+    .right-info {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 15px;
+    }
+
+    .right-info-text h3 {
+        font-size: 25px;
+    }
+
+    .right-info-text p, .right-info-text ul li {
+        font-size: 16px;
+    }
+
+    .star-sunrise {
+        width: 30px;
+        height: 30px;
+    }
+
+    .right-info-title {
+        height: 50px;
+        gap: 8px;
+    }
+
+    .iframe-wrapper.video-container {
+        max-height: 200px;
+    }
+
+    .btn-download {
+        height: 45px;
+    }
+
+    .btn-download span {
+        font-size: 16px;
+    }
+
+    .enlarge-text {
+        font-size: 20px;
+    }
+
+    .modal-close-btn {
+        width: 40px;
+        height: 40px;
+        top: -20px;
+        right: -20px;
+    }
+
+    .modal-image-container {
+        max-height: 70vh;
+    }
+
+    .modal-image {
+        max-height: 70vh;
     }
 }
 
@@ -2216,5 +2826,10 @@ footer {
         margin: 20px;
         width: 100%;
         height: 120%;
+    }
+
+        .title-and-download {
+        flex-direction: column;
+        gap: 10px;
     }
 }

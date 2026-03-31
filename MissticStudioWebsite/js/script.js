@@ -11,6 +11,81 @@ window.addEventListener("scroll", function() {
     lastScrollTop = scrollTop;
 });
 
+// MP4 Video autoplay/pause on scroll
+const trailerVideo = document.getElementById('trailer-video');
+
+console.log('Video element trouvé:', trailerVideo);
+
+if (trailerVideo) {
+    trailerVideo.muted = true;
+
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            console.log('ratio:', entry.intersectionRatio, '| intersecting:', entry.isIntersecting);
+            if (entry.isIntersecting) {
+                trailerVideo.play().then(() => {
+                    console.log('✅ Video playing');
+                }).catch(err => {
+                    console.error('❌ Play bloqué:', err);
+                });
+            } else {
+                trailerVideo.pause();
+                console.log('⏸ Video paused');
+            }
+        });
+    }, {
+        threshold: [0, 0.1]
+    });
+
+    videoObserver.observe(trailerVideo);
+    console.log('Observer attaché à:', trailerVideo.id);
+}
+
+// Image Modal - Click to Enlarge
+const thumbnailContainer = document.querySelector('.thumbnail-container');
+const imageModal = document.getElementById('imageModal');
+const modalImage = document.getElementById('modalImage');
+const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const modalBackdrop = document.querySelector('.modal-backdrop');
+
+// Open modal when thumbnail is clicked
+if (thumbnailContainer) {
+    thumbnailContainer.addEventListener('click', function(e) {
+        // Prevent download button from triggering modal
+        if (e.target.closest('.download-btn')) {
+            return;
+        }
+        
+        const imgSrc = this.querySelector('.thumbnail-image').src;
+        modalImage.src = imgSrc;
+        modalDownloadBtn.href = imgSrc;
+        modalDownloadBtn.download = imgSrc.split('/').pop();
+        imageModal.classList.add('active');
+    });
+}
+
+// Close modal when X button is clicked
+if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', function() {
+        imageModal.classList.remove('active');
+    });
+}
+
+// Close modal when backdrop is clicked
+if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', function() {
+        imageModal.classList.remove('active');
+    });
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && imageModal.classList.contains('active')) {
+        imageModal.classList.remove('active');
+    }
+});
+
 var swiper = new Swiper(".mySwiper", {
     spaceBetween: 0,
     loop: false,
@@ -95,43 +170,3 @@ sidebarOverlay.addEventListener('click', () => {
     sidebar.classList.remove('open');
     sidebarOverlay.classList.remove('open');
 });
-
-(function () {
-    const wrapper = document.getElementById('trailer-wrapper');
-    let player = null;
-    let playerReady = false;
-
-    function loadYTApi() {
-        if (document.getElementById('yt-api')) return;
-        const tag = document.createElement('script');
-        tag.id = 'yt-api';
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.head.appendChild(tag);
-    }
-
-    window.onYouTubeIframeAPIReady = function () {
-        player = new YT.Player('trailer-iframe', {
-            events: {
-                onReady: function () {
-                    playerReady = true;
-                }
-            }
-        });
-    };
-
-    loadYTApi();
-
-    // IntersectionObserver : pause quand hors écran, play quand visible
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!playerReady || !player) return;
-            if (entry.isIntersecting) {
-                player.playVideo();
-            } else {
-                player.pauseVideo();
-            }
-        });
-    }, { threshold: 0.4 });
-
-    observer.observe(wrapper);
-})();
