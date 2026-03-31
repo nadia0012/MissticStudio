@@ -117,23 +117,25 @@ const pauseIcon = `<svg width="10" height="12" viewBox="0 0 10 12" fill="none">
     <path d="M0 0L10 6L0 12Z" fill="currentColor"/>
 </svg>`;
 
-pauseBtn.addEventListener("click", () => {
-    if (isPaused) {
-        swiper.autoplay.resume();
-        pauseBtn.innerHTML = playIcon;
-        const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
-        if (activeBullet) activeBullet.style.setProperty("--animation-state", "running");
-    } else {
-        swiper.autoplay.pause();
-        pauseBtn.innerHTML = pauseIcon;
-        const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
-        if (activeBullet) activeBullet.style.setProperty("--animation-state", "paused");
-    }
-    isPaused = !isPaused;
-});
+if (pauseBtn) {
+    pauseBtn.addEventListener("click", () => {
+        if (isPaused) {
+            swiper.autoplay.resume();
+            pauseBtn.innerHTML = playIcon;
+            const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
+            if (activeBullet) activeBullet.style.setProperty("--animation-state", "running");
+        } else {
+            swiper.autoplay.pause();
+            pauseBtn.innerHTML = pauseIcon;
+            const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
+            if (activeBullet) activeBullet.style.setProperty("--animation-state", "paused");
+        }
+        isPaused = !isPaused;
+    });
+}
 
 swiper.on("slideChange", () => {
-    if (isPaused) {
+    if (pauseBtn && isPaused) {
         isPaused = false;
         pauseBtn.innerHTML = playIcon;
     }
@@ -156,17 +158,19 @@ const sidebar = document.getElementById('sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 const sidebarClose = document.getElementById('sidebarClose');
 
-hamburgerBtn.addEventListener('click', () => {
-    sidebar.classList.add('open');
-    sidebarOverlay.classList.add('open');
-});
+if (hamburgerBtn && sidebar && sidebarOverlay && sidebarClose) {
+    hamburgerBtn.addEventListener('click', () => {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('open');
+    });
 
-sidebarClose.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('open');
-});
+    sidebarClose.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+    });
 
-sidebarOverlay.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('open');
-});
+    sidebarOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+    });
+}
