@@ -1,0 +1,2220 @@
+/*Variables*/
+:root {
+    --Misstic-Mauve-Dark: #472952;
+    --Misstic-Mauve-Light: #A077AF;
+    --Misstic-Gradient-Dark: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    --Misstic-Gradient-Light: linear-gradient(270deg, #FDFAFF 0%, #FAEFFF 100%);
+    --Orange: #F59F2D;
+    --Contact-Form-Mauve: #EFE0F4;
+    --swiper-pagination-color: #472952;
+    --swiper-pagination-bullet-inactive-color: #472952;
+    --swiper-pagination-bullet-inactive-opacity: 0.3;
+    --swiper-theme-color: #472952;
+}
+
+main {
+    margin-top: 65px;
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--Misstic-Mauve-Dark) var(--Contact-Form-Mauve);
+    /* thumb / track */
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100dvh;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: var(--Misstic-Mauve-Dark);
+}
+
+#steam-reviews {
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--Misstic-Mauve-Dark);
+    text-align: center;
+    margin-top: 90px;
+    margin-bottom: 20px;
+}
+
+/* sélection de texte */
+::selection {
+    background: rgba(107, 61, 117, 0.5);
+    color: #472952;
+}
+
+::-moz-selection {
+    background: rgba(107, 61, 117, 0.5);
+    color: #472952;
+}
+
+/* Pour Chrome, Safari, Edge, et Opera */
+/* largeur de la scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* fond (track) */
+::-webkit-scrollbar-track {
+    background: var(--Contact-Form-Mauve);
+}
+
+/* le curseur (thumb) */
+::-webkit-scrollbar-thumb {
+    background: var(--Misstic-Mauve-Dark);
+    border-radius: 10px;
+}
+
+/* hover (optionnel mais cute) */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--Misstic-Mauve-Dark);
+}
+
+/*Section dédiée au Header*/
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 16px;
+    box-sizing: border-box;
+    z-index: 1000;
+    transition: top 0.3s ease;
+}
+
+/*Logo du header*/
+.header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* suit la hauteur du navbar */
+    width: auto;
+}
+
+.header-logo-wrapper {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#logo-Misstic-header {
+    top: 10%;
+    left: 0.5%;
+    position: absolute;
+    width: 113px;
+    height: auto;
+    aspect-ratio: 140.89/58.72;
+    transition: transform 0.25s ease;
+}
+
+#logo-Misstic-header:hover {
+    transform: scale(0.97);
+}
+
+.tail-header {
+    padding-left: 74px;
+}
+
+/*Liens des pages*/
+.link-pages {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding-left: 160px;
+}
+
+.icon {
+    fill: var(--Misstic-Mauve-Dark);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.text-pages {
+    gap: 10px;
+    align-items: center;
+    color: #000;
+    font-family: Asap;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.25s ease;
+    display: inline-flex;
+}
+
+.text-pages:hover {
+    color: var(--Misstic-Mauve-Light);
+}
+
+.text-pages:hover .icon {
+    fill: var(--Misstic-Mauve-Light);
+}
+
+.list-pages {
+    list-style-type: none;
+}
+
+#button-header-discord {
+    width: 104px;
+    height: 40px;
+    border-radius: 6px;
+    border: 2px solid var(--Misstic-Mauve-Dark);
+    background: var(--Misstic-Gradient-Light);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    transition: color 0.25s ease;
+}
+
+.discord-icon-path {
+    fill: white;
+    transition: fill;
+}
+
+#button-header-steam {
+    width: 104px;
+    height: 40px;
+    border-radius: 6px;
+    border: 2px solid #6B3D75;
+    background: var(--Misstic-Gradient-Light);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    transition: color 0.25s ease;
+}
+
+#button-header-discord:hover,
+#button-header-steam:hover {
+    background: linear-gradient(0deg, rgba(160, 119, 175, 0.45) 0%, rgba(160, 119, 175, 0.45) 100%), linear-gradient(270deg, #EEE 0%, #FAEFFF 100%);
+}
+
+#button-header-discord:hover .discord-icon-path {
+    fill: rgba(254, 251, 255, 0.45);
+}
+
+.buttons-header {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.buttons-header ul {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.text-button-header {
+    background: var(--Misstic-Gradient-Dark, linear-gradient(270deg, #6B3D75 0%, #472952 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-flex;
+    height: auto;
+    align-items: center;
+    gap: 4px;
+    font-family: Asap;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.25s ease, transform 0.25s ease;
+    display: inline-flex;
+}
+
+/* Section réservée au footer */
+footer {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, rgba(71, 41, 82, 0.20) 100%), linear-gradient(0deg, #FFF 0%, #FDF8FF 100%);
+    margin-top: auto;
+    z-index: 5;
+}
+
+.footer-content {
+    position: absolute;
+    inset: 0;
+    /* remplace top/left/width/height */
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    /* centre horizontalement */
+    justify-content: end;
+    /* centre verticalement */
+    box-sizing: border-box;
+    z-index: 5;
+    padding-left: clamp(10px, 5vw, 180px);
+    padding-right: clamp(10px, 5vw, 180px);
+}
+
+.socials-and-credits {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 60px;
+}
+
+.footer-logo-wrapper {
+    line-height: 0;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+.footer-background {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    flex-shrink: 0;
+    bottom: 0;
+}
+
+.tail-footer {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: auto;
+    flex-shrink: 0;
+    align-self: flex-end;
+    left: 395px;
+    height: 300px;
+}
+
+#logo-Misstic-footer {
+    position: absolute;
+    bottom: 18%;
+    left: 180px;
+    width: 390px;
+    max-width: 480px;
+    min-width: 100px;
+    height: auto;
+    transition: transform 0.3s ease;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+#logo-Misstic-footer:hover {
+    transform: scale(1.02);
+}
+
+#star-footer {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 110px;
+    height: 110px;
+}
+
+.social-media {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.social-media a {
+    display: flex;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+}
+
+.social-media-icons {
+    width: 64px;
+    height: 64px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    display: block;
+}
+
+.social-media-icons:hover {
+    transform: scale(1.02);
+    opacity: 0.85;
+}
+
+#credits {
+    color: var(--Misstic-Mauve-Dark);
+    text-align: right;
+    font-family: Asap;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-bottom: 14px;
+    margin-top: 8px;
+}
+
+/* Section du carrousel */
+#game-carousel {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: clamp(60px, 8vw, 100px);
+    overflow: hidden;
+}
+
+
+
+.swiper.mySwiper {
+    width: 100%;
+    /* prend toute la largeur du container parent */
+    overflow: hidden;
+    /* remet hidden partout */
+    height: auto;
+    /* laisse la hauteur s'adapter au contenu */
+}
+
+.swiper-slide {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+    display: grid;
+    grid-template-rows: auto;
+}
+
+.sunrise-cover,
+.craftiny-cover {
+    position: relative;
+    width: 70%;
+    margin-left: auto;
+    overflow: hidden;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.sunrise-cover img,
+.craftiny-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* gradient sur l'image — derrière le logo wrapper */
+.game-gradient-sunrise {
+    position: absolute;
+    /* positionné par rapport au swiper-slide */
+    bottom: -1px;
+    /* corrige un léger débordement en bas */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 101%;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.00) 62.81%, #FFF 100%),
+        radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0, 0, 0, 0.00) 0%, rgba(198, 135, 73, 0.30) 40.87%, rgba(253, 214, 167, 0.30) 68.27%, rgba(255, 255, 255, 0.50) 100%),
+        linear-gradient(270deg, rgba(255, 255, 255, 0.00) 47.95%, #FDD6A7 68.75%, #F9B36E 86.06%, #875028 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.game-gradient-craftiny {
+    position: absolute;
+    bottom: -1px;
+    /* corrige un léger débordement en bas */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 101%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 69.55%, #FFF 100%), radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0, 0, 0, 0.00) 0%, rgba(218, 159, 190, 0.30) 40.87%, rgba(91, 171, 205, 0.30) 68.27%, rgba(255, 255, 255, 0.50) 100%), linear-gradient(270deg, rgba(255, 255, 255, 0.00) 47.95%, #5BABCD 68.75%, #DA9FBE 86.06%, #784D6E 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.swiper-slide .sunrise-logo-wrapper,
+.swiper-slide .craftiny-logo-wrapper,
+.swiper-slide .btn-buy-now,
+.swiper-slide .btn-discover,
+.swiper-slide .btn-add-wishlist {
+    pointer-events: auto;
+    /* réactive seulement sur les éléments cliquables */
+}
+
+.sunrise-logo {
+    width: clamp(100px, 18vw, 400px);
+    max-width: 400px;
+    height: auto;
+}
+
+.craftiny-logo {
+    width: clamp(150px, 20vw, 500px);
+    /* rétrécit plus vite */
+    height: auto;
+    object-fit: contain;
+    object-position: left;
+    margin: 0;
+}
+
+.sunrise-logo-wrapper {
+    position: absolute;
+    top: clamp(20px, 8%, 80px);
+    left: 8%;
+    right: 8%;
+    min-width: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(6px, 1vw, 12px);
+    overflow: visible;
+}
+
+.craftiny-logo-wrapper {
+    position: absolute;
+    top: clamp(8%, 10vw, 30%);
+    /* plus bas */
+    left: 8%;
+    right: 8%;
+    min-width: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(4px, 0.6vw, 8px);
+    /* gap plus serré */
+    overflow: visible;
+}
+
+.available-now {
+    border-radius: 10px;
+    background: #82E8FF;
+    box-shadow: -3px 3px 0 0 #006FBF;
+    width: clamp(180px, 13vw, 190px);
+    height: clamp(33px, 2.5vw, 35px);
+    padding: 5px 15px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.coming-soon {
+    border-radius: 10px;
+    background: #F4D937;
+    box-shadow: -3px 3px 0 0 #F59F2D;
+    width: clamp(180px, 13vw, 190px);
+    height: clamp(33px, 2.5vw, 35px);
+    padding: 5px 15px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.available-now-content,
+.coming-soon-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.available-now-text,
+.coming-soon-text {
+    font-size: clamp(18px, 1.5vw, 20px);
+    font-family: Asap;
+    font-weight: 900;
+    color: #000;
+    white-space: nowrap;
+}
+
+.available-now-content svg {
+    width: clamp(20px, 1.5vw, 22px);
+    height: clamp(20px, 1.5vw, 22px);
+    flex-shrink: 0;
+}
+
+.game-description {
+    background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    width: 100%;
+    max-width: 650px;
+    min-width: 0;
+    pointer-events: none;
+}
+
+.desc-bold {
+    font-weight: 700;
+}
+
+.game-buttons {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(20px, 2.5vw, 26px);
+    margin-top: clamp(4px, 0.8vw, 8px);
+    /* réduit l'espace */
+}
+
+.btn-content {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-buy-now {
+    width: clamp(175px, 14vw, 180px);
+    height: clamp(53px, 4vw, 55px);
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-mauve-dark {
+    border: 2px solid #A077AF;
+    background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+}
+
+.btn-mauve-light {
+    border: 2px solid #6B3D75;
+    background: linear-gradient(270deg, #FDFAFF 0%, #FAEFFF 100%);
+}
+
+.btn-add-wishlist {
+    width: clamp(245px, 20vw, 250px);
+    height: clamp(53px, 4vw, 55px);
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-buy-now span,
+.btn-add-wishlist span {
+    color: #FFF;
+    font-family: Asap;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.btn-buy-now:hover,
+.btn-add-wishlist:hover,
+.btn-big-buy-now:hover,
+.btn-trailer:hover,
+.btn-sunrise-informations-buy-now:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.btn-buy-now svg,
+.btn-add-wishlist svg {
+    width: clamp(26px, 2vw, 28px);
+    height: clamp(26px, 2vw, 28px);
+}
+
+.btn-discover {
+    width: clamp(250px, 20vw, 250px);
+    height: clamp(50px, 4vw, 55px);
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-discover span {
+    color: #472952;
+    font-family: Asap;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.btn-discover:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.btn-discover svg {
+    display: block;
+    margin-top: 4px;
+    transition: transform 0.2s ease;
+}
+
+.btn-discover:hover svg {
+    transform: translateX(4px);
+}
+
+/* Swiper — pagination et boutons */
+.pagination-wrapper {
+    position: relative;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(71, 41, 82, 0.12);
+    border: 1px solid #A077AF;
+    border-radius: 20px;
+    padding: 6px 12px;
+    white-space: nowrap;
+    margin: 5px auto 0 auto;
+    align-self: center;
+    /* force le centrage dans le flex parent */
+}
+
+.swiper-pagination {
+    position: static !important;
+    width: auto !important;
+}
+
+.swiper-pagination-bullet:hover {
+    background-color: white;
+}
+
+.swiper-pagination-bullet-active {
+    width: 50px;
+    border-radius: 4px;
+    background: #47295240;
+    position: relative;
+    overflow: hidden;
+}
+
+.swiper-pagination-bullet-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: #472952;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: fill-bullet 10s linear forwards;
+    animation-play-state: var(--animation-state, running);
+}
+
+@keyframes fill-bullet {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.pause-btn {
+    background: none;
+    border: 1px solid rgba(71, 41, 82, 0.5);
+    /* bordure visible sur fond clair */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: #472952;
+    /* icône mauve */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.pause-btn:hover {
+    opacity: 1;
+}
+
+.pause-btn svg {
+    transition: transform 0.2s ease;
+}
+
+.pause-btn:hover svg {
+    transform: scale(1.08);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    width: 42px;
+    height: 42px;
+    background: rgb(190, 190, 190);
+    border: 1px solid rgba(255, 255, 255);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease, background 0.2s ease, box-shadow 0.3s ease;
+    --swiper-navigation-color: white;
+    --swiper-navigation-sides-offset: 3%;
+}
+
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
+    opacity: 1;
+    box-shadow: 0 0px 40px rgba(71, 41, 82, 0.5);
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+    display: none !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    opacity: 1;
+    background: rgba(175, 175, 175);
+}
+
+.swiper-button-next svg,
+.swiper-button-prev svg {
+    width: 12px;
+    height: 12px;
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+
+/* Section pour les cartes de jeux */
+
+#games {
+    scroll-margin-top: 0px;
+    /* adapte selon la hauteur de ton header */
+}
+
+.section-games {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    /* empile les cartes quand l'écran rétrécit */
+    padding: 0 1vw;
+    /* espace gauche/droite responsive */
+}
+
+.section-title {
+    text-align: center;
+    font-family: "Lilita One";
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--Misstic-Gradient-Dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 90px;
+}
+
+.game-card {
+    flex: 1 1 0;
+    max-width: 600px;
+    min-width: 0;
+    height: 620px;
+    border-radius: 30px;
+    border: 2px solid #6B3D75;
+    background: #FDF8FF;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    align-items: flex-start;
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    /* remonte la carte au hover */
+    box-shadow: 0 20px 40px rgba(71, 41, 82, 0.15);
+}
+
+.game-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.game-card-img-wrapper {
+    width: 100%;
+    height: 310px;
+    /* hauteur fixe pour l'image */
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.game-card:hover .game-card-img {
+    transform: scale(1.05);
+    /* agrandit l'image dans son frame */
+}
+
+.game-card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 18px;
+    gap: 12px;
+    flex: 1;
+}
+
+.game-card-title {
+    height: 42px;
+    font-family: "Lilita One";
+    font-size: 40px;
+    font-weight: 400;
+    line-height: normal;
+    background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.game-card-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.available-now-small {
+    border-radius: 7px;
+    background: #82E8FF;
+    box-shadow: -2px 2px 0 0 #006FBF;
+    padding: 3px 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.coming-soon-small {
+    border-radius: 7px;
+    background: #F4D937;
+    box-shadow: -2px 2px 0 0 #F59F2D;
+    padding: 3px 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.available-now-small-content,
+.coming-soon-small-content {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.available-now-small-text,
+.coming-soon-small-text {
+    font-family: Asap;
+    font-size: 13px;
+    font-weight: 900;
+    color: #000;
+}
+
+.game-card-price {
+    font-family: Asap;
+    font-size: 20px;
+    font-weight: 500;
+    background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.game-card-description {
+    font-family: Asap;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+    background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.game-card-description .desc-bold {
+    font-weight: 700;
+}
+
+.game-card-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-self: start;
+    margin-top: auto;
+    /* pousse les boutons vers le bas */
+    margin-bottom: 15px;
+    /* 20px du bas */
+}
+
+.card-btn-buy {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.card-btn-buy span {
+    color: #FFF;
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.card-btn-buy svg {
+    width: 20px;
+    height: 20px;
+}
+
+.card-btn-buy:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.card-btn-discover {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 8px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.card-btn-discover span {
+    color: #472952;
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.card-btn-discover svg {
+    display: block;
+    margin-top: 2px;
+    transition: transform 0.2s ease;
+}
+
+.card-btn-discover:hover svg {
+    transform: translateX(3px);
+}
+
+.card-btn-discover:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+/* Section About Us */
+.section-about-us {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 200px;
+    padding: 0 1vw;
+}
+
+.aura-bubble {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.bubble {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #8c44ff 0%, transparent 90%);
+}
+
+.founders {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.founder-wrapper {
+    display: flex;
+    width: 530px;
+    align-items: flex-start;
+    position: relative;
+}
+
+.founder-img-pink {
+    width: 130px;
+    height: 130px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    border-radius: 155px;
+    border: 4px solid #E327C8;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    /* par dessus l'étiquette */
+    transition: transform 0.2s ease;
+}
+
+.founder-wrapper:hover .founder-img-blue {
+    transform: translateX(-5px);
+}
+
+.founder-wrapper:hover .founder-img-pink {
+    transform: translateX(-5px);
+}
+
+.founder-wrapper:hover .founder-star-pink {
+    transform: rotate(-40deg);
+}
+
+.founder-wrapper:hover .founder-star-blue {
+    transform: rotate(5deg);
+}
+
+.founder-img-blue {
+    width: 130px;
+    height: 130px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    border-radius: 155px;
+    border: 4px solid #4BA5E7;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease;
+}
+
+.founder-tag-container {
+    width: 390px;
+    height: 170px;
+    position: absolute;
+    left: 65px;
+    bottom: -17px;
+}
+
+.founder-tag-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.founder-star-pink {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    transform: rotate(1deg);
+    z-index: 2;
+    fill: #E327C8;
+    filter: drop-shadow(4px 4px 0 #991B87);
+    transition: transform 0.2s ease;
+}
+
+.founder-star-blue {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    transform: rotate(-35deg);
+    z-index: 2;
+    fill: #4BA5E7;
+    filter: drop-shadow(4px 4px 0 #3173A3);
+    transition: transform 0.2s ease;
+}
+
+.founder-tag-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 90px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.founder-text-group {
+    display: flex;
+    width: 333px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.founder-name {
+    align-self: stretch;
+    font-family: "Lilita One";
+    font-size: 40px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.founder-name-pink {
+    color: #E327C8;
+}
+
+.founder-name-blue {
+    color: #4BA5E7;
+}
+
+.founder-role {
+    align-self: stretch;
+    color: #472952;
+    font-family: Asap;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.about-text-column {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.about-text {
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333;
+    line-height: 1;
+    margin: 0;
+}
+
+.about-bold {
+    font-weight: 700;
+    color: #333;
+}
+
+.about-us-description {
+    background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    width: 100%;
+    max-width: 650px;
+    min-width: 0;
+    pointer-events: none;
+}
+
+/* Menu hamburger */
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* caché à droite */
+    width: 280px;
+    height: 100vh;
+    background: white;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: -4px 0 20px rgba(71, 41, 82, 0.15);
+    transition: right 0.3s ease;
+    gap: 30px;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    z-index: 1999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+    padding: 4px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #000;
+    font-family: Asap;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.sidebar-link .icon {
+    fill: var(--Misstic-Mauve-Dark);
+}
+
+.sidebar-link:hover {
+    color: var(--Misstic-Mauve-Light);
+}
+
+.sidebar-link:hover .icon {
+    fill: var(--Misstic-Mauve-Light);
+}
+
+.sidebar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-btn-discord,
+.sidebar-btn-steam {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 44px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 600;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sidebar-btn-discord {
+    border: 2px solid var(--Misstic-Mauve-Dark);
+    background: var(--Misstic-Gradient-Light);
+    -webkit-text-fill-color: var(--Misstic-Mauve-Dark);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 44px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 600;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sidebar-btn-steam {
+    border: 2px solid var(--Misstic-Mauve-Dark);
+    background: var(--Misstic-Gradient-Light);
+    -webkit-text-fill-color: var(--Misstic-Mauve-Dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 44px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 600;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sidebar-btn-discord:hover,
+.sidebar-btn-steam:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+/* Page de Sunrise's Order */
+.sunrise-page-cover {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.sunrise-page-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    display: block;
+}
+
+.sunrise-page-cover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0) 60%,
+            rgba(255, 255, 255, 1) 100%);
+    pointer-events: none;
+}
+
+.sunrise-content-logo {
+    width: clamp(400px, 30vw, 450px);
+    max-width: 450px;
+    height: auto;
+}
+
+.sunrise-content-wrapper {
+    position: absolute;
+    left: 8%;
+    top: 380px;
+    min-width: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(10px, 5vw, 12px);
+    padding: 20px;
+    width: 84%;
+    box-sizing: border-box;
+    margin-top: -120px;
+    line-height: 1;
+    pointer-events: auto;
+    overflow: hidden;
+}
+
+.btn-big-buy-now {
+    width: clamp(190px, 14vw, 220px);
+    height: clamp(53px, 4vw, 70px);
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-trailer {
+    width: clamp(250px, 14vw, 280px);
+    height: clamp(53px, 4vw, 70px);
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-trailer span {
+    background: var(--Gradient-Sunrises-Order, linear-gradient(270deg, #C68749 0%, #875028 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.btn-trailer:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.btn-trailer svg {
+    display: block;
+    margin-top: 4px;
+    transition: transform 0.2s ease;
+}
+
+.btn-trailer:hover svg {
+    transform: translateX(4px);
+}
+
+.btn-big-buy-now span,
+.btn-sunrise-informations-buy-now span {
+    color: #FFF;
+    font-family: Asap;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.btn-big-buy-now svg,
+.btn-trailer svg {
+    width: clamp(26px, 2vw, 40px);
+    height: clamp(26px, 2vw, 40px);
+}
+
+.btn-beige-dark {
+    border: 2px solid var(--Bouton-pale-Sunrise, #FFFBF6);
+    background: var(--Gradient-Sunrises-Order, linear-gradient(270deg, #C68749 0%, #875028 100%));
+}
+
+.btn-beige-light {
+    border: 2px solid var(--Gradient-Sunrises-Order, #C68749);
+    background: var(--Bouton-pale-Sunrise, linear-gradient(270deg, #FFFBF6 0%, #FFF3E8 100%));
+}
+
+.informations {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    gap: clamp(10px, 8vw, 30px);
+    padding-bottom: 200px;
+    padding-top: 100px;
+}
+
+.informations-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+.informations-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.informations-left img {
+    width: 100%;
+    max-width: 452px;
+    height: auto;
+    flex-shrink: 0;
+    aspect-ratio: 135/158;
+    border-radius: 15px;
+}
+
+.sunrise-box {
+    background: var(--Sunrise-1, #FEEBDC);
+}
+
+.factsheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    padding: 30px 60px;
+    border-radius: 25px;
+}
+
+.factsheet-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.factsheet-text h3, .right-info-text h3 {
+    font-family: "Lilita One";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.sunrise-title{
+    color: var(--Sunrise-4, #9D6437);
+}
+
+.factsheet-text p {
+    color: #000;
+    font-family: Asap;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.factsheet-text p + p {
+    align-self: flex-start;
+}
+
+.factsheet-text h3,
+.factsheet-text p {
+    margin: 0;
+}
+
+.price-factsheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 10px;
+    border: 1px solid var(--Gradient-Sunrises-Order, #C68749);
+    background: var(--Bouton-ple-Sunrise, linear-gradient(270deg, #FFFBF6 0%, #FFF3E8 100%));
+    width: 358px;
+    height: 88px;
+    margin-left: -20px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.btn-sunrise-informations-buy-now{
+    width: 100%;
+    max-width: 452px;
+    height: 88px;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.right-info-text p, .right-info-text ul li {
+    color: #000;
+    font-family: Asap;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.right-info {
+    display: flex;
+    width: 790px;
+    max-width: 100%;
+    padding: 30px 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 25px;
+}
+
+.right-info-text h3,
+.right-info-text p {
+    margin: 15px;
+}
+
+.right-info-text {
+    width: 100%;
+}
+
+.star-sunrise {
+    position: relative;
+    fill: var(--Sunrise-5, #875028);
+    filter: drop-shadow(4px 4px 0 #C68749);
+}
+
+.right-info-title {
+    display: flex;
+    height: 60px;
+    align-items: center; 
+    justify-content: start;
+    gap: 10px;
+    flex-shrink: 0; 
+    align-self: start;
+}
+
+.iframe-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Media queries pour les écrans de 1400px et moins */
+@media (max-width: 1400px) {
+
+    .socials-and-credits {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .footer-background {
+        display: block;
+        height: 250px;
+        flex-shrink: 0;
+        width: 450px;
+        bottom: 0;
+    }
+
+    .tail-footer {
+        left: 220px;
+    }
+
+    #logo-Misstic-footer {
+        bottom: 18%;
+        left: 1%;
+        width: 380px;
+    }
+}
+
+@media (max-width: 1205px) {
+    .bubble {
+        width: 100%;
+        height: 20%;
+    }
+
+    .section-about-us {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .founders {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-bottom: 60px;
+        width: 100%;
+    }
+
+    .founder-wrapper {
+        align-items: center;
+        position: relative;
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 50%;
+        gap: 12px;
+        border-radius: 30px;
+        background-color: white;
+        text-decoration: none;
+    }
+
+    .founder-tag-container {
+        width: 100%;
+        height: 170px;
+        position: relative;
+        left: 0;
+        bottom: 0;
+    }
+
+    .founder-tag-content {
+        position: relative;
+        inset: unset;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .founder-tag-bg {
+        display: none;
+    }
+
+    .founder-img-pink,
+    .founder-img-blue {
+        margin-left: 30px;
+    }
+
+    .about-text-column {
+        gap: 40px;
+        text-align: center;
+        align-items: center;
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .about-us-description {
+        max-width: 100%;
+    }
+
+    .founder-star-pink {
+        visibility: hidden;
+    }
+
+    .founder-star-blue {
+        visibility: hidden;
+    }
+}
+
+/* Media query 1024px */
+@media (max-width: 1024px) {
+
+    .section-title {
+        margin-bottom: 10px;
+    }
+
+    .section-about-us {
+        padding-top: 0px;
+        margin-bottom: 150px;
+    }
+
+    .founders {
+        flex-direction: column;
+    }
+
+    .founder-wrapper {
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .founder-tag-container {
+        width: auto;
+    }
+
+    .section-games {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 2vw;
+        /* espace gauche/droite responsive */
+    }
+
+    .game-card {
+        flex: 0;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .game-card-img {
+        object-position: center;
+    }
+
+    .game-card-img-wrapper {
+        height: auto;
+    }
+
+    .buttons-header {
+        display: none;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        margin-left: auto;
+    }
+
+    /* cache les liens de nav du sidebar à 1024px */
+    .sidebar-nav {
+        display: none;
+    }
+
+    #game-carousel {
+        overflow-x: hidden;
+        overflow-y: visible;
+        min-width: unset;
+        padding-bottom: 0px;
+    }
+
+    .swiper.mySwiper {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .swiper-slide {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .sunrise-cover,
+    .craftiny-cover {
+        width: 100%;
+        line-height: 0;
+        min-width: unset;
+        margin-left: 0;
+        height: 40vh;
+        overflow: visible;
+        flex-shrink: 0;
+        display: block;
+        position: relative;
+    }
+
+    .sunrise-cover img,
+    .craftiny-cover img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .sunrise-cover::after,
+    .craftiny-cover::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        /* dépasse légèrement en haut */
+        left: 0;
+        width: 100%;
+        height: calc(100% + 7px);
+        /* dépasse de 2px en haut et en bas */
+        /* supprime bottom et ne mets pas les deux en même temps */
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .sunrise-cover::after {
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.00) 40%, #FFF 100%),
+            linear-gradient(90deg, rgba(0, 0, 0, 0.00) 85%, rgba(198, 135, 73, 0.60) 100%),
+            radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0, 0, 0, 0.00) 0%, rgba(198, 135, 73, 0.30) 40.87%, rgba(253, 214, 167, 0.30) 68.27%, rgba(255, 255, 255, 0.50) 100%),
+            linear-gradient(270deg, rgba(255, 255, 255, 0.00) 70%, rgba(221, 182, 134, 0.60) 85%, rgba(249, 179, 110, 0.60) 95%, rgba(135, 80, 40, 0.60) 100%);
+    }
+
+    .craftiny-cover::after {
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.00) 40%, #FFF 100%),
+            linear-gradient(270deg, rgba(255, 255, 255, 0.00) 70%, rgba(91, 171, 205, 0.60) 85%, rgba(218, 159, 190, 0.60) 95%, rgba(120, 77, 110, 0.60) 100%);
+    }
+
+
+    .game-gradient-sunrise {
+        display: none;
+    }
+
+    .game-gradient-craftiny {
+        display: none;
+    }
+
+    .sunrise-logo-wrapper,
+    .craftiny-logo-wrapper {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: -120px;
+        z-index: 2;
+        line-height: 1;
+    }
+
+    .sunrise-logo {
+        width: 220px;
+        min-width: unset;
+    }
+
+    .craftiny-logo {
+        width: 300px;
+        min-width: unset;
+        min-height: unset;
+        /* retire le min-height en mobile */
+        margin: 0;
+        object-fit: unset;
+    }
+
+    .game-description {
+        text-align: center;
+        width: 100%;
+        max-width: 700px;
+        min-width: unset;
+    }
+
+    .game-buttons {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+
+    .about-text-column {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .section-about-us {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    footer {
+        padding-top: 20px;
+        position: relative;
+    }
+
+    .footer-background {
+        display: none !important;
+    }
+
+    .footer-logo-wrapper {
+        position: relative;
+        background: linear-gradient(90deg, #6B3D75 0%, #472952 104.91%);
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .footer-content {
+        position: relative;
+        inset: unset;
+        align-items: center;
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .tail-footer {
+        bottom: 0;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    #logo-Misstic-footer {
+        position: relative;
+        bottom: 5px;
+        justify-content: center;
+        width: 320px;
+        z-index: 10;
+    }
+
+    .social-media {
+        margin-top: 40px;
+        justify-content: center;
+    }
+
+    .socials-and-credits {
+        align-items: center;
+        gap: 40px !important;
+    }
+
+    #credits {
+        text-align: center;
+        margin: 0;
+        display: block;
+    }
+}
+
+/* à 768px — cache aussi les liens de nav du header */
+@media (max-width: 768px) {
+    .bubble {
+        width: 100%;
+        height: 60%;
+    }
+
+    .section-title {
+        margin-bottom: 10px;
+    }
+
+    .section-about-us {
+        padding-top: 0px;
+        margin-bottom: 100px;
+    }
+
+    .founders {
+        flex-direction: column;
+        padding-bottom: 0;
+        gap: 30px;
+    }
+
+    .founder-wrapper {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .founder-img-pink,
+    .founder-img-blue {
+        margin-left: 0px;
+        margin-top: 20px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .founder-tag-container {
+        width: auto;
+    }
+
+    .founder-tag-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .founder-text-group {
+        display: flex;
+        width: auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .founder-name {
+        align-self: center;
+    }
+
+    .founder-role {
+        align-self: center;
+    }
+
+    nav {
+        display: none;
+    }
+
+    /* montre les liens de nav dans le sidebar */
+    .sidebar-nav {
+        display: flex;
+    }
+
+
+
+    /* 1. description → arrête de casser la largeur */
+    .game-description {
+        width: 100%;
+        max-width: 100%;
+        min-width: unset;
+        font-size: 22px;
+    }
+
+    /* 2. wrappers → enlève la pression des côtés */
+    .sunrise-logo-wrapper,
+    .craftiny-logo-wrapper {
+        left: 20px;
+        right: 20px;
+        min-width: unset;
+        width: auto;
+    }
+
+    /* 3. covers → full width clean */
+    .sunrise-cover,
+    .craftiny-cover {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* 4. boutons → évite qu’ils push le layout */
+    .game-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* 5. sécurité globale anti-débordement */
+    .swiper-slide {
+        overflow-x: hidden;
+    }
+
+    /* 6. au cas où un enfant est trop large */
+    .swiper-slide * {
+        max-width: 100%;
+    }
+
+    #logo-Misstic-footer {
+        width: clamp(220px, 50vw, 280px);
+        /* 220px sur mobile, 280px sur tablette */
+    }
+}
+
+@media (max-width: 540px) {
+    .bubble {
+        margin: 20px;
+        width: 100%;
+        height: 120%;
+    }
+}
