@@ -10,6 +10,11 @@
     --swiper-pagination-bullet-inactive-color: #472952;
     --swiper-pagination-bullet-inactive-opacity: 0.3;
     --swiper-theme-color: #472952;
+    --Gradient-Sunrises-Order: linear-gradient(270deg, #C68749 0%, #875028 100%);
+    --Bouton-pale-Sunrise: linear-gradient(270deg, #FFFBF6 0%, #FFF3E8 100%);
+    --Sunrise-1: #FEEBDC;
+    --Sunrise-4: #9D6437;
+    --Sunrise-5: #875028;
 }
 
 main {
@@ -230,7 +235,7 @@ body {
 }
 
 .text-button-header {
-    background: var(--Misstic-Gradient-Dark, linear-gradient(270deg, #6B3D75 0%, #472952 100%));
+    background: var(--Misstic-Gradient-Dark);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1482,7 +1487,7 @@ footer {
 }
 
 .btn-trailer span {
-    background: var(--Gradient-Sunrises-Order, linear-gradient(270deg, #C68749 0%, #875028 100%));
+    background: var(--Gradient-Sunrises-Order);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1517,13 +1522,13 @@ footer {
 }
 
 .btn-beige-dark {
-    border: 2px solid var(--Bouton-pale-Sunrise, #FFFBF6);
-    background: var(--Gradient-Sunrises-Order, linear-gradient(270deg, #C68749 0%, #875028 100%));
+    border: 2px solid var(--Sunrise-1);
+    background: var(--Gradient-Sunrises-Order);
 }
 
 .btn-beige-light {
-    border: 2px solid var(--Gradient-Sunrises-Order, #C68749);
-    background: var(--Bouton-pale-Sunrise, linear-gradient(270deg, #FFFBF6 0%, #FFF3E8 100%));
+    border: 2px solid var(--Sunrise-4);
+    background: var(--Bouton-pale-Sunrise);
 }
 
 .informations {
@@ -1532,8 +1537,8 @@ footer {
     align-items: stretch;
     justify-content: center;
     gap: clamp(10px, 8vw, 30px);
-    padding-bottom: 200px;
-    padding-top: 100px;
+    margin-bottom: 90px;
+    margin-top: 100px;
 }
 
 .informations-right {
@@ -1563,7 +1568,7 @@ footer {
 }
 
 .sunrise-box {
-    background: var(--Sunrise-1, #FEEBDC);
+    background: var(--Sunrise-1);
 }
 
 .factsheet {
@@ -1592,7 +1597,7 @@ footer {
 }
 
 .sunrise-title{
-    color: var(--Sunrise-4, #9D6437);
+    color: var(--Sunrise-4);
 }
 
 .factsheet-text p {
@@ -1619,8 +1624,8 @@ footer {
     justify-content: center;
     align-items: flex-start;
     border-radius: 10px;
-    border: 1px solid var(--Gradient-Sunrises-Order, #C68749);
-    background: var(--Bouton-ple-Sunrise, linear-gradient(270deg, #FFFBF6 0%, #FFF3E8 100%));
+    border: 1px solid var(--Sunrise-4);
+    background: var(--Bouton-pale-Sunrise);
     width: 358px;
     height: 88px;
     margin-left: -20px;
@@ -1632,7 +1637,7 @@ footer {
     width: 100%;
     max-width: 452px;
     height: 88px;
-    border-radius: 10px;
+    border-radius: 15px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -1672,7 +1677,7 @@ footer {
 
 .star-sunrise {
     position: relative;
-    fill: var(--Sunrise-5, #875028);
+    fill: var(--Sunrise-5);
     filter: drop-shadow(4px 4px 0 #C68749);
 }
 
@@ -1687,13 +1692,16 @@ footer {
 }
 
 .iframe-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     width: 100%;
     padding-bottom: 56.25%; /* ratio 16:9 */
     height: 0;
     overflow: hidden;
     border-radius: 12px;
-    margin-top: 20px;
+    margin: 20px 0px 0px 0px;
     max-height: 400px;
 }
 
@@ -1702,23 +1710,16 @@ footer {
     max-height: 350px;
 }
 
-.iframe-wrapper iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
 .iframe-wrapper video {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    left: 50%;
+    width: 95%;
+    height: 95%;
     border: 0;
     border-radius: 12px;
     background-color: #000;
+    transform: translateX(-50%);
 }
 
 .title-and-download {
@@ -2051,6 +2052,20 @@ footer {
     pointer-events: auto;
 }
 
+.section-title-sunrise {
+    text-align: center;
+    font-family: "Lilita One";
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--Gradient-Sunrises-Order);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 0px;
+}
+
 /* Media queries pour les écrans de 1400px et moins */
 @media (max-width: 1400px) {
 
@@ -2070,7 +2085,7 @@ footer {
     }
     
     .factsheet {
-        padding: 40px 50px;
+        padding: 40px 60px;
     }
 
     .socials-and-credits {
@@ -2100,26 +2115,20 @@ footer {
     .informations-right {
         justify-content: space-between;
     }
-
-    .download-btn {
-        width: 100%;
-        max-width: 492px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .download-btn svg {
-        width: 30px;
-        height: 30px;
-    }
 }
 
 @media (max-width: 1205px) {
 
     .btn-big-buy-now {
     padding: 0px 0px;
+    }
+
+    .right-info-title {
+        margin: 0px 30px;
+    }
+
+    .title-and-download {
+        margin: 0px 30px 0px 0px;
     }
 
     .informations {
@@ -2129,7 +2138,7 @@ footer {
         gap: 40px;
         padding-top: 60px;
         padding: 100px 0px;
-        margin: 0 6vh;
+        margin: 0 2vh;
     }
     
     .informations-left {
@@ -2159,14 +2168,27 @@ footer {
     .factsheet {
         width: 100%;
         max-width: none;
-        padding: 30px 40px;
+        padding: 30px 0px;
         gap: 40px;
+    }
+
+    .factsheet-text {
+        padding: 0px 60px;
     }
     
     .right-info {
         width: 100%;
         max-width: none;
-        padding: 25px 40px;
+        padding: 25px 0px;
+    }
+
+    .right-info-text p, .right-info-text ul li {
+        padding: 0px 60px;
+    }
+
+    .right-info-text ul {
+        list-style-position: inside;
+        padding-left: 0;
     }
 
     .thumbnail-container {
@@ -2175,8 +2197,10 @@ footer {
     }
 
     .price-factsheet {
-        width: 100%;
-        max-width: none;
+        width: 96%;
+        margin: 20px;
+        padding: 0px 40px;
+        box-sizing: border-box;
     }
 
     .bubble {
@@ -2521,47 +2545,86 @@ footer {
 
     .informations {
         flex-direction: column;
-        padding-bottom: 80px;
-        padding-top: 40px;
+        align-items: center;
+        justify-content: center;
         gap: 30px;
-        margin: 0px 6vh;
+        padding-top: 40px;
+        padding: 100px 0px;
+        margin: 0 2vh;
     }
     
     .informations-left {
         width: 100%;
+        max-width: none;
+        align-items: center;
     }
     
     .informations-right {
         width: 100%;
+        max-width: none;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .informations-left img {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .btn-sunrise-informations-buy-now {
+        width: 100%;
+        max-width: none;
     }
     
     .factsheet {
         width: 100%;
-        padding: 25px 35px;
-        gap: 30px;
+        max-width: none;
+        padding: 30px 0px;
+        gap: 40px;
     }
 
-    .factsheet-text h3 {
-        font-size: 30px;
+    .factsheet-text {
+        padding: 0px 60px;
     }
     
     .right-info {
         width: 100%;
-        padding: 20px 35px;
+        max-width: none;
+        padding: 25px 0px;
     }
-    
-    .right-info-text h3 {
-        font-size: 30px;
-    }
-    
+
     .right-info-text p, .right-info-text ul li {
-        font-size: 18px;
+        padding: 0px 60px;
     }
-    
-    .price-factsheet {
+
+    .right-info-text ul {
+        list-style-position: inside;
+        padding-left: 0;
+    }
+
+    .thumbnail-container {
         width: 100%;
-        margin-left: 0;
-        max-width: 450px;
+        max-width: none;
+    }
+
+    .price-factsheet {
+        width: 95%;
+        margin: 0px 0px 0px 20px;
+        padding: 0px 40px;
+        box-sizing: border-box;
+    }
+
+    .btn-big-buy-now {
+        padding: 0px 0px;
+    }
+
+    .right-info-title {
+        margin: 0px 30px;
+    }
+
+    .title-and-download {
+        margin: 0px 30px 0px 0px;
     }
 }
 
@@ -2709,7 +2772,7 @@ footer {
         padding-top: 20px;
         gap: 15px;
         padding: 100px 0px;
-        margin: 0 4vh;
+        margin: 0 3vh;
     }
 
     .informations-left {
@@ -2727,50 +2790,44 @@ footer {
         height: auto;
     }
 
-    .btn-sunrise-informations-buy-now {
-        width: 100%;
-        height: 60px;
-        padding: 10px;
-    }
-
     .btn-sunrise-informations-buy-now span {
         font-size: 25px;
     }
 
     .factsheet {
         width: 100%;
-        padding: 15px 20px;
-        gap: 20px;
-        border-radius: 15px;
+        max-width: none;
+        padding: 30px 0px;
+        gap: 40px;
     }
 
     .factsheet-text h3{
-        font-size: 25px;
+        font-size: 30px;
     }
 
     .factsheet-text p{
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .price-factsheet {
-        width: 100%;
-        height: auto;
-        padding: 12px;
-        margin-left: 0;
+        width: 94%;
+        margin: 0px 0px 0px 20px;
+        padding: 0px 40px;
+        box-sizing: border-box;
     }
 
     .right-info {
         width: 100%;
-        padding: 15px 20px;
-        border-radius: 15px;
+        max-width: none;
+        padding: 25px 0px;
     }
 
     .right-info-text h3 {
-        font-size: 25px;
+        font-size: 30px;
     }
 
     .right-info-text p, .right-info-text ul li {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .star-sunrise {
@@ -2787,12 +2844,8 @@ footer {
         max-height: 200px;
     }
 
-    .btn-download {
-        height: 45px;
-    }
-
     .btn-download span {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .enlarge-text {
@@ -2822,7 +2875,7 @@ footer {
         height: 120%;
     }
 
-        .title-and-download {
+    .title-and-download {
         flex-direction: column;
         gap: 10px;
     }
