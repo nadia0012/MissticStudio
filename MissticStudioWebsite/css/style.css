@@ -1414,6 +1414,7 @@ footer {
     width: 100%;
     height: 90vh;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .sunrise-page-cover img {
@@ -2173,26 +2174,40 @@ footer {
 /* Media queries pour les écrans de 1400px et moins */
 @media (max-width: 1400px) {
     .informations {
-        gap: 25px;
         padding: 0px 2vh;
+        flex-direction: row;
+        align-items: stretch;
     }
 
+    .informations-left,
     .informations-right {
-        justify-content: space-between;
+        max-width: 790px;
+        align-items: stretch;
+        box-sizing: border-box;
     }
-    
-    .right-info {
-        width: 100%;
-        max-width: 600px;
-        padding: 25px 50px;
-    }
-    
+
+    .informations-left img{
+        max-width: 100%;
+    } 
+
     .btn-sunrise-informations-buy-now {
         max-width: 100%;
     }
-    
+
+    .right-info {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .price-factsheet {
+        width: 100%;
+        margin-left: 0;
+        box-sizing: border-box;
+    }
+
     .factsheet {
-        padding: 40px 60px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .socials-and-credits {
