@@ -43,6 +43,7 @@ if (trailerVideo) {
 
 // Image Modal - Click to Enlarge
 const thumbnailContainer = document.querySelector('.thumbnail-container');
+const screenshotContainer = document.querySelectorAll('.screenshot-container');
 const imageModal = document.getElementById('imageModal');
 const modalImage = document.getElementById('modalImage');
 const modalDownloadBtn = document.getElementById('modalDownloadBtn');
@@ -64,6 +65,21 @@ if (thumbnailContainer) {
         imageModal.classList.add('active');
     });
 }
+
+// Open modal when screenshot is clicked
+screenshotContainer.forEach(container => {
+    container.addEventListener('click', function(e) {
+        if (e.target.closest('.download-btn')) {
+            return;
+        }
+        
+        const imgSrc = this.querySelector('.screenshot-image').src;
+        modalImage.src = imgSrc;
+        modalDownloadBtn.href = imgSrc;
+        modalDownloadBtn.download = imgSrc.split('/').pop();
+        imageModal.classList.add('active');
+    });
+});
 
 // Close modal when X button is clicked
 if (modalCloseBtn) {
