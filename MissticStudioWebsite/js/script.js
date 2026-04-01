@@ -190,3 +190,24 @@ if (hamburgerBtn && sidebar && sidebarOverlay && sidebarClose) {
         sidebarOverlay.classList.remove('open');
     });
 }
+
+document.querySelectorAll('.sidebar-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+
+        // Fermer la sidebar
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+
+        // Si c'est une ancre (#games, #contact, etc.)
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+    });
+});

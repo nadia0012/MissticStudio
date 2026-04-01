@@ -1272,7 +1272,6 @@ footer {
     position: fixed;
     top: 0;
     right: -300px;
-    /* caché à droite */
     width: 280px;
     height: 100vh;
     background: white;
@@ -1319,7 +1318,6 @@ footer {
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
 .sidebar-link {
@@ -1332,6 +1330,9 @@ footer {
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s ease;
+    padding: 14px 0;                        /* ← espace vertical */
+    border-bottom: 1px solid #E8E0EC;       /* ← ligne de séparation */
+    justify-content: space-between;         /* ← pousse la flèche à droite */
 }
 
 .sidebar-link .icon {
@@ -1349,7 +1350,7 @@ footer {
 .sidebar-buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
 }
 
 .sidebar-btn-discord,
@@ -1372,40 +1373,79 @@ footer {
     background: var(--Misstic-Gradient-Light);
     -webkit-text-fill-color: var(--Misstic-Mauve-Dark);
     color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    height: 44px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-family: Asap;
-    font-size: 18px;
-    font-weight: 600;
-    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .sidebar-btn-steam {
     border: 2px solid var(--Misstic-Mauve-Dark);
     background: var(--Misstic-Gradient-Light);
     -webkit-text-fill-color: var(--Misstic-Mauve-Dark);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    height: 44px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-family: Asap;
-    font-size: 18px;
-    font-weight: 600;
-    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .sidebar-btn-discord:hover,
 .sidebar-btn-steam:hover {
     transform: scale(1.02);
     opacity: 0.9;
+}
+
+.sidebar-logo-wrapper {
+    position: relative;
+    height: 70px;
+    flex-shrink: 0;
+    margin: -20px -20px 0 -20px;
+}
+
+.sidebar-bg-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+}
+
+.sidebar-bg-tail {
+    position: absolute;
+    top: 0;
+    left: 74px;
+    height: 100%;
+    width: auto;
+}
+
+.sidebar-logo-img {
+    position: absolute;
+    top: 50%;
+    left: 12px; /* ← valeur fixe plus fiable que 0.5% sur 280px */
+    transform: translateY(-50%);
+    width: 110px;
+    height: auto;
+    transition: transform 0.25s ease;
+}
+
+.sidebar-logo-img:hover {
+    transform: translateY(-50%) scale(0.97); /* ← combiner les deux transforms */
+}
+
+.sidebar-link-arrow {
+    flex-shrink: 0;
+    fill: var(--Misstic-Mauve-Dark);
+    transition: fill 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-link-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Repositionner le bouton close en absolu sur le logo */
+.sidebar-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
 }
 
 /* Page de Sunrise's Order */
@@ -2761,6 +2801,10 @@ footer {
 
 /* à 768px — cache aussi les liens de nav du header */
 @media (max-width: 768px) {
+    .sidebar-buttons {
+    margin-top: auto;
+    }
+
     .images {
         grid-template-columns: repeat(1, 1fr);
     }
