@@ -2227,6 +2227,105 @@ footer {
     white-space: nowrap;
 }
 
+.player-reviews{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 90px;
+    align-items: center;
+}
+
+.text-reviews h3{
+    font-family: "Lilita One";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text-reviews p{
+    color: #000;
+    font-family: Asap;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text-reviews h3,
+.text-reviews p {
+    margin: 15px;
+}
+
+.text-reviews {
+    width: 100%;
+}
+
+.carousel-reviews{ /* CARROUSEL CONTAINER */
+    overflow: hidden;
+    width: 100%;
+}
+
+.player-review{ /* CARD */
+    flex: 0 0 auto;
+    background-color: var(--Sunrise-1);
+    border-radius: 25px;
+    display: flex;
+    width: 500px; /* ← fixe au lieu de max-width */
+    max-width: none;
+    height: auto;
+    padding: 30px;
+    flex-direction: column;
+    align-items: start;
+    flex-shrink: 0;
+}
+
+.reviews-top{  /* CARROUSEL TRACK */
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+    gap: 20px;
+}
+
+@keyframes scroll{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-50%);
+    }
+}
+
+.reviews-bottom {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    gap: 20px;
+    animation: scroll 30s linear infinite reverse;
+}
+
+.carousel-reviews:hover .reviews-top{
+    animation-play-state: paused;
+}
+
+.carousel-reviews:hover .reviews-bottom{
+    animation-play-state: paused;
+}
+
+.reviews-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, #FFF 0%, rgba(255, 255, 255, 0.00) 25%, rgba(255, 255, 255, 0.00) 75%, #FFF 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
 /* Media queries pour les écrans de 1400px et moins */
 @media (max-width: 1400px) {
     .informations {
@@ -2812,6 +2911,11 @@ footer {
 
 /* à 768px — cache aussi les liens de nav du header */
 @media (max-width: 768px) {
+    .player-review{ /* CARD */
+    width: 350px; 
+    height: 400px;
+    }
+
     .modal-nav-btn {
         position: static;
         width: 35px;
