@@ -1329,9 +1329,9 @@ footer {
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s ease;
-    padding: 14px 0;                        /* ← espace vertical */
-    border-bottom: 1px solid #E8E0EC;       /* ← ligne de séparation */
-    justify-content: space-between;         /* ← pousse la flèche à droite */
+    padding: 14px 0;
+    border-bottom: 1px solid #E8E0EC;
+    justify-content: space-between;
 }
 
 .sidebar-link .icon {
@@ -3008,7 +3008,17 @@ footer {
     }
 
     .sidebar-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     margin-top: auto;
+    padding: 14px 0px 0px 0px;
+    border-top: 1px solid #E8E0EC;
+    }
+
+    .sidebar-btn-discord,
+    .sidebar-btn-steam {
+    width: 100%;
     }
 
     .images {
