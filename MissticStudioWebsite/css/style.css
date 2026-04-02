@@ -1593,7 +1593,6 @@ footer {
 .informations-left {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 30px;
     justify-content: space-between;
 }
@@ -1657,21 +1656,6 @@ footer {
 .factsheet-text h3,
 .factsheet-text p {
     margin: 0;
-}
-
-.price-factsheet {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    border-radius: 10px;
-    border: 1px solid var(--Sunrise-4);
-    background: var(--Bouton-pale-Sunrise);
-    width: 358px;
-    height: 88px;
-    margin-left: -20px;
-    padding-left: 20px;
-    box-sizing: border-box;
 }
 
 .btn-sunrise-informations-buy-now{
@@ -1946,6 +1930,7 @@ footer {
 }
 
 .modal-content {
+    display: flex;
     position: relative;
     z-index: 1001;
     display: flex;
@@ -1960,13 +1945,46 @@ footer {
     animation: slideUp 0.4s ease-in-out;
 }
 
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1002;
+    background: white;
+    border: 2px solid var(--Sunrise-5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.modal-prev {
+    left: 5%;
+}
+
+.modal-next {
+    right: 5%;
+}
+
+.modal-nav-btn:hover {
+    transform: translateY(-50%) scale(1.08); /* ← toujours combiner avec translateY */
+}
+
+.modal-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    transform: translateY(-50%); /* ← garder translateY pour pas que ça bouge */
+}
+
 @keyframes slideUp {
     from {
-        transform: translateY(50px);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
         opacity: 1;
     }
 }
@@ -2045,8 +2063,6 @@ footer {
     cursor: pointer;
     transition: transform 0.3s ease;
 }
-
-
 
 .download-btn {
     width: 50px;
@@ -2239,12 +2255,6 @@ footer {
         box-sizing: border-box;
     }
 
-    .price-factsheet {
-        width: 100%;
-        margin-left: 0;
-        box-sizing: border-box;
-    }
-
     .factsheet {
         width: 100%;
         box-sizing: border-box;
@@ -2354,13 +2364,6 @@ footer {
         max-width: none;
     }
 
-    .price-factsheet {
-        width: 96%;
-        margin: 20px;
-        padding: 0px 40px;
-        box-sizing: border-box;
-    }
-
     .bubble {
         width: 100%;
         height: 20%;
@@ -2441,18 +2444,33 @@ footer {
 
 /* Media query 1024px */
 @media (max-width: 1024px) {
+    .modal-nav-btn {
+        position: static;
+        top: auto;   
+    }
+
+    .modal-content {
+        flex-direction: column;
+    }
+
+    .modal-footer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
 
     .image-row {
         flex-wrap: nowrap;
     }
 
-    /* Regroupe les rows en grille 3x2 sur desktop */
     .images {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .image-row {
-        display: contents; /* Les enfants remontent dans la grille parente */
+        display: contents;
     }
 
     .section-title {
@@ -2779,13 +2797,6 @@ footer {
         max-width: none;
     }
 
-    .price-factsheet {
-        width: 95%;
-        margin: 0px 0px 0px 20px;
-        padding: 0px 40px;
-        box-sizing: border-box;
-    }
-
     .btn-big-buy-now {
         padding: 0px 0px;
     }
@@ -2801,6 +2812,17 @@ footer {
 
 /* à 768px — cache aussi les liens de nav du header */
 @media (max-width: 768px) {
+    .modal-nav-btn {
+        position: static;
+        width: 35px;
+        height: 35px;
+    }
+
+    .modal-nav-btn svg {
+        width: 8px;
+        height: 14px;
+    }
+
     .sidebar-buttons {
     margin-top: auto;
     }
@@ -2819,7 +2841,7 @@ footer {
     }
 
     .modal-content {
-        padding: 20px;
+        padding: 5px;
         gap: 20px;
     }
 
@@ -2992,13 +3014,6 @@ footer {
         font-size: 20px;
     }
 
-    .price-factsheet {
-        width: 94%;
-        margin: 0px 0px 0px 20px;
-        padding: 0px 40px;
-        box-sizing: border-box;
-    }
-
     .right-info {
         width: 100%;
         max-width: none;
@@ -3065,5 +3080,9 @@ footer {
 
     .btn-download {
         margin-left: 30px;
+    }
+
+    .sunrise-cover-content{
+        margin-bottom: 70px;
     }
 }
