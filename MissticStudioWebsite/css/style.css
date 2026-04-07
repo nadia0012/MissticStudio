@@ -15,6 +15,11 @@
     --Sunrise-1: #FEEBDC;
     --Sunrise-4: #9D6437;
     --Sunrise-5: #875028;
+    --Craftiny-rose-pale: #FFC2E2;
+    --Gradient-Craftiny-pale: linear-gradient(270deg, #FFF0F8 0%, #FFE8F4 100%);
+    --Gradient-Craftiny-dark: linear-gradient(90deg, #784D6E 0%, #DA9FBE 100%);
+    --Craftiny-mauve: #784D6E;
+    --Craftiny-bleu: #5BABCD;
 }
 
 main {
@@ -426,9 +431,7 @@ footer {
 /* gradient sur l'image — derrière le logo wrapper */
 .game-gradient-sunrise {
     position: absolute;
-    /* positionné par rapport au swiper-slide */
     inset: 0;
-    /* remplace top/left/bottom/right */
     width: 100%;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.00) 62.81%, #FFF 100%),
@@ -616,7 +619,7 @@ footer {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .btn-buy-now span,
@@ -635,7 +638,6 @@ footer {
 .btn-discover-sunrise:hover,
 .btn-home-page:hover {
     transform: scale(1.02);
-    opacity: 0.9;
 }
 
 .btn-buy-now svg,
@@ -644,7 +646,7 @@ footer {
     height: 28px;
 }
 
-.btn-discover, .btn-discover-sunrise {
+.btn-discover{
     width: 250px;
     height: 55px;
     border-radius: 10px;
@@ -652,7 +654,19 @@ footer {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-discover-sunrise {
+    width: 280px;
+    height: 55px;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease;
     white-space: nowrap;
 }
 
@@ -672,7 +686,6 @@ footer {
 
 .btn-discover:hover, .btn-discover-sunrise:hover {
     transform: scale(1.02);
-    opacity: 0.9;
 }
 
 .btn-discover svg, .btn-discover-sunrise svg {
@@ -699,7 +712,6 @@ footer {
     white-space: nowrap;
     margin: 5px auto 0 auto;
     align-self: center;
-    /* force le centrage dans le flex parent */
 }
 
 .swiper-pagination {
@@ -810,12 +822,9 @@ footer {
     transition: width 0.2s ease, height 0.2s ease;
 }
 
-
 /* Section pour les cartes de jeux */
-
 #games {
     scroll-margin-top: 0px;
-    /* adapte selon la hauteur de ton header */
 }
 
 .section-games {
@@ -825,9 +834,15 @@ footer {
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
-    /* empile les cartes quand l'écran rétrécit */
     padding: 0 1vw;
-    /* espace gauche/droite responsive */
+}
+
+.game-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
 
 .section-title {
@@ -1460,7 +1475,7 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: bottom;
+    object-position: center;
     display: block;
 }
 
@@ -1526,7 +1541,27 @@ footer {
     white-space: nowrap;
 }
 
-.btn-trailer span {
+.big-btn-rose-light span{
+    background: var(--Gradient-Craftiny-dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.small-btn-rose-light span{
+    background: var(--Gradient-Craftiny-dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.big-btn-beige-light span{
     background: var(--Gradient-Sunrises-Order);
     background-clip: text;
     -webkit-background-clip: text;
@@ -1536,6 +1571,15 @@ footer {
     font-weight: 900;
 }
 
+.small-btn-beige-light span{
+    background: var(--Gradient-Sunrises-Order);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap;
+    font-size: 25px;
+    font-weight: 900;
+}
 
 .btn-trailer svg {
     display: block;
@@ -1571,6 +1615,16 @@ footer {
 .btn-beige-light {
     border: 2px solid var(--Sunrise-4);
     background: var(--Bouton-pale-Sunrise);
+}
+
+.btn-rose-dark {
+    border: 2px solid #FFF0F8;
+    background: var(--Gradient-Craftiny-dark);
+}
+
+.btn-rose-light {
+    border: 2px solid var(--Craftiny-mauve);
+    background: var(--Gradient-Craftiny-pale);
 }
 
 .informations {
@@ -1611,6 +1665,10 @@ footer {
     background: var(--Sunrise-1);
 }
 
+.craftiny-box {
+    background: var(--Craftiny-rose-pale);
+}
+
 .factsheet {
     display: flex;
     flex-direction: column;
@@ -1638,6 +1696,10 @@ footer {
 
 .sunrise-title{
     color: var(--Sunrise-4);
+}
+
+.craftiny-title{
+    color: var(--Craftiny-mauve);
 }
 
 .factsheet-text p {
@@ -1706,6 +1768,12 @@ footer {
     filter: drop-shadow(4px 4px 0 #C68749);
 }
 
+.star-craftiny{
+    position: relative;
+    fill: var(--Craftiny-mauve);
+    filter: drop-shadow(4px 4px 0 #5BABCD);
+}
+
 .right-info-title {
     display: flex;
     height: 60px;
@@ -1765,16 +1833,6 @@ footer {
     white-space: nowrap;
 }
 
-.btn-download span, .btn-google-drive span {
-    background: var(--Gradient-Sunrises-Order);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: Asap;
-    font-size: 25px;
-    font-weight: 900;
-}
-
 .btn-download:hover, .btn-google-drive:hover {
     transform: scale(1.02);
     opacity: 0.9;
@@ -1830,11 +1888,18 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) -0.02%, rgba(0, 0, 0, 0.30) 99.96%), radial-gradient(57.92% 50.85% at 50% 50%, rgba(254, 235, 220, 0.15) 0%, rgba(135, 80, 40, 0.50) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
     z-index: 2;
+}
+
+.thumbnail-overlay-sunrise {
+    background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) -0.02%, rgba(0, 0, 0, 0.30) 99.96%), radial-gradient(57.92% 50.85% at 50% 50%, rgba(254, 235, 220, 0.15) 0%, rgba(135, 80, 40, 0.50) 100%);
+}
+
+.thumbnail-overlay-craftiny {
+    background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) -0.02%, rgba(0, 0, 0, 0.30) 99.96%), radial-gradient(57.92% 50.85% at 50% 50%, rgba(49, 115, 163, 0.22) 0%, rgba(218, 159, 190, 0.50) 100%);
 }
 
 .thumbnail-container:hover .thumbnail-overlay {
@@ -1867,7 +1932,7 @@ footer {
     flex-direction: row;
 }
 
-.enlarge-text {
+.enlarge-text-sunrise {
     color: #FFF;
     text-align: center;
     text-shadow: 
@@ -1879,6 +1944,25 @@ footer {
         2px 0 0 #875028,
         0 -2px 0 #875028,
         0 2px 0 #875028;
+    font-family: Asap;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.enlarge-text-craftiny {
+    color: #FFF;
+    text-align: center;
+    text-shadow: 
+        -2px -2px 0 #784D6E,
+        2px -2px 0 #784D6E,
+        -2px 2px 0 #784D6E,
+        2px 2px 0 #784D6E,
+        -2px 0 0 #784D6E,
+        2px 0 0 #784D6E,
+        0 -2px 0 #784D6E,
+        0 2px 0 #784D6E;
     font-family: Asap;
     font-size: 40px;
     font-style: normal;
@@ -1951,7 +2035,6 @@ footer {
     transform: translateY(-50%);
     z-index: 1002;
     background: white;
-    border: 2px solid var(--Sunrise-5);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -1994,7 +2077,6 @@ footer {
     top: -25px;
     right: -25px;
     border-radius: 42.5px;
-    border: 2px solid var(--Sunrise-4);
     background: #FFF;
     cursor: pointer;
     padding: 0;
@@ -2123,6 +2205,28 @@ footer {
     margin: 0px 0px 20px 0px;
 }
 
+.gradient-sunrise{
+    background: var(--Gradient-Sunrises-Order);
+}
+
+.gradient-craftiny{
+    background: var(--Gradient-Craftiny-dark);
+}
+
+.section-title-craftiny {
+    text-align: center;
+    font-family: "Lilita One";
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--Gradient-Craftiny-dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0px 0px 20px 0px;
+}
+
 .media {
     display: flex;
     flex-direction: column;
@@ -2171,6 +2275,14 @@ footer {
     transition: opacity 0.3s ease;
     pointer-events: none;
     z-index: 2;
+}
+
+.screenshot-overlay-sunrise {
+    background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) -0.02%, rgba(0, 0, 0, 0.30) 99.96%), radial-gradient(57.92% 50.85% at 50% 50%, rgba(254, 235, 220, 0.15) 0%, rgba(135, 80, 40, 0.50) 100%);
+}
+
+.screenshot-overlay-craftiny {
+    background: linear-gradient(72deg, rgba(0, 0, 0, 0.00) -0.02%, rgba(0, 0, 0, 0.30) 99.96%), radial-gradient(57.92% 50.85% at 50% 50%, rgba(49, 115, 163, 0.22) 0%, rgba(218, 159, 190, 0.50) 100%);
 }
 
 .screenshot-container:hover .screenshot-overlay {
@@ -2271,10 +2383,9 @@ footer {
 
 .player-review{ /* CARD */
     flex: 0 0 auto;
-    background-color: var(--Sunrise-1);
     border-radius: 25px;
     display: flex;
-    width: 500px; /* ← fixe au lieu de max-width */
+    width: 500px;
     max-width: none;
     height: auto;
     padding: 30px;
@@ -2346,17 +2457,24 @@ footer {
     align-items: center;
     gap: 20px;
     border-radius: 25px;
-    background: var(--Sunrise-1);
 }
 
 .more-games-container img{
-    border-radius: 15px;
-    border: 2px solid var(--Gradient-Sunrises-Order, #C68749);
     width: 400px;
     height: auto;
     object-fit: cover;
     object-position: center;
     display: block;
+}
+
+.more-games-sunrise img{
+    border-radius: 15px;
+    border: 2px solid var(--Sunrise-4);
+}
+
+.more-games-craftiny img{
+    border-radius: 15px;
+    border: 2px solid var(--Craftiny-mauve);
 }
 
 .more-games-description {
@@ -2991,6 +3109,19 @@ footer {
 
 /* à 768px — cache aussi les liens de nav du header */
 @media (max-width: 768px) {
+
+    .more-games{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2vw;
+    }
+
+    .more-games-container {
+    width: 100%;
+    box-sizing: border-box; 
+    }
+
     .player-review{ /* CARD */
     width: 350px; 
     height: 400px;
@@ -3217,6 +3348,11 @@ footer {
     }
 
     .star-sunrise {
+        width: 30px;
+        height: 30px;
+    }
+
+    .star-craftiny {
         width: 30px;
         height: 30px;
     }
