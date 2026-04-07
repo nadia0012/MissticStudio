@@ -1014,7 +1014,7 @@ footer {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease;
     white-space: nowrap;
 }
 
@@ -1032,7 +1032,6 @@ footer {
 
 .card-btn-buy:hover {
     transform: scale(1.02);
-    opacity: 0.9;
 }
 
 .card-btn-discover {
@@ -1043,7 +1042,7 @@ footer {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease;
     white-space: nowrap;
 }
 
@@ -1066,7 +1065,6 @@ footer {
 
 .card-btn-discover:hover {
     transform: scale(1.02);
-    opacity: 0.9;
 }
 
 /* Section About Us */
@@ -2645,6 +2643,7 @@ footer {
     gap: 10px;
     border-radius: 10px;
     background: #EFE0F4;
+    resize: vertical;
 }
 
 .contact-input input::placeholder, 
@@ -2678,6 +2677,13 @@ textarea::placeholder {
     border: none;
 }
 
+.choose-file {
+    font-family: Asap;
+    font-size: 18px;
+    font-weight: 100;
+    color: var(--Misstic-Mauve-Dark);
+}
+
 .choose-file::file-selector-button {
     border-radius: 10px;
     padding: 5px 30px;
@@ -2692,6 +2698,13 @@ textarea::placeholder {
 
 .choose-file::file-selector-button:hover{
     transform: scale(1.02);
+    background: linear-gradient(270deg, rgba(238, 238, 238, 0.20) 0%, rgba(250, 239, 255, 0.20) 100%), linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+}
+
+.contact-input input:focus,
+.contact-input textarea:focus {
+    outline: 2px solid var(--Misstic-Mauve-Dark);
+    outline-offset: 0px;
 }
 
 #attachment{
@@ -2728,6 +2741,66 @@ textarea::placeholder {
 
 .contact-form button:hover {
     transform: scale(1.03);
+    background: linear-gradient(270deg, rgba(238, 238, 238, 0.20) 0%, rgba(250, 239, 255, 0.20) 100%), linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+}
+
+/* État désactivé du bouton */
+.contact-form button.disabled {
+    position: relative;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.contact-form button.disabled::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+/* Wrapper pour intercepter le hover quand désactivé */
+.submit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    position: relative;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submit-wrapper.form-invalid {
+    cursor: not-allowed;
+}
+
+.submit-wrapper.form-invalid::before {
+    content: 'Form invalid or incomplete';
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    font-family: Asap;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+.submit-wrapper.form-invalid:hover::before {
+    opacity: 1;
+}
+
+/* Retirer le margin-top du bouton car il est sur le wrapper maintenant */
+.contact-form button {
+    margin-top: 0;
 }
 
 /* Media queries pour les écrans de 1400px et moins */

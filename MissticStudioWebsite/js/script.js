@@ -213,3 +213,34 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
         }
     });
 });
+
+(function () {
+    const form = document.querySelector('.contact-form');
+    const wrapper = document.querySelector('.submit-wrapper');
+    const btn = form.querySelector('button[type="submit"]');
+    const requiredFields = form.querySelectorAll('[required]');
+
+    function checkValidity() {
+        const allFilled = Array.from(requiredFields).every(field => {
+            if (field.type === 'file') return field.files.length > 0;
+            return field.value.trim() !== '';
+        });
+
+        if (allFilled) {
+            btn.classList.remove('disabled');
+            btn.style.pointerEvents = '';
+            wrapper.classList.remove('form-invalid');
+        } else {
+            btn.classList.add('disabled');
+            btn.style.pointerEvents = 'none';
+            wrapper.classList.add('form-invalid');
+        }
+    }
+
+    requiredFields.forEach(field => {
+        field.addEventListener('input', checkValidity);
+        field.addEventListener('change', checkValidity); // pour le file input
+    });
+
+    checkValidity(); // état initial
+})();
