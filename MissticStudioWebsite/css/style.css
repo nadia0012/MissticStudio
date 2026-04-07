@@ -20,6 +20,7 @@
     --Gradient-Craftiny-dark: linear-gradient(90deg, #784D6E 0%, #DA9FBE 100%);
     --Craftiny-mauve: #784D6E;
     --Craftiny-bleu: #5BABCD;
+    --Contact-Mauve: #EFE0F4;
 }
 
 main {
@@ -2505,6 +2506,228 @@ footer {
     text-decoration: none;
     transition: transform 0.2s ease, opacity 0.2s ease;
     white-space: nowrap;
+}
+
+.contact-title {
+    text-align: start;
+    font-family: "Lilita One";
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--Misstic-Gradient-Dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.email-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 150px;
+    padding: 0 2vw;
+}
+
+.email-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.mail-to {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: auto;
+    gap: 0;
+}
+
+.mail-to p {
+    margin: 0;
+    color: #F59F2D;
+    font-family: "Lilita One";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.mail-to a{
+    font-family: "Lilita One";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    background: var(--Misstic-Gradient-Dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    background: #FDF8FF;
+    margin-top: -30px;
+    padding: 40px 60px;
+    box-sizing: border-box;
+}
+
+.gradient-contact {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 95%;
+    background: radial-gradient(50% 50% at 50% 50%, #6B3D75 0%, #A077AF 36.54%, rgba(255, 255, 255, 0.00) 100%);
+    filter: blur(60px);
+    z-index: -1;
+    pointer-events: none; 
+}
+
+.input-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
+
+.input-title svg{
+    margin-bottom: 10px;
+}
+
+.input-title label{
+    font-family: Asap;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: var(--Misstic-Gradient-Dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-input input{
+    display: flex;
+    width: 100%;
+    height: 45px;
+    align-items: center;
+    padding: 0px 0px 0px 10px;
+    border-radius: 10px;
+    background: #EFE0F4;
+}
+
+.contact-input textarea{
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    padding: 10px 0px 0px 10px;
+    gap: 10px;
+    border-radius: 10px;
+    background: #EFE0F4;
+}
+
+.contact-input input::placeholder, 
+textarea::placeholder {
+    font-family: Asap;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+    opacity: 1;
+    background: var(--Misstic-Gradient-Dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-input {
+    flex: 1;
+}
+
+.name-and-email{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 60px;
+    width: 100%;
+}
+
+.contact-input input,
+.contact-input textarea {
+    border: none;
+}
+
+.choose-file::file-selector-button {
+    border-radius: 10px;
+    padding: 5px 30px;
+    border: 1px solid #A077AF;
+    background: var(--Misstic-Gradient-Dark);
+    color: #FFF;
+    font-family: Asap;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.choose-file::file-selector-button:hover{
+    transform: scale(1.02);
+}
+
+#attachment{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.contact-form button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 10px;
+    max-width: 260px;
+    height: 65px;
+    padding: 20px 25px;
+    color: #FFF;
+    font-family: Asap;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.contact-form button svg {
+    transition: transform 0.3s ease;
+}
+
+.contact-form button:hover {
+    transform: scale(1.03);
 }
 
 /* Media queries pour les écrans de 1400px et moins */
