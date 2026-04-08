@@ -2801,7 +2801,6 @@ textarea::placeholder {
     opacity: 1;
 }
 
-/* Retirer le margin-top du bouton car il est sur le wrapper maintenant */
 .contact-form button {
     margin-top: 0;
 }
@@ -3462,6 +3461,37 @@ textarea::placeholder {
 
 /* à 768px — cache aussi les liens de nav du header */
 @media (max-width: 768px) {
+
+    .email-title {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    }
+
+    .contact-title{
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    .contact-form{
+        margin-top: 30px;
+        padding: 40px 20px;
+    }
+
+    .mail-to{
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .mail-to a{
+        font-size: 25px;
+    }
+
+    .name-and-email{
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+    }
 
     .more-games{
     display: flex;

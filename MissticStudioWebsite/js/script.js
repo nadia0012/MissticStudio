@@ -248,28 +248,21 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
     });
 
     // --- 3. DÉCLENCHEMENT DE L'OVERLAY ET RESET ---
-    btn.addEventListener('click', function (e) {
+    wrapper.addEventListener('click', function (e) {
         e.preventDefault();
-
         if (btn.classList.contains('disabled')) return;
 
         if (overlay) {
-            // Affiche l'overlay
             overlay.classList.add('visible');
 
-            // --- RESET MANUEL DU FORMULAIRE (car c'est une DIV) ---
             const allInputs = contactForm.querySelectorAll('input, textarea');
             allInputs.forEach(input => {
-                input.value = ''; // Vide le texte
-                if (input.type === 'file') {
-                    input.value = null; // Vide le fichier
-                }
+                input.value = '';
+                if (input.type === 'file') input.value = null;
             });
 
-            // Recalcule la validité (pour remettre le bouton en 'disabled')
-            checkValidity(); 
+            checkValidity();
 
-            // Nettoyage après l'animation (ex: 6s pour correspondre au CSS)
             setTimeout(() => {
                 overlay.classList.remove('visible');
             }, 3000);
