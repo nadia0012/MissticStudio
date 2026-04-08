@@ -261,6 +261,9 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
                 if (input.type === 'file') input.value = null;
             });
 
+            selectedFiles = [];
+            uploadedArea.innerHTML = '';
+
             checkValidity();
 
             setTimeout(() => {
@@ -272,3 +275,71 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
     // État initial
     checkValidity();
 })();
+
+
+const fileInput = document.getElementById('attachment');
+const uploadedArea = document.querySelector('.uploaded-area');
+
+const fileSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 44 59" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M25.6667 0H5.5C4.04131 0 2.64236 0.579462 1.61091 1.61091C0.579462 2.64236 0 4.04131 0 5.5V53.1667C0 54.6254 0.579462 56.0243 1.61091 57.0558C2.64236 58.0872 4.04131 58.6667 5.5 58.6667H38.5C39.9587 58.6667 41.3576 58.0872 42.3891 57.0558C43.4205 56.0243 44 54.6254 44 53.1667V18.3333H43.9853L25.6667 0ZM22 5.88133V21.0833C22 21.5893 22.4107 22 22.9167 22H38.1223C38.3036 21.9996 38.4806 21.9455 38.6311 21.8445C38.7816 21.7435 38.8987 21.6002 38.9678 21.4327C39.0369 21.2651 39.0547 21.0808 39.0191 20.9032C38.9835 20.7255 38.896 20.5623 38.7677 20.4343L23.5657 5.23233C23.4375 5.1038 23.274 5.01624 23.096 4.98073C22.9179 4.94522 22.7334 4.96338 22.5657 5.0329C22.3979 5.10241 22.2547 5.22016 22.154 5.3712C22.0533 5.52225 21.9997 5.6998 22 5.88133Z" fill="#472952"/>
+</svg>`;
+
+const deleteSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" style="cursor:pointer; flex-shrink:0;">
+    <path d="M18 6L6 18M6 6l12 12" stroke="#A077AF" stroke-width="2" stroke-linecap="round"/>
+</svg>`;
+
+// Stocke les fichiers sélectionnés dans un tableau
+let selectedFiles = [];
+
+fileInput.addEventListener('change', function () {
+    const newFiles = Array.from(this.files);
+    
+    // Ajoute les nouveaux fichiers sans écraser les anciens
+    newFiles.forEach(newFile => {
+        const alreadyExists = selectedFiles.some(f => f.name === newFile.name && f.size === newFile.size);
+        if (!alreadyExists) selectedFiles.push(newFile);
+    });
+
+    renderFiles();
+});
+
+function renderFiles() {
+    uploadedArea.innerHTML = '';
+
+    const dt = new DataTransfer();
+    selectedFiles.forEach(file => dt.items.add(file));
+    fileInput.files = dt.files
+
+    selectedFiles.forEach((file, index) => {
+        let fileName = file.name;
+        if (fileName.length >= 20) {
+            const splitName = fileName.split('.');
+            fileName = splitName[0].substring(0, 13) + '... .' + splitName[splitName.length - 1];
+        }
+
+        const fileSize = file.size < 1024 * 1024
+            ? Math.floor(file.size / 1024) + ' KB'
+            : (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+
+        const li = document.createElement('li');
+        li.classList.add('row');
+        li.innerHTML = `
+            <div class="content">
+                ${fileSVG}
+                <div class="details">
+                    <span class="name">${fileName}</span>
+                    <span class="size">${fileSize}</span>
+                </div>
+            </div>
+            ${deleteSVG}
+        `;
+
+        // Bouton delete
+        li.querySelector('svg:last-child').addEventListener('click', () => {
+            selectedFiles.splice(index, 1);
+            renderFiles();
+        });
+
+        uploadedArea.appendChild(li);
+    });
+}
