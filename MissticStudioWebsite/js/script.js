@@ -215,11 +215,15 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
 });
 
 (function () {
-    const form = document.querySelector('.contact-form');
-    const wrapper = document.querySelector('.submit-wrapper');
-    const btn = form.querySelector('button[type="submit"]');
-    const requiredFields = form.querySelectorAll('[required]');
+    const contactForm = document.querySelector('.contact-form');
+    if (!contactForm) return;
 
+    const overlay = document.getElementById('formSuccessOverlay');
+    const wrapper = document.querySelector('.submit-wrapper');
+    const btn = contactForm.querySelector('button');
+    const requiredFields = contactForm.querySelectorAll('[required]');
+
+    // --- 1. FONCTION DE VALIDATION ---
     function checkValidity() {
         const allFilled = Array.from(requiredFields).every(field => {
             if (field.type === 'file') return field.files.length > 0;
@@ -228,7 +232,7 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
 
         if (allFilled) {
             btn.classList.remove('disabled');
-            btn.style.pointerEvents = '';
+            btn.style.pointerEvents = 'auto';
             wrapper.classList.remove('form-invalid');
         } else {
             btn.classList.add('disabled');
@@ -237,10 +241,41 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
         }
     }
 
+    // --- 2. ÉCOUTEURS D'ÉVÉNEMENTS ---
     requiredFields.forEach(field => {
         field.addEventListener('input', checkValidity);
-        field.addEventListener('change', checkValidity); // pour le file input
+        field.addEventListener('change', checkValidity);
     });
 
-    checkValidity(); // état initial
+    // --- 3. DÉCLENCHEMENT DE L'OVERLAY ET RESET ---
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        if (btn.classList.contains('disabled')) return;
+
+        if (overlay) {
+            // Affiche l'overlay
+            overlay.classList.add('visible');
+
+            // --- RESET MANUEL DU FORMULAIRE (car c'est une DIV) ---
+            const allInputs = contactForm.querySelectorAll('input, textarea');
+            allInputs.forEach(input => {
+                input.value = ''; // Vide le texte
+                if (input.type === 'file') {
+                    input.value = null; // Vide le fichier
+                }
+            });
+
+            // Recalcule la validité (pour remettre le bouton en 'disabled')
+            checkValidity(); 
+
+            // Nettoyage après l'animation (ex: 6s pour correspondre au CSS)
+            setTimeout(() => {
+                overlay.classList.remove('visible');
+            }, 3000);
+        }
+    });
+
+    // État initial
+    checkValidity();
 })();

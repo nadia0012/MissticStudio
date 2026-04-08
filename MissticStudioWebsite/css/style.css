@@ -2585,6 +2585,8 @@ footer {
     margin-top: -30px;
     padding: 40px 60px;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 }
 
 .gradient-contact {
@@ -2716,6 +2718,7 @@ textarea::placeholder {
 }
 
 .contact-form button {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -2801,6 +2804,60 @@ textarea::placeholder {
 /* Retirer le margin-top du bouton car il est sur le wrapper maintenant */
 .contact-form button {
     margin-top: 0;
+}
+
+.form-success-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    display: none; /* Masqué par défaut */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Classe ajoutée par JS pour déclencher le fade in */
+.form-success-overlay.visible {
+    display: flex !important;
+    animation: fadeInThenOut 3s ease forwards; 
+}
+
+@keyframes fadeInThenOut {
+    0%   { opacity: 0; }
+    10%  { opacity: 1; pointer-events: auto; } /* Apparition en 0.5s */
+    90%  { opacity: 1; pointer-events: auto; } /* Reste visible 4.5s */
+    100% { opacity: 0; pointer-events: none; } /* Disparition en 0.5s */
+}
+
+.form-success-overlay svg {
+    width: 113px;
+    height: 113px;
+    filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.1)); 
+}
+
+.form-success-overlay .success-title {
+    text-align: center;
+    font-family: "Lilita One";
+    font-size: 35px;
+    background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.form-success-overlay .success-subtitle {
+    color: var(--Misstic-Mauve-1, #A077AF);
+    text-align: center;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: var(--Misstic-Mauve-Dark);
+    font-family: "Lilita One";
+    font-size: 25px;
+    margin: 0;
 }
 
 /* Media queries pour les écrans de 1400px et moins */
