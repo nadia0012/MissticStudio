@@ -214,6 +214,7 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
     });
 });
 
+
 (function () {
     const contactForm = document.querySelector('.contact-form');
     if (!contactForm) return;
@@ -222,10 +223,15 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
     const wrapper = document.querySelector('.submit-wrapper');
     const btn = contactForm.querySelector('button');
     const requiredFields = contactForm.querySelectorAll('[required]');
+    const emailField = document.getElementById('email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // --- 1. FONCTION DE VALIDATION ---
     function checkValidity() {
+        const emailValid = emailRegex.test(emailField.value.trim());
+
         const allFilled = Array.from(requiredFields).every(field => {
+            if (field.id === 'email') return emailValid;
             if (field.type === 'file') return field.files.length > 0;
             return field.value.trim() !== '';
         });
@@ -247,6 +253,19 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
         field.addEventListener('change', checkValidity);
     });
 
+    // Feedback visuel email (seulement quand on quitte le champ)
+    emailField.addEventListener('blur', () => {
+        if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
+            emailField.classList.add('invalid');
+        } else {
+            emailField.classList.remove('invalid');
+        }
+    });
+
+    emailField.addEventListener('input', () => {
+        emailField.classList.remove('invalid');
+    });
+
     // --- 3. DÉCLENCHEMENT DE L'OVERLAY ET RESET ---
     wrapper.addEventListener('click', function (e) {
         e.preventDefault();
@@ -263,6 +282,7 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
 
             selectedFiles = [];
             uploadedArea.innerHTML = '';
+            emailField.classList.remove('invalid');
 
             checkValidity();
 
