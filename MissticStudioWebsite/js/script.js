@@ -65,7 +65,6 @@ function openModal(index) {
     imageModal.classList.add('active');
 }
 
-// Open modal when screenshot is clicked
 screenshotContainers.forEach((container, index) => {
     container.addEventListener('click', function(e) {
         if (e.target.closest('.download-btn')) return;
@@ -73,7 +72,6 @@ screenshotContainers.forEach((container, index) => {
     });
 });
 
-// Flèches de navigation
 if (modalPrev) {
     modalPrev.addEventListener('click', () => {
         if (currentIndex > 0) openModal(currentIndex - 1);
@@ -86,7 +84,6 @@ if (modalNext) {
     });
 }
 
-// Close modal
 if (modalCloseBtn) {
     modalCloseBtn.addEventListener('click', () => imageModal.classList.remove('active'));
 }
@@ -95,7 +92,6 @@ if (modalBackdrop) {
     modalBackdrop.addEventListener('click', () => imageModal.classList.remove('active'));
 }
 
-// Clavier
 document.addEventListener('keydown', (e) => {
     if (!imageModal.classList.contains('active')) return;
     if (e.key === 'ArrowLeft' && modalPrev) modalPrev.click();
@@ -158,14 +154,12 @@ swiper.on("slideChange", () => {
         pauseBtn.innerHTML = playIcon;
     }
     
-    // reset l'animation sur le nouveau bullet actif
     setTimeout(() => {
         const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
         if (activeBullet) {
             activeBullet.style.setProperty("--animation-state", "running");
-            // force le reset de l'animation
             activeBullet.style.animation = "none";
-            activeBullet.offsetHeight; // force reflow
+            activeBullet.offsetHeight;
             activeBullet.style.animation = "";
         }
     }, 50);
@@ -197,11 +191,9 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
 
-        // Fermer la sidebar
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('open');
 
-        // Si c'est une ancre (#games, #contact, etc.)
         if (href && href.startsWith('#')) {
             e.preventDefault();
             const target = document.querySelector(href);
@@ -215,90 +207,12 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
 });
 
 
-(function () {
-    const contactForm = document.querySelector('.contact-form');
-    if (!contactForm) return;
-
-    const overlay = document.getElementById('formSuccessOverlay');
-    const wrapper = document.querySelector('.submit-wrapper');
-    const btn = contactForm.querySelector('button');
-    const requiredFields = contactForm.querySelectorAll('[required]');
-    const emailField = document.getElementById('email');
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    // --- 1. FONCTION DE VALIDATION ---
-    function checkValidity() {
-        const emailValid = emailRegex.test(emailField.value.trim());
-
-        const allFilled = Array.from(requiredFields).every(field => {
-            if (field.id === 'email') return emailValid;
-            if (field.type === 'file') return field.files.length > 0;
-            return field.value.trim() !== '';
-        });
-
-        if (allFilled) {
-            btn.classList.remove('disabled');
-            btn.style.pointerEvents = 'auto';
-            wrapper.classList.remove('form-invalid');
-        } else {
-            btn.classList.add('disabled');
-            btn.style.pointerEvents = 'none';
-            wrapper.classList.add('form-invalid');
-        }
-    }
-
-    // --- 2. ÉCOUTEURS D'ÉVÉNEMENTS ---
-    requiredFields.forEach(field => {
-        field.addEventListener('input', checkValidity);
-        field.addEventListener('change', checkValidity);
-    });
-
-    // Feedback visuel email (seulement quand on quitte le champ)
-    emailField.addEventListener('blur', () => {
-        if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
-            emailField.classList.add('invalid');
-        } else {
-            emailField.classList.remove('invalid');
-        }
-    });
-
-    emailField.addEventListener('input', () => {
-        emailField.classList.remove('invalid');
-    });
-
-    // --- 3. DÉCLENCHEMENT DE L'OVERLAY ET RESET ---
-    wrapper.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (btn.classList.contains('disabled')) return;
-
-        if (overlay) {
-            overlay.classList.add('visible');
-
-            const allInputs = contactForm.querySelectorAll('input, textarea');
-            allInputs.forEach(input => {
-                input.value = '';
-                if (input.type === 'file') input.value = null;
-            });
-
-            selectedFiles = [];
-            uploadedArea.innerHTML = '';
-            emailField.classList.remove('invalid');
-
-            checkValidity();
-
-            setTimeout(() => {
-                overlay.classList.remove('visible');
-            }, 3000);
-        }
-    });
-
-    // État initial
-    checkValidity();
-})();
-
-
+// =============================================
+// FICHIERS
+// =============================================
 const fileInput = document.getElementById('attachment');
 const uploadedArea = document.querySelector('.uploaded-area');
+let selectedFiles = [];
 
 const fileSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 44 59" fill="none">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M25.6667 0H5.5C4.04131 0 2.64236 0.579462 1.61091 1.61091C0.579462 2.64236 0 4.04131 0 5.5V53.1667C0 54.6254 0.579462 56.0243 1.61091 57.0558C2.64236 58.0872 4.04131 58.6667 5.5 58.6667H38.5C39.9587 58.6667 41.3576 58.0872 42.3891 57.0558C43.4205 56.0243 44 54.6254 44 53.1667V18.3333H43.9853L25.6667 0ZM22 5.88133V21.0833C22 21.5893 22.4107 22 22.9167 22H38.1223C38.3036 21.9996 38.4806 21.9455 38.6311 21.8445C38.7816 21.7435 38.8987 21.6002 38.9678 21.4327C39.0369 21.2651 39.0547 21.0808 39.0191 20.9032C38.9835 20.7255 38.896 20.5623 38.7677 20.4343L23.5657 5.23233C23.4375 5.1038 23.274 5.01624 23.096 4.98073C22.9179 4.94522 22.7334 4.96338 22.5657 5.0329C22.3979 5.10241 22.2547 5.22016 22.154 5.3712C22.0533 5.52225 21.9997 5.6998 22 5.88133Z" fill="#472952"/>
@@ -308,27 +222,23 @@ const deleteSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18
     <path d="M18 6L6 18M6 6l12 12" stroke="#A077AF" stroke-width="2" stroke-linecap="round"/>
 </svg>`;
 
-// Stocke les fichiers sélectionnés dans un tableau
-let selectedFiles = [];
-
-fileInput.addEventListener('change', function () {
-    const newFiles = Array.from(this.files);
-    
-    // Ajoute les nouveaux fichiers sans écraser les anciens
-    newFiles.forEach(newFile => {
-        const alreadyExists = selectedFiles.some(f => f.name === newFile.name && f.size === newFile.size);
-        if (!alreadyExists) selectedFiles.push(newFile);
+if (fileInput) {
+    fileInput.addEventListener('change', function () {
+        const newFiles = Array.from(this.files);
+        newFiles.forEach(newFile => {
+            const alreadyExists = selectedFiles.some(f => f.name === newFile.name && f.size === newFile.size);
+            if (!alreadyExists) selectedFiles.push(newFile);
+        });
+        renderFiles();
     });
-
-    renderFiles();
-});
+}
 
 function renderFiles() {
     uploadedArea.innerHTML = '';
 
     const dt = new DataTransfer();
     selectedFiles.forEach(file => dt.items.add(file));
-    fileInput.files = dt.files
+    fileInput.files = dt.files;
 
     selectedFiles.forEach((file, index) => {
         let fileName = file.name;
@@ -354,7 +264,6 @@ function renderFiles() {
             ${deleteSVG}
         `;
 
-        // Bouton delete
         li.querySelector('svg:last-child').addEventListener('click', () => {
             selectedFiles.splice(index, 1);
             renderFiles();
@@ -363,3 +272,148 @@ function renderFiles() {
         uploadedArea.appendChild(li);
     });
 }
+
+
+// =============================================
+// CLOUDINARY — upload fichier → URL
+// =============================================
+async function uploadToCloudinary(file) {
+    const cloudName = 'dubts2zzk';
+    const uploadPreset = 'misstic_uploads';
+
+    const data = new FormData();
+    data.append('file', file);
+    data.append('upload_preset', uploadPreset);
+
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+        method: 'POST',
+        body: data,
+    });
+
+    if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error?.message || 'Cloudinary upload failed');
+    }
+
+    const result = await response.json();
+    return result.secure_url;
+}
+
+
+// =============================================
+// FORMULAIRE — soumission Web3Forms + overlay
+// =============================================
+(function () {
+    const contactForm = document.querySelector('.contact-form');
+    if (!contactForm) return;
+
+    const overlay = document.getElementById('formSuccessOverlay');
+    const wrapper = document.querySelector('.submit-wrapper');
+    const btn = contactForm.querySelector('button');
+    const requiredFields = contactForm.querySelectorAll('[required]');
+    const emailField = document.getElementById('email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const btnOriginalHTML = btn.innerHTML;
+
+    // --- 1. VALIDATION ---
+    function checkValidity() {
+        const emailValid = emailRegex.test(emailField.value.trim());
+
+        const allFilled = Array.from(requiredFields).every(field => {
+            if (field.id === 'email') return emailValid;
+            if (field.type === 'file') return true;
+            return field.value.trim() !== '';
+        });
+
+        if (allFilled) {
+            btn.classList.remove('disabled');
+            btn.style.pointerEvents = 'auto';
+            wrapper.classList.remove('form-invalid');
+        } else {
+            btn.classList.add('disabled');
+            btn.style.pointerEvents = 'none';
+            wrapper.classList.add('form-invalid');
+        }
+    }
+
+    // --- 2. ÉCOUTEURS ---
+    requiredFields.forEach(field => {
+        field.addEventListener('input', checkValidity);
+        field.addEventListener('change', checkValidity);
+    });
+
+    emailField.addEventListener('blur', () => {
+        if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
+            emailField.classList.add('invalid');
+        } else {
+            emailField.classList.remove('invalid');
+        }
+    });
+
+    emailField.addEventListener('input', () => {
+        emailField.classList.remove('invalid');
+    });
+
+    // --- 3. SOUMISSION ---
+    wrapper.addEventListener('click', async function (e) {
+        e.preventDefault();
+        if (btn.classList.contains('disabled')) return;
+
+        // Désactive le bouton pendant l'envoi
+        btn.classList.add('disabled');
+        btn.style.pointerEvents = 'none';
+        btn.innerHTML = 'Sending...';
+
+        try {
+            // 1. Upload les fichiers sur Cloudinary
+            let fileLinks = '';
+            if (selectedFiles.length > 0) {
+                const urls = await Promise.all(selectedFiles.map(file => uploadToCloudinary(file)));
+                fileLinks = '\n\n📎 Fichiers joints :\n' + urls.map((url, i) => `${i + 1}. ${selectedFiles[i].name} : ${url}`).join('\n');
+            }
+
+            // 2. Construit le FormData sans les fichiers binaires
+            const form = document.querySelector('.email-section');
+            const formData = new FormData(form);
+            formData.delete('attachment');
+
+            // 3. Ajoute les liens Cloudinary dans le message
+            const originalMessage = formData.get('message');
+            formData.set('message', originalMessage + fileLinks);
+
+            // 4. Envoie à Web3Forms
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                // ✅ Succès
+                if (overlay) overlay.classList.add('visible');
+
+                contactForm.querySelectorAll('input, textarea').forEach(input => {
+                    input.value = '';
+                    if (input.type === 'file') input.value = null;
+                });
+                selectedFiles = [];
+                if (uploadedArea) uploadedArea.innerHTML = '';
+                emailField.classList.remove('invalid');
+
+                setTimeout(() => {
+                    if (overlay) overlay.classList.remove('visible');
+                }, 3000);
+            } else {
+                const errorData = await response.json();
+                alert('Erreur: ' + JSON.stringify(errorData));
+            }
+        } catch (error) {
+            alert('Erreur: ' + error.message);
+        } finally {
+            btn.innerHTML = btnOriginalHTML;
+            checkValidity();
+        }
+    });
+
+    checkValidity();
+})();
