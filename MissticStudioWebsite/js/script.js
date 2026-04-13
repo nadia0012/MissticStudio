@@ -42,6 +42,7 @@ if (trailerVideo) {
 }
 
 // Image Modal - Click to Enlarge
+const thumbnailContainer = document.querySelector('.thumbnail-container');
 const screenshotContainers = document.querySelectorAll('.screenshot-container');
 const imageModal = document.getElementById('imageModal');
 const modalImage = document.getElementById('modalImage');
@@ -65,9 +66,26 @@ function openModal(index) {
     imageModal.classList.add('active');
 }
 
+// Thumbnail (sans navigation prev/next)
+if (thumbnailContainer) {
+    thumbnailContainer.addEventListener('click', function(e) {
+        if (e.target.closest('.download-btn')) return;
+        const imgSrc = this.querySelector('.thumbnail-image').src;
+        modalImage.src = imgSrc;
+        modalDownloadBtn.href = imgSrc;
+        modalDownloadBtn.download = imgSrc.split('/').pop();
+        if (modalPrev) modalPrev.style.display = 'none';
+        if (modalNext) modalNext.style.display = 'none';
+        imageModal.classList.add('active');
+    });
+}
+
+// Screenshots (avec navigation prev/next)
 screenshotContainers.forEach((container, index) => {
     container.addEventListener('click', function(e) {
         if (e.target.closest('.download-btn')) return;
+        if (modalPrev) modalPrev.style.display = '';
+        if (modalNext) modalNext.style.display = '';
         openModal(index);
     });
 });
@@ -94,8 +112,8 @@ if (modalBackdrop) {
 
 document.addEventListener('keydown', (e) => {
     if (!imageModal.classList.contains('active')) return;
-    if (e.key === 'ArrowLeft' && modalPrev) modalPrev.click();
-    if (e.key === 'ArrowRight' && modalNext) modalNext.click();
+    if (e.key === 'ArrowLeft' && modalPrev && modalPrev.style.display !== 'none') modalPrev.click();
+    if (e.key === 'ArrowRight' && modalNext && modalNext.style.display !== 'none') modalNext.click();
     if (e.key === 'Escape') imageModal.classList.remove('active');
 });
 
@@ -300,7 +318,6 @@ async function uploadToCloudinary(file) {
     const result = await response.json();
     return result.secure_url;
 }
-
 
 // =============================================
 // FORMULAIRE — soumission Web3Forms + overlay

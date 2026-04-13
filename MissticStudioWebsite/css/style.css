@@ -17,7 +17,7 @@
     --Sunrise-5: #875028;
     --Craftiny-rose-pale: #FFC2E2;
     --Gradient-Craftiny-pale: linear-gradient(270deg, #FFF0F8 0%, #FFE8F4 100%);
-    --Gradient-Craftiny-dark: linear-gradient(90deg, #784D6E 0%, #DA9FBE 100%);
+    --Gradient-Craftiny-dark: linear-gradient(90deg, #784D6E 0%, #B17C98  100%);
     --Craftiny-mauve: #784D6E;
     --Craftiny-bleu: #5BABCD;
     --Contact-Mauve: #EFE0F4;
@@ -594,12 +594,6 @@ footer {
     width: 180px;
     height: 55px;
     border-radius: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    white-space: nowrap;
 }
 
 .btn-mauve-dark {
@@ -612,15 +606,18 @@ footer {
     background: linear-gradient(270deg, #FDFAFF 0%, #FAEFFF 100%);
 }
 
+.btn-mauve-dark:hover {
+    background: linear-gradient(90deg, #6B3D75 0%, #85618D 100%);
+}
+
+.btn-mauve-light:hover {
+    background: linear-gradient(90deg, #D1B9DA 0%, #F7E3FF 100%);
+}
+
 .btn-add-wishlist {
     width: 250px;
     height: 55px;
     border-radius: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.2s ease;
 }
 
 .btn-buy-now span,
@@ -638,7 +635,7 @@ footer {
 .btn-sunrise-informations-buy-now:hover,
 .btn-discover-sunrise:hover,
 .btn-home-page:hover {
-    transform: scale(1.02);
+    transform: translateZ(0) scale(1.02);
 }
 
 .btn-buy-now svg,
@@ -651,24 +648,12 @@ footer {
     width: 250px;
     height: 55px;
     border-radius: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-    white-space: nowrap;
 }
 
 .btn-discover-sunrise {
     width: 280px;
     height: 55px;
     border-radius: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-    white-space: nowrap;
 }
 
 .btn-discover span {
@@ -1009,21 +994,13 @@ footer {
     flex-wrap: wrap;
     align-self: start;
     margin-top: auto;
-    /* pousse les boutons vers le bas */
     margin-bottom: 15px;
-    /* 20px du bas */
 }
 
 .card-btn-buy {
     height: 40px;
     padding: 0 14px;
     border-radius: 8px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-    white-space: nowrap;
 }
 
 .card-btn-buy span {
@@ -1039,19 +1016,32 @@ footer {
 }
 
 .card-btn-buy:hover {
-    transform: scale(1.02);
+    transform: translateZ(0) scale(1.02);
 }
 
-.card-btn-discover {
-    height: 38px;
-    padding: 0 14px;
-    border-radius: 8px;
+.card-btn-buy,
+.card-btn-discover,
+.btn-buy-now,
+.btn-add-wishlist,
+.btn-discover,
+.btn-discover-sunrise,
+.btn-home-page,
+.btn-sunrise-informations-buy-now,.btn-big-buy-now,
+.btn-trailer {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     transition: transform 0.2s ease;
     white-space: nowrap;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.card-btn-discover {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 8px;
 }
 
 .card-btn-discover span {
@@ -1072,7 +1062,7 @@ footer {
 }
 
 .card-btn-discover:hover {
-    transform: scale(1.02);
+    transform: translateZ(0) scale(1.02);
 }
 
 /* Section About Us */
@@ -1524,16 +1514,15 @@ footer {
     overflow: hidden;
 }
 
+.craftiny-content-wrapper{
+    top: 530px !important;
+
+}
+
 .btn-big-buy-now {
     width: 220px;
     height: 70px;
     border-radius: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    white-space: nowrap;
 }
 
 .btn-trailer {
@@ -1624,6 +1613,14 @@ footer {
     background: var(--Bouton-pale-Sunrise);
 }
 
+.btn-beige-dark:hover {
+    background: linear-gradient(90deg, #BD8C62 0%, #DEAA73 100%);
+}
+
+.btn-beige-light:hover {
+    background: linear-gradient(90deg, #FEE6CA 0%, #FFF3E8 100%);
+}
+
 .btn-rose-dark {
     border: 2px solid #FFF0F8;
     background: var(--Gradient-Craftiny-dark);
@@ -1632,6 +1629,14 @@ footer {
 .btn-rose-light {
     border: 2px solid var(--Craftiny-mauve);
     background: var(--Gradient-Craftiny-pale);
+}
+
+.btn-rose-dark:hover {
+    background: linear-gradient(90deg, #A47392 0%, #D99EBC 100%);
+}
+
+.btn-rose-light:hover {
+    background: linear-gradient(90deg, #EEC4D9 0%, #FFE8F4 100%);
 }
 
 .informations {
@@ -2052,6 +2057,14 @@ footer {
     transition: opacity 0.2s ease;
 }
 
+.craftiny-modal-nav-btn{
+    border: 1px solid #784D6E;
+}
+
+.sunrise-modal-nav-btn{
+    border: 1px solid #C68749;
+}
+
 .modal-prev {
     left: 5%;
 }
@@ -2061,13 +2074,13 @@ footer {
 }
 
 .modal-nav-btn:hover {
-    transform: translateY(-50%) scale(1.08); /* ← toujours combiner avec translateY */
+    transform: translateY(-50%) scale(1.08);
 }
 
 .modal-nav-btn:disabled {
     opacity: 0.3;
     cursor: default;
-    transform: translateY(-50%); /* ← garder translateY pour pas que ça bouge */
+    transform: translateY(-50%);
 }
 
 @keyframes slideUp {
@@ -2506,12 +2519,6 @@ footer {
     width: clamp(340px, 50vw, 380px);
     height: 70px;
     border-radius: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    white-space: nowrap;
 }
 
 .contact-title {
