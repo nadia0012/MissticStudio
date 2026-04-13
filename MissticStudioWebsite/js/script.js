@@ -136,11 +136,13 @@ if (pauseBtn) {
         if (isPaused) {
             swiper.autoplay.resume();
             pauseBtn.innerHTML = playIcon;
+            pauseBtn.classList.remove('is-paused');
             const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
             if (activeBullet) activeBullet.style.setProperty("--animation-state", "running");
         } else {
             swiper.autoplay.pause();
             pauseBtn.innerHTML = pauseIcon;
+            pauseBtn.classList.add('is-paused');
             const activeBullet = document.querySelector(".swiper-pagination-bullet-active");
             if (activeBullet) activeBullet.style.setProperty("--animation-state", "paused");
         }
