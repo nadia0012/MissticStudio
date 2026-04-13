@@ -11,6 +11,31 @@ window.addEventListener("scroll", function() {
     lastScrollTop = scrollTop;
 });
 
+// Scroll animations with Intersection Observer
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        root: null, // Utilise le viewport par défaut
+        threshold: 0.15, // L'élément doit être visible à 15% pour se déclencher
+        rootMargin: '0px 0px -50px 0px' // Se déclenche un peu avant d'arriver tout en bas
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Ajoute la classe qui déclenche l'animation CSS
+                entry.target.classList.add('is-visible');
+                
+                // Si tu veux que l'animation ne se joue qu'une fois, déconnecte l'élément
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Cible tous les éléments avec la classe .scroll-anim
+    const animatedElements = document.querySelectorAll('.scroll-anim');
+    animatedElements.forEach(el => observer.observe(el));
+});
+
 // MP4 Video autoplay/pause on scroll
 const trailerVideo = document.getElementById('trailer-video');
 
