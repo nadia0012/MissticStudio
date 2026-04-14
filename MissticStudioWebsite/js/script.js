@@ -320,36 +320,12 @@ function renderFiles() {
 
 
 // =============================================
-// CLOUDINARY — upload fichier → URL
-// =============================================
-async function uploadToCloudinary(file) {
-    const cloudName = 'dubts2zzk';
-    const uploadPreset = 'misstic_uploads';
-
-    const data = new FormData();
-    data.append('file', file);
-    data.append('upload_preset', uploadPreset);
-
-    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
-        method: 'POST',
-        body: data,
-    });
-
-    if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error?.message || 'Cloudinary upload failed');
-    }
-
-    const result = await response.json();
-    return result.secure_url;
-}
-
-// =============================================
-// FORMULAIRE — soumission Web3Forms + overlay
+// FORMULAIRE — soumission + validation + overlay
 // =============================================
 (function () {
+    const emailSection = document.querySelector('.email-section');
     const contactForm = document.querySelector('.contact-form');
-    if (!contactForm) return;
+    if (!emailSection || !contactForm) return;
 
     const overlay = document.getElementById('formSuccessOverlay');
     const wrapper = document.querySelector('.submit-wrapper');
@@ -357,7 +333,6 @@ async function uploadToCloudinary(file) {
     const requiredFields = contactForm.querySelectorAll('[required]');
     const emailField = document.getElementById('email');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     const btnOriginalHTML = btn.innerHTML;
 
     // --- 1. VALIDATION ---
@@ -381,7 +356,7 @@ async function uploadToCloudinary(file) {
         }
     }
 
-    // --- 2. ÉCOUTEURS ---
+    // --- 2. ÉCOUTEURS DE VALIDATION ---
     requiredFields.forEach(field => {
         field.addEventListener('input', checkValidity);
         field.addEventListener('change', checkValidity);
@@ -399,43 +374,44 @@ async function uploadToCloudinary(file) {
         emailField.classList.remove('invalid');
     });
 
-    // --- 3. SOUMISSION ---
-    wrapper.addEventListener('click', async function (e) {
+    checkValidity();
+
+    // --- 3. SOUMISSION DU FORMULAIRE ---
+    emailSection.addEventListener('submit', async function (e) {
         e.preventDefault();
         if (btn.classList.contains('disabled')) return;
 
-        // Désactive le bouton pendant l'envoi
         btn.classList.add('disabled');
         btn.style.pointerEvents = 'none';
         btn.innerHTML = 'Sending...';
 
         try {
-            // 1. Upload les fichiers sur Cloudinary
-            let fileLinks = '';
-            if (selectedFiles.length > 0) {
-                const urls = await Promise.all(selectedFiles.map(file => uploadToCloudinary(file)));
-                fileLinks = '\n\n📎 Fichiers joints :\n' + urls.map((url, i) => `${i + 1}. ${selectedFiles[i].name} : ${url}`).join('\n');
-            }
+            const formData = new FormData(emailSection);
 
-            // 2. Construit le FormData sans les fichiers binaires
-            const form = document.querySelector('.email-section');
-            const formData = new FormData(form);
+            // Retire les fichiers de l'input et rajoute ceux de selectedFiles
             formData.delete('attachment');
+            selectedFiles.forEach(file => formData.append('attachment[]', file));
 
-            // 3. Ajoute les liens Cloudinary dans le message
-            const originalMessage = formData.get('message');
-            formData.set('message', originalMessage + fileLinks);
-
-            // 4. Envoie à Web3Forms
-            const response = await fetch(form.action, {
+            const response = await fetch('php/contact-form.php', {
                 method: 'POST',
                 body: formData,
             });
 
-            if (response.ok) {
-                // ✅ Succès
-                if (overlay) overlay.classList.add('visible');
+            // Vérifier que la réponse est OK
+            if (!response.ok) {
+                throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+            }
 
+            // Vérifier que nous avons du contenu
+            const text = await response.text();
+            if (!text) {
+                throw new Error('Réponse vide du serveur');
+            }
+
+            const result = JSON.parse(text);
+
+            if (result.success) {
+                if (overlay) overlay.classList.add('visible');
                 contactForm.querySelectorAll('input, textarea').forEach(input => {
                     input.value = '';
                     if (input.type === 'file') input.value = null;
@@ -443,21 +419,18 @@ async function uploadToCloudinary(file) {
                 selectedFiles = [];
                 if (uploadedArea) uploadedArea.innerHTML = '';
                 emailField.classList.remove('invalid');
-
-                setTimeout(() => {
-                    if (overlay) overlay.classList.remove('visible');
-                }, 3000);
+                setTimeout(() => { if (overlay) overlay.classList.remove('visible'); }, 3000);
             } else {
-                const errorData = await response.json();
-                alert('Erreur: ' + JSON.stringify(errorData));
+                alert('Erreur: ' + (result.message || 'Erreur inconnue'));
             }
         } catch (error) {
+            console.error('Erreur complète:', error);
             alert('Erreur: ' + error.message);
         } finally {
             btn.innerHTML = btnOriginalHTML;
+            btn.classList.remove('disabled');
+            btn.style.pointerEvents = 'auto';
             checkValidity();
         }
     });
-
-    checkValidity();
 })();
