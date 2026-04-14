@@ -23,6 +23,10 @@
     --Contact-Mauve: #EFE0F4;
 }
 
+.visually-hidden{
+    display: none;
+}
+
 main {
     margin-top: 65px;
 }
@@ -123,7 +127,6 @@ section{
     top: 0;
     left: 0;
     height: 100%;
-    /* suit la hauteur du navbar */
     width: auto;
 }
 
@@ -283,13 +286,10 @@ footer {
 .footer-content {
     position: absolute;
     inset: 0;
-    /* remplace top/left/width/height */
     display: flex;
     flex-direction: column;
     align-items: end;
-    /* centre horizontalement */
     justify-content: end;
-    /* centre verticalement */
     box-sizing: border-box;
     z-index: 5;
     padding-left: clamp(10px, 5vw, 180px);
