@@ -1,6 +1,6 @@
 # Misstic Studio Website
 
-Site web officiel du studio indie Misstic Studio à Montréal.
+Site web officiel du studio indie Misstic Studio à Sherbrooke.
 
 ## 📁 Structure du projet
 
