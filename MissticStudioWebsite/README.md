@@ -29,7 +29,8 @@ Site web officiel du studio indie Misstic Studio à Sherbrooke.
 │   └── process-email-queue.php # Traitement queue emails
 │
 ├── config/                   # Configuration
-│   └── .env                  # Variables d'environnement
+│   ├── .env                  # Variables d'environnement
+│   └── .env.example          # Variables d'environnement exemple de template
 │
 ├── logs/                     # Logs d'application
 │   ├── security.log          # Logs de sécurité

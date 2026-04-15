@@ -17,7 +17,7 @@ require '../vendor/autoload.php';
 // =============================================
 // Charger les variables d'environnement du .env
 // =============================================
-$envFile = __DIR__ . '/../.env';
+$envFile = __DIR__ . '/../config/.env';
 if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
