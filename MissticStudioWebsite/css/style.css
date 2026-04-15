@@ -2953,6 +2953,41 @@ textarea::placeholder {
     color: #A077AF;
 }
 
+/* Champ invalide */
+.contact-input input.error-state,
+.contact-input textarea.error-state {
+    outline: 2px solid #E24B4A;
+    outline-offset: 0px;
+}
+
+/* Message d'erreur sous un champ */
+.field-error {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    color: #A32D2D;
+    font-family: Asap;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Bandeau d'erreur général */
+.form-error-banner {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: Asap;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 16px;
+}
+.form-error-banner.visible { display: flex; }
+.form-error-banner.error   { background: #FCEBEB; color: #791F1F; border: 1px solid #F7C1C1; }
+.form-error-banner.warning { background: #FAEEDA; color: #633806; border: 1px solid #FAC775; }
+
 /* Media queries pour les écrans de 1400px et moins */
 @media (max-width: 1400px) {
     .informations {

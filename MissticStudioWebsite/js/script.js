@@ -14,24 +14,20 @@ window.addEventListener("scroll", function() {
 // Scroll animations with Intersection Observer
 document.addEventListener('DOMContentLoaded', function() {
     const observerOptions = {
-        root: null, // Utilise le viewport par défaut
-        threshold: 0.15, // L'élément doit être visible à 15% pour se déclencher
-        rootMargin: '0px 0px -50px 0px' // Se déclenche un peu avant d'arriver tout en bas
+        root: null,
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Ajoute la classe qui déclenche l'animation CSS
                 entry.target.classList.add('is-visible');
-                
-                // Si tu veux que l'animation ne se joue qu'une fois, déconnecte l'élément
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Cible tous les éléments avec la classe .scroll-anim
     const animatedElements = document.querySelectorAll('.scroll-anim');
     animatedElements.forEach(el => observer.observe(el));
 });
@@ -91,7 +87,6 @@ function openModal(index) {
     imageModal.classList.add('active');
 }
 
-// Thumbnail (sans navigation prev/next)
 if (thumbnailContainer) {
     thumbnailContainer.addEventListener('click', function(e) {
         if (e.target.closest('.download-btn')) return;
@@ -105,7 +100,6 @@ if (thumbnailContainer) {
     });
 }
 
-// Screenshots (avec navigation prev/next)
 screenshotContainers.forEach((container, index) => {
     container.addEventListener('click', function(e) {
         if (e.target.closest('.download-btn')) return;
@@ -291,7 +285,6 @@ let csrfTokenReady = false;
 async function ensureCSRFToken(forceRefresh = false) {
     const csrfInput = document.getElementById('csrf_token');
     
-    // Si token déjà chargé ET pas forceRefresh, retourner
     if (!forceRefresh && csrfInput && csrfInput.value && csrfTokenReady) {
         return true;
     }
@@ -312,10 +305,8 @@ async function ensureCSRFToken(forceRefresh = false) {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    // Charger le token au démarrage
     await ensureCSRFToken();
     
-    // ✅ INITIALISER LA SESSION TIME-TRAP (démarrer le timer serveur)
     try {
         const initResponse = await fetch('php/init-form.php');
         if (initResponse.ok) {
@@ -326,13 +317,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.error('Erreur initialisation TIME-TRAP:', e);
     }
     
-    // ✅ INITIALISER submission_time au chargement de la page (pour TIME-TRAP)
-    const submissionTimeInput = document.getElementById('submission_time');
-    if (submissionTimeInput) {
-        submissionTimeInput.value = Date.now(); // Millisecondes
-    }
-    
-    // Recharger le token après 55 minutes (avant l'expiration d'1 heure)
     setTimeout(async () => {
         const csrfInput = document.getElementById('csrf_token');
         const response = await fetch('php/get-csrf-token.php');
@@ -347,9 +331,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 // reCAPTCHA v3 — Générer le token avant soumission
 // =============================================
 async function generateRecaptchaToken() {
-    // Vérifier si reCAPTCHA v3 est chargé (window.grecaptcha)
     if (typeof window.grecaptcha === 'undefined') {
-        return ''; // reCAPTCHA non configuré
+        return '';
     }
     
     try {
@@ -419,6 +402,38 @@ function renderFiles() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const btnOriginalHTML = btn.innerHTML;
 
+    // =============================================
+    // GESTION DES ERREURS UX — Bandeau inline
+    // =============================================
+    const errorBanner = document.getElementById('formErrorBanner');
+    const errorMessage = document.getElementById('formErrorMessage');
+
+    function showFormError(message, type = 'error') {
+        errorBanner.className = 'form-error-banner visible ' + type;
+        errorMessage.textContent = message;
+        errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideFormError() {
+        errorBanner.className = 'form-error-banner';
+    }
+
+    // Mapping codes HTTP → messages humains
+    function getErrorMessage(status, serverMessage) {
+        if (status === 429) return 'Too many attempts. Please wait an hour before trying again.';
+        if (status === 403) {
+            if (serverMessage && (serverMessage.includes('session') || serverMessage.includes('token') || serverMessage.includes('expiré'))) {
+                // Recharge silencieusement le CSRF pour la prochaine tentative
+                ensureCSRFToken(true);
+                return 'Your session expired — please try submitting again.';
+            }
+            return 'Request blocked. Please refresh the page and try again.';
+        }
+        if (status >= 500) return 'Server error. Your message was not sent — please try again later.';
+        if (serverMessage) return serverMessage;
+        return 'Something went wrong. Please try again.';
+    }
+
     // --- 1. VALIDATION ---
     function checkValidity() {
         const emailValid = emailRegex.test(emailField.value.trim());
@@ -465,18 +480,22 @@ function renderFiles() {
         e.preventDefault();
         if (btn.classList.contains('disabled')) return;
 
+        // Cacher l'erreur précédente dès qu'on retente
+        hideFormError();
+
         btn.classList.add('disabled');
         btn.style.pointerEvents = 'none';
         btn.innerHTML = 'Sending...';
 
+        // Garder le status HTTP pour le mapping d'erreur
+        let httpStatus = 0;
+
         try {
-            // Vérifier que le CSRF token est chargé
             const tokenReady = await ensureCSRFToken();
             if (!tokenReady) {
-                throw new Error('Impossible de charger le token de sécurité');
+                throw new Error('Unable to load security token. Please refresh the page.');
             }
             
-            // Générer le token reCAPTCHA v3
             const recaptchaToken = await generateRecaptchaToken();
             const recaptchaInput = document.getElementById('recaptcha_token');
             if (recaptchaInput && recaptchaToken) {
@@ -489,32 +508,22 @@ function renderFiles() {
             formData.delete('attachment');
             selectedFiles.forEach(file => formData.append('attachment[]', file));
 
-            // === DEBUG: Afficher les fichiers dans formData ===
-            console.log('📦 DEBUG FormData - selectedFiles:', selectedFiles.length);
-            let fileCount = 0;
-            for (let pair of formData.entries()) {
-                if (pair[0] === 'attachment') {
-                    fileCount++;
-                    console.log(`  Fichier ${fileCount}: ${pair[1].name} (${pair[1].size} bytes)`);
-                }
-            }
-            console.log(`📦 Total attachments dans FormData: ${fileCount}`);
-
-            // ✅ Réinitialise le timestamp juste avant l'envoi
-            const submissionTimeInput = document.getElementById('submission_time');
-            if (submissionTimeInput) {
-                submissionTimeInput.value = Date.now();
-            }
-
-            // Avant le fetch, ajoute :
+            // Vérification taille fichiers côté client
             const maxSize = 5 * 1024 * 1024; // 5MB
             for (const file of selectedFiles) {
                 if (file.size > maxSize) {
-                    alert(`Fichier trop lourd : ${file.name} (max 5MB)`);
+                    // === MODIFIÉ : bandeau au lieu de alert ===
+                    showFormError(`File too large: ${file.name} (max 5MB per file)`);
                     btn.innerHTML = btnOriginalHTML;
                     checkValidity();
                     return;
                 }
+            }
+
+            // Réinitialise le timestamp juste avant l'envoi
+            const submissionTimeInput = document.getElementById('submission_time');
+            if (submissionTimeInput) {
+                submissionTimeInput.value = Date.now();
             }
 
             const response = await fetch('php/contact-form.php', {
@@ -522,20 +531,19 @@ function renderFiles() {
                 body: formData,
             });
 
-            // Vérifier que la réponse est OK
-            if (!response.ok) {
-                throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
-            }
+            // Sauvegarder le status pour le mapping d'erreur
+            httpStatus = response.status;
 
-            // Vérifier que nous avons du contenu
             const text = await response.text();
             if (!text) {
-                throw new Error('Réponse vide du serveur');
+                throw new Error('Empty response from server.');
             }
 
             const result = JSON.parse(text);
 
             if (result.success) {
+                // Succès : vider le formulaire et afficher l'overlay
+                hideFormError();
                 if (overlay) overlay.classList.add('visible');
                 contactForm.querySelectorAll('input, textarea').forEach(input => {
                     input.value = '';
@@ -545,17 +553,21 @@ function renderFiles() {
                 if (uploadedArea) uploadedArea.innerHTML = '';
                 emailField.classList.remove('invalid');
                 
-                // ✅ Recharger le NOUVEAU token CSRF après soumission réussie
-                // forceRefresh=true pour ignorer le cache et refetcher du serveur
                 await ensureCSRFToken(true);
                 
                 setTimeout(() => { if (overlay) overlay.classList.remove('visible'); }, 3000);
             } else {
-                alert('Erreur: ' + (result.message || 'Erreur inconnue'));
+                // === MODIFIÉ : bandeau au lieu de alert ===
+                showFormError(getErrorMessage(httpStatus, result.message));
             }
         } catch (error) {
             console.error('Erreur complète:', error);
-            alert('Erreur: ' + error.message);
+            // === MODIFIÉ : bandeau au lieu de alert, avec détection réseau ===
+            if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
+                showFormError('Network error — check your connection and try again.', 'warning');
+            } else {
+                showFormError(getErrorMessage(httpStatus, error.message));
+            }
         } finally {
             btn.innerHTML = btnOriginalHTML;
             btn.classList.remove('disabled');

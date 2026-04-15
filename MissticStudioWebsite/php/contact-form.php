@@ -1,15 +1,18 @@
 <?php
 session_start();
 
-// =====================================================
-// AUGMENTER LES LIMITES DE FICHIERS IMMÉDIATEMENT
-// =====================================================
 require_once 'config-upload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require '../vendor/autoload.php';
+
+logSecurityEvent('PHP_CONFIG', [
+    'max_file_uploads' => ini_get('max_file_uploads'),
+    'upload_max_filesize' => ini_get('upload_max_filesize'),
+    'post_max_size' => ini_get('post_max_size'),
+], $ip);
 
 // Activer les erreurs mais ne pas les afficher au client
 error_reporting(E_ALL);
@@ -63,6 +66,7 @@ $allowed_origins = [
     'https://www.missticstudio.com',
     'https://missticstudio.com',
     'http://localhost:8000',
+    'https://precision-paramount-mocker.ngrok-free.dev',
 ];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
@@ -474,6 +478,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $totalSize = 0;
 
             foreach ($_FILES['attachment']['tmp_name'] as $i => $tmpName) {
+
+                if ($_FILES['attachment']['error'][$i] === UPLOAD_ERR_INI_SIZE) {
+                    throw new Exception('Fichier trop lourd : ' . $_FILES['attachment']['name'][$i]);
+                }
+
                 if ($_FILES['attachment']['error'][$i] === 0 && !empty($tmpName)) {
                     $fileSize = $_FILES['attachment']['size'][$i];
                     $totalSize += $fileSize;
