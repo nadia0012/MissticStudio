@@ -182,8 +182,6 @@ Lire dans cet ordre:
 
 ## 🎯 OBJECTIFS RÉALISÉS
 
-L'utilisateur a demandé:
-
 ❌ "rendre le check injection moins agressif pour accepter Jean-Pierre, O'Connor"
 ✅ FAIT: Regex amélioré, tirets et apostrophes acceptés
 
