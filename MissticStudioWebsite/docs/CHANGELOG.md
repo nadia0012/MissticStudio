@@ -43,23 +43,6 @@
 
 ──────────────────────────────────────────────────────────────
 
-## 📝 FICHIERS CRÉÉS/MODIFIÉS
-
-MODIFIÉS:
-  ✏️  php/contact-form.php         (50+ lignes changées)
-  ✏️  contact.html                 (1 ligne ajoutée)
-  ✏️  js/script.js                 (5-10 lignes changées)
-  ✏️  .env                         (template nettoyé)
-
-CRÉÉS:
-  ✨ php/process-email-queue.php   (nouveau - 140 lignes)
-  ✨ ADVANCED_SECURITY.md          (nouveau - 280 lignes)
-  ✨ IMPROVEMENTS_SUMMARY.md       (nouveau - 220 lignes)
-  ✨ TESTING_GUIDE.md              (nouveau - 320 lignes)
-  ✨ CHANGELOG.md                  (ce fichier)
-
-──────────────────────────────────────────────────────────────
-
 ## 🚀 QUICK START
 
 ### 1. Configuration
@@ -160,20 +143,17 @@ logs/
 
 Lire dans cet ordre:
 
-1. **SECURITY_SETUP.md**
-   → Première mise en place + reCAPTCHA v3 setup
-
-2. **ADVANCED_SECURITY.md**
+1. **SECURITY.md**
    → Détails techniques des 7 protections
    → Configuration production
    → Troubleshooting
 
-3. **IMPROVEMENTS_SUMMARY.md**
+2. **IMPROVEMENTS_SUMMARY.md**
    → Résumé des changements
    → Impact performance
    → Production checklist
 
-4. **TESTING_GUIDE.md**
+3. **TESTING.md**
    → Guide complet de test
    → Test chaque protection
    → End-to-end testing
@@ -228,8 +208,8 @@ Lire dans cet ordre:
 
 ## 🔗 FICHIERS À LIRE ensuite
 
-1. ADVANCED_SECURITY.md      ← LIRE D'ABORD
-2. TESTING_GUIDE.md          ← Pour tester
+1. SECURITY.md      ← LIRE D'ABORD
+2. TESTING.md          ← Pour tester
 3. IMPROVEMENTS_SUMMARY.md   ← Détails techniques
 
 ──────────────────────────────────────────────────────────────
@@ -241,7 +221,7 @@ Lire dans cet ordre:
 → Vérifier permissions /logs
 
 ### Problème: Rate limit trop strict
-→ Voir ADVANCED_SECURITY.md section "Logs"
+→ Voir SECURITY.md section "Logs"
 → Vérifier /logs/rate-limit.json
 
 ### Probleme: "Formulaire rejeté trop rapide"
