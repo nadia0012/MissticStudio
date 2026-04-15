@@ -128,18 +128,22 @@ if (modalNext) {
 }
 
 if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', () => imageModal.classList.remove('active'));
+    modalCloseBtn.addEventListener('click', () => {
+        if (imageModal) imageModal.classList.remove('active');
+    });
 }
 
 if (modalBackdrop) {
-    modalBackdrop.addEventListener('click', () => imageModal.classList.remove('active'));
+    modalBackdrop.addEventListener('click', () => {
+        if (imageModal) imageModal.classList.remove('active');
+    });
 }
 
 document.addEventListener('keydown', (e) => {
-    if (!imageModal.classList.contains('active')) return;
+    if (!imageModal || !imageModal.classList.contains('active')) return;
     if (e.key === 'ArrowLeft' && modalPrev && modalPrev.style.display !== 'none') modalPrev.click();
     if (e.key === 'ArrowRight' && modalNext && modalNext.style.display !== 'none') modalNext.click();
-    if (e.key === 'Escape') imageModal.classList.remove('active');
+    if (e.key === 'Escape' && imageModal) imageModal.classList.remove('active');
 });
 
 
@@ -278,6 +282,86 @@ if (fileInput) {
     });
 }
 
+
+// =============================================
+// CSRF TOKEN — Charger le token au démarrage
+// =============================================
+let csrfTokenReady = false;
+
+async function ensureCSRFToken(forceRefresh = false) {
+    const csrfInput = document.getElementById('csrf_token');
+    
+    // Si token déjà chargé ET pas forceRefresh, retourner
+    if (!forceRefresh && csrfInput && csrfInput.value && csrfTokenReady) {
+        return true;
+    }
+    
+    try {
+        const response = await fetch('php/get-csrf-token.php');
+        const data = await response.json();
+        if (csrfInput && data.token) {
+            csrfInput.value = data.token;
+            csrfTokenReady = true;
+            console.log('✅ CSRF token chargé');
+            return true;
+        }
+    } catch (e) {
+        console.error('Erreur chargement CSRF token:', e);
+    }
+    return false;
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+    // Charger le token au démarrage
+    await ensureCSRFToken();
+    
+    // ✅ INITIALISER LA SESSION TIME-TRAP (démarrer le timer serveur)
+    try {
+        const initResponse = await fetch('php/init-form.php');
+        if (initResponse.ok) {
+            const initData = await initResponse.json();
+            console.log('Form session initialized:', initData);
+        }
+    } catch (e) {
+        console.error('Erreur initialisation TIME-TRAP:', e);
+    }
+    
+    // ✅ INITIALISER submission_time au chargement de la page (pour TIME-TRAP)
+    const submissionTimeInput = document.getElementById('submission_time');
+    if (submissionTimeInput) {
+        submissionTimeInput.value = Date.now(); // Millisecondes
+    }
+    
+    // Recharger le token après 55 minutes (avant l'expiration d'1 heure)
+    setTimeout(async () => {
+        const csrfInput = document.getElementById('csrf_token');
+        const response = await fetch('php/get-csrf-token.php');
+        const data = await response.json();
+        if (csrfInput && data.token) {
+            csrfInput.value = data.token;
+        }
+    }, 55 * 60 * 1000);
+});
+
+// =============================================
+// reCAPTCHA v3 — Générer le token avant soumission
+// =============================================
+async function generateRecaptchaToken() {
+    // Vérifier si reCAPTCHA v3 est chargé (window.grecaptcha)
+    if (typeof window.grecaptcha === 'undefined') {
+        return ''; // reCAPTCHA non configuré
+    }
+    
+    try {
+        const token = await grecaptcha.execute('VOTRE_SITE_KEY', { action: 'contact' });
+        return token;
+    } catch (e) {
+        console.warn('Erreur reCAPTCHA:', e);
+        return '';
+    }
+}
+
+
 function renderFiles() {
     uploadedArea.innerHTML = '';
 
@@ -386,11 +470,52 @@ function renderFiles() {
         btn.innerHTML = 'Sending...';
 
         try {
+            // Vérifier que le CSRF token est chargé
+            const tokenReady = await ensureCSRFToken();
+            if (!tokenReady) {
+                throw new Error('Impossible de charger le token de sécurité');
+            }
+            
+            // Générer le token reCAPTCHA v3
+            const recaptchaToken = await generateRecaptchaToken();
+            const recaptchaInput = document.getElementById('recaptcha_token');
+            if (recaptchaInput && recaptchaToken) {
+                recaptchaInput.value = recaptchaToken;
+            }
+            
             const formData = new FormData(emailSection);
 
             // Retire les fichiers de l'input et rajoute ceux de selectedFiles
             formData.delete('attachment');
             selectedFiles.forEach(file => formData.append('attachment[]', file));
+
+            // === DEBUG: Afficher les fichiers dans formData ===
+            console.log('📦 DEBUG FormData - selectedFiles:', selectedFiles.length);
+            let fileCount = 0;
+            for (let pair of formData.entries()) {
+                if (pair[0] === 'attachment') {
+                    fileCount++;
+                    console.log(`  Fichier ${fileCount}: ${pair[1].name} (${pair[1].size} bytes)`);
+                }
+            }
+            console.log(`📦 Total attachments dans FormData: ${fileCount}`);
+
+            // ✅ Réinitialise le timestamp juste avant l'envoi
+            const submissionTimeInput = document.getElementById('submission_time');
+            if (submissionTimeInput) {
+                submissionTimeInput.value = Date.now();
+            }
+
+            // Avant le fetch, ajoute :
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            for (const file of selectedFiles) {
+                if (file.size > maxSize) {
+                    alert(`Fichier trop lourd : ${file.name} (max 5MB)`);
+                    btn.innerHTML = btnOriginalHTML;
+                    checkValidity();
+                    return;
+                }
+            }
 
             const response = await fetch('php/contact-form.php', {
                 method: 'POST',
@@ -419,6 +544,11 @@ function renderFiles() {
                 selectedFiles = [];
                 if (uploadedArea) uploadedArea.innerHTML = '';
                 emailField.classList.remove('invalid');
+                
+                // ✅ Recharger le NOUVEAU token CSRF après soumission réussie
+                // forceRefresh=true pour ignorer le cache et refetcher du serveur
+                await ensureCSRFToken(true);
+                
                 setTimeout(() => { if (overlay) overlay.classList.remove('visible'); }, 3000);
             } else {
                 alert('Erreur: ' + (result.message || 'Erreur inconnue'));

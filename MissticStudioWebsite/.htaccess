@@ -1,0 +1,19 @@
+# =====================================================
+# AUGMENTER LES LIMITES D'UPLOAD DE FICHIERS
+# =====================================================
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
+php_value max_file_uploads 20
+
+# =====================================================
+# SÉCURITÉ ET OPTIMISATION
+# =====================================================
+# Désactiver l'affichage des erreurs en production
+php_flag display_errors Off
+php_flag log_errors On
+
+# Délai d'exécution max
+php_value max_execution_time 60
+
+# Mémoire max pour un script
+php_value memory_limit 256M

@@ -2882,6 +2882,7 @@ textarea::placeholder {
     font-family: "Lilita One";
     font-size: 35px;
     background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
