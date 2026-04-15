@@ -480,6 +480,28 @@ function renderFiles() {
         e.preventDefault();
         if (btn.classList.contains('disabled')) return;
 
+        if (btn.classList.contains('disabled')) return;
+
+        hideFormError();
+
+        // NOUVELLE VÉRIFICATION : Poids total des fichiers
+        const MAX_TOTAL_SIZE = 15 * 1024 * 1024; // 15 Mo (ajuste selon post_max_size)
+        let totalFilesSize = 0;
+        selectedFiles.forEach(file => {
+            totalFilesSize += file.size;
+        });
+
+        if (totalFilesSize > MAX_TOTAL_SIZE) {
+            const sizeInMB = (totalFilesSize / (1024 * 1024)).toFixed(2);
+            showFormError(`The total size of your files is too large (${sizeInMB} MB). Maximum allowed: 15 MB.`);
+            return; // On arrête tout ici, pas d'envoi vers le serveur
+        }
+
+        // --- Début de l'envoi habituel ---
+        btn.classList.add('disabled');
+        btn.style.pointerEvents = 'none';
+        btn.innerHTML = 'Sending...';
+
         // Cacher l'erreur précédente dès qu'on retente
         hideFormError();
 
@@ -509,21 +531,40 @@ function renderFiles() {
             selectedFiles.forEach(file => formData.append('attachment[]', file));
 
             // Vérification taille fichiers côté client
-            const maxSize = 5 * 1024 * 1024; // 5MB
+            const maxSize = 2 * 1024 * 1024; // 2MB — vraie limite serveur
+            const totalMax = 8 * 1024 * 1024; // 8MB post_max_size
+
+            let totalSize = 0;
             for (const file of selectedFiles) {
                 if (file.size > maxSize) {
-                    // === MODIFIÉ : bandeau au lieu de alert ===
-                    showFormError(`File too large: ${file.name} (max 5MB per file)`);
+                    showFormError(`"${file.name}" exceeds the 2MB limit. Please compress or remove it.`);
                     btn.innerHTML = btnOriginalHTML;
                     checkValidity();
                     return;
                 }
+                totalSize += file.size;
+            }
+            if (totalSize > totalMax) {
+                showFormError(`Total file size exceeds 8MB. Please reduce the number of files.`);
+                btn.innerHTML = btnOriginalHTML;
+                checkValidity();
+                return;
             }
 
             // Réinitialise le timestamp juste avant l'envoi
             const submissionTimeInput = document.getElementById('submission_time');
             if (submissionTimeInput) {
                 submissionTimeInput.value = Date.now();
+            }
+
+            // Juste avant le fetch, ajoute ce check
+            const tooLargeFiles = selectedFiles.filter(f => f.size > 2 * 1024 * 1024);
+            if (tooLargeFiles.length > 0) {
+                const names = tooLargeFiles.map(f => f.name).join(', ');
+                showFormError(`Ces fichiers dépassent 2MB (limite serveur) : ${names}`);
+                btn.innerHTML = btnOriginalHTML;
+                checkValidity();
+                return;
             }
 
             const response = await fetch('php/contact-form.php', {

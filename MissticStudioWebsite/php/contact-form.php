@@ -14,6 +14,17 @@ logSecurityEvent('PHP_CONFIG', [
     'post_max_size' => ini_get('post_max_size'),
 ], $ip);
 
+// Détecter si le poids total dépasse post_max_size
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST) && $_SERVER['CONTENT_LENGTH'] > 0) {
+    $max_size = ini_get('post_max_size');
+    http_response_code(413 ); // Content Too Large
+    echo json_encode([
+        'success' => false, 
+        'message' => "The total size of your files is too large (Limit: $max_size). Please send fewer files or compress them."
+    ]);
+    exit;
+}
+
 // Activer les erreurs mais ne pas les afficher au client
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
@@ -65,8 +76,8 @@ if (file_exists($envFile)) {
 $allowed_origins = [
     'https://www.missticstudio.com',
     'https://missticstudio.com',
-    'http://localhost:8000',
-    'https://precision-paramount-mocker.ngrok-free.dev',
+    'http://localhost:8000', // Que pour tester, à enlever
+    'https://precision-paramount-mocker.ngrok-free.dev', // Que pour tester, à enlever
 ];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
@@ -479,9 +490,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             foreach ($_FILES['attachment']['tmp_name'] as $i => $tmpName) {
 
+                // ✅ Détecter UPLOAD_ERR_INI_SIZE correctement
                 if ($_FILES['attachment']['error'][$i] === UPLOAD_ERR_INI_SIZE) {
-                    throw new Exception('Fichier trop lourd : ' . $_FILES['attachment']['name'][$i]);
+                    throw new Exception('File too large (server limit 2MB): ' . $_FILES['attachment']['name'][$i]);
                 }
+                
+                // Ignorer les slots vides (error != 0 pour d'autres raisons)
+                if ($_FILES['attachment']['error'][$i] !== UPLOAD_ERR_OK) {
+                    continue; // ← skip silencieux pour les autres erreurs
+                }
+                
+                if (empty($tmpName)) continue;
 
                 if ($_FILES['attachment']['error'][$i] === 0 && !empty($tmpName)) {
                     $fileSize = $_FILES['attachment']['size'][$i];
