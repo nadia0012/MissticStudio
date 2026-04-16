@@ -1055,7 +1055,7 @@ footer {
 
 .game-card {
     flex: 1 1 0;
-    max-width: 600px;
+    max-width: 600px; /* À changer pour 450px si vous voulez 3 jeux par colonnes */
     min-width: 0;
     height: auto;
     min-height: 620px;
