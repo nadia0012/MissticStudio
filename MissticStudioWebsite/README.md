@@ -94,7 +94,7 @@ FORM_SECRET=your-secret-key
 RECAPTCHA_SECRET=your-recaptcha-secret  # Optionnel
 ```
 
-**Voir `.env.example` pour plus de détails.**
+**Voir `.env.` pour plus de détails.**
 
 ## 🚀 Déploiement
 
@@ -108,3 +108,9 @@ RECAPTCHA_SECRET=your-recaptcha-secret  # Optionnel
 - **Error 500 au formulaire**: Vérifier les logs dans `logs/security.log`
 - **Emails non reçus**: Vérifier `logs/archive/` (email queue)
 - **Formulaire bloqué**: Attendre 1h (rate limit) ou vérifier token CSRF
+
+## 🎨 Ajout et modifications de jeux dans le HTML et le CSS
+
+- **index.html**: Vérifier les blocs de commentaires dans `Slide 2 — doublon` et `Carte Craftiny`. Des instructions se trouvent dans les lignes 366, 382 et 461.
+- **sunrise-order.html**: Vérifier les blocs de commentaires dans `section class="more-games"`. Des instructions se trouvent dans la ligne 876.
+- **style.css**: Chaque jeu a deux couleurs, une foncée, et une pâle. Celles de Sunrise's Order se nomment `btn-beige-dark` et `btn-beige-light`. Celles de Craftiny se nomment `btn-rose-dark` et `btn-rose-light`. Les boutons pâles dans les pages de jeux ont la classe `big-btn-beige-light` et `big-btn-rose-light` dû à leur taille et leur couleur de texte. Si vous créer de nouveaux boutons, n'oubliez pas de les inclure dans le responsive en vous inspirant des boutons similaires! N'hésitez pas à créer des variables de couleurs afin de les réutiliser dans le code.
