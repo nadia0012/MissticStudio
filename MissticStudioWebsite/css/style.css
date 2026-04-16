@@ -44,17 +44,7 @@
 /* ============================================================
     UTILITAIRES
    ============================================================ */
-
-/* Texte en dégradé Misstic */
-.gradient-text {
-    background: var(--Misstic-Gradient-Dark);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 /* Base commune à tous les boutons */
-.btn-base,
 .card-btn-buy,
 .card-btn-discover,
 .btn-buy-now,
