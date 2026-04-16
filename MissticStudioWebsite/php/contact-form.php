@@ -516,7 +516,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     // Vérification du type MIME - utiliser aussi l'extension
                     $fileExt = strtolower(pathinfo($_FILES['attachment']['name'][$i], PATHINFO_EXTENSION));
-                    $allowedExt = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'zip'];
+                    $allowedExt = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'svg', 'zip'];
                     $fileType = $_FILES['attachment']['type'][$i] ?? '';
                     
                     // Valider l'extension

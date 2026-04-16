@@ -290,7 +290,9 @@ async function ensureCSRFToken(forceRefresh = false) {
     }
     
     try {
-        const response = await fetch('php/get-csrf-token.php');
+        const response = await fetch('php/get-csrf-token.php', {
+            credentials: 'include'  // ← ajouter
+        });
         const data = await response.json();
         if (csrfInput && data.token) {
             csrfInput.value = data.token;
@@ -308,7 +310,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     await ensureCSRFToken();
     
     try {
-        const initResponse = await fetch('php/init-form.php');
+        const initResponse = await fetch('php/init-form.php', {
+            credentials: 'include' 
+        });
         if (initResponse.ok) {
             const initData = await initResponse.json();
             console.log('Form session initialized:', initData);
@@ -436,15 +440,14 @@ function renderFiles() {
 
     // --- 1. VALIDATION ---
     function checkValidity() {
-        const emailValid = emailRegex.test(emailField.value.trim());
-
-        const allFilled = Array.from(requiredFields).every(field => {
-            if (field.id === 'email') return emailValid;
+        const allValid = Array.from(requiredFields).every(field => {
             if (field.type === 'file') return true;
-            return field.value.trim() !== '';
+            const config = fieldConfig[field.id];
+            if (!config) return field.value.trim() !== '';
+            return config.validate(field.value.trim());
         });
 
-        if (allFilled) {
+        if (allValid) {
             btn.classList.remove('disabled');
             btn.style.pointerEvents = 'auto';
             wrapper.classList.remove('form-invalid');
@@ -456,33 +459,110 @@ function renderFiles() {
     }
 
     // --- 2. ÉCOUTEURS DE VALIDATION ---
-    requiredFields.forEach(field => {
-        field.addEventListener('input', checkValidity);
-        field.addEventListener('change', checkValidity);
-    });
+    // --- Icône d'erreur inline ---
+    const errorIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="none" style="flex-shrink:0">
+        <circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M8 4.5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="8" cy="11" r=".8" fill="currentColor"/>
+    </svg>`;
 
-    emailField.addEventListener('blur', () => {
-        if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
-            emailField.classList.add('invalid');
+    const fieldConfig = {
+        'full-name': {
+            empty:    'Please enter your full name.',
+            invalid:  'Name must be at least 2 characters and contain no numbers.',
+            validate: val => val.length >= 2 && !/\d/.test(val)
+        },
+        'email': {
+            empty:    'Please enter your email address.',
+            invalid:  'Please enter a valid email address (ex: name@domain.com).',
+            validate: val => emailRegex.test(val)
+        },
+        'subject': {
+            empty:    'Please enter a subject.',
+            invalid:  'Subject must be at least 5 characters.',
+            validate: val => val.length >= 5
+        },
+        'message': {
+            empty:    'Please write your message.',
+            invalid:  'Message must be at least 20 characters.',
+            validate: val => val.length >= 20
+        },
+    };
+
+    function showFieldError(field, msg) {
+    field.classList.add('error-state');
+    let errEl = field.parentElement.querySelector('.field-error');
+    if (!errEl) {
+        errEl = document.createElement('div');
+        errEl.className = 'field-error';
+        field.parentElement.appendChild(errEl);
+    }
+    errEl.innerHTML = `${errorIcon} ${msg}`;
+    }
+
+    function clearFieldError(field) {
+        field.classList.remove('error-state');
+        const errEl = field.parentElement.querySelector('.field-error');
+        if (errEl) errEl.remove();
+    }
+
+    function validateField(field) {
+        const config = fieldConfig[field.id];
+        if (!config) return;
+        const val = field.value.trim();
+        if (val === '') {
+            clearFieldError(field);
+        } else if (!config.validate(val)) {
+            showFieldError(field, config.invalid);
         } else {
-            emailField.classList.remove('invalid');
+            clearFieldError(field);
         }
-    });
+    }
 
-    emailField.addEventListener('input', () => {
-        emailField.classList.remove('invalid');
-    });
+    function validateFieldOnBlur(field) {
+        const config = fieldConfig[field.id];
+        if (!config) return;
+        const val = field.value.trim();
+        if (val === '') {
+            showFieldError(field, config.empty);
+        } else if (!config.validate(val)) {
+            showFieldError(field, config.invalid);
+        } else {
+            clearFieldError(field);
+        }
+    }
 
-    checkValidity();
+    function clearAllFieldErrors() {
+        Object.keys(fieldConfig).forEach(id => {
+            const field = document.getElementById(id);
+            if (field) clearFieldError(field);
+        });
+    }
+
+    Object.keys(fieldConfig).forEach(id => {
+        const field = document.getElementById(id);
+        if (!field) return;
+        field.addEventListener('input', () => {
+            validateField(field);
+            checkValidity();
+        });
+        field.addEventListener('blur', () => {
+            validateFieldOnBlur(field);
+            checkValidity();
+        });
+    });
 
     // --- 3. SOUMISSION DU FORMULAIRE ---
     emailSection.addEventListener('submit', async function (e) {
         e.preventDefault();
         if (btn.classList.contains('disabled')) return;
 
-        if (btn.classList.contains('disabled')) return;
-
         hideFormError();
+
+                const submissionTimeInput = document.getElementById('submission_time');
+        if (submissionTimeInput) {
+            submissionTimeInput.value = Date.now();
+        }
 
         // NOUVELLE VÉRIFICATION : Poids total des fichiers
         const MAX_TOTAL_SIZE = 15 * 1024 * 1024; // 15 Mo (ajuste selon post_max_size)
@@ -504,10 +584,6 @@ function renderFiles() {
 
         // Cacher l'erreur précédente dès qu'on retente
         hideFormError();
-
-        btn.classList.add('disabled');
-        btn.style.pointerEvents = 'none';
-        btn.innerHTML = 'Sending...';
 
         // Garder le status HTTP pour le mapping d'erreur
         let httpStatus = 0;
@@ -557,7 +633,6 @@ function renderFiles() {
                 submissionTimeInput.value = Date.now();
             }
 
-            // Juste avant le fetch, ajoute ce check
             const tooLargeFiles = selectedFiles.filter(f => f.size > 2 * 1024 * 1024);
             if (tooLargeFiles.length > 0) {
                 const names = tooLargeFiles.map(f => f.name).join(', ');
@@ -570,6 +645,7 @@ function renderFiles() {
             const response = await fetch('php/contact-form.php', {
                 method: 'POST',
                 body: formData,
+                credentials: 'include'
             });
 
             // Sauvegarder le status pour le mapping d'erreur
@@ -592,6 +668,7 @@ function renderFiles() {
                 });
                 selectedFiles = [];
                 if (uploadedArea) uploadedArea.innerHTML = '';
+                clearAllFieldErrors();
                 emailField.classList.remove('invalid');
                 
                 await ensureCSRFToken(true);
@@ -616,4 +693,5 @@ function renderFiles() {
             checkValidity();
         }
     });
+    checkValidity();
 })();
