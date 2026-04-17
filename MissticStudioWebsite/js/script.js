@@ -365,7 +365,7 @@ function renderFiles() {
 
         const fileSize = file.size < 1024 * 1024
             ? Math.floor(file.size / 1024) + ' KB'
-            : (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+            : (file.size / (1024 * 1024)).toFixed(5) + ' MB';
 
         const li = document.createElement('li');
         li.classList.add('row');
@@ -572,7 +572,7 @@ function renderFiles() {
         });
 
         if (totalFilesSize > MAX_TOTAL_SIZE) {
-            const sizeInMB = (totalFilesSize / (1024 * 1024)).toFixed(2);
+            const sizeInMB = (totalFilesSize / (1024 * 1024)).toFixed(5);
             showFormError(`The total size of your files is too large (${sizeInMB} MB). Maximum allowed: 15 MB.`);
             return; // On arrête tout ici, pas d'envoi vers le serveur
         }
@@ -607,13 +607,13 @@ function renderFiles() {
             selectedFiles.forEach(file => formData.append('attachment[]', file));
 
             // Vérification taille fichiers côté client
-            const maxSize = 2 * 1024 * 1024; // 2MB — vraie limite serveur
-            const totalMax = 8 * 1024 * 1024; // 8MB post_max_size
+            const maxSize = 5 * 1024 * 1024; // 5MB — limite pour un fichier individuel
+            const totalMax = 15 * 1024 * 1024; // 15MB post_max_size
 
             let totalSize = 0;
             for (const file of selectedFiles) {
                 if (file.size > maxSize) {
-                    showFormError(`"${file.name}" exceeds the 2MB limit. Please compress or remove it.`);
+                    showFormError(`"${file.name}" exceeds the 5MB limit. Please compress or remove it.`);
                     btn.innerHTML = btnOriginalHTML;
                     checkValidity();
                     return;
@@ -621,7 +621,7 @@ function renderFiles() {
                 totalSize += file.size;
             }
             if (totalSize > totalMax) {
-                showFormError(`Total file size exceeds 8MB. Please reduce the number of files.`);
+                showFormError(`Total file size exceeds 15MB. Please reduce the number of files.`);
                 btn.innerHTML = btnOriginalHTML;
                 checkValidity();
                 return;
@@ -633,10 +633,10 @@ function renderFiles() {
                 submissionTimeInput.value = Date.now();
             }
 
-            const tooLargeFiles = selectedFiles.filter(f => f.size > 2 * 1024 * 1024);
+            const tooLargeFiles = selectedFiles.filter(f => f.size > 5 * 1024 * 1024);
             if (tooLargeFiles.length > 0) {
                 const names = tooLargeFiles.map(f => f.name).join(', ');
-                showFormError(`Ces fichiers dépassent 2MB (limite serveur) : ${names}`);
+                showFormError(`These files exceed 5MB : ${names}`);
                 btn.innerHTML = btnOriginalHTML;
                 checkValidity();
                 return;

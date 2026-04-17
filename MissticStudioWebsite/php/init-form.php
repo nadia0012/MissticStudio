@@ -25,5 +25,3 @@ echo json_encode([
     ]
 ]);
 ?>
-
-

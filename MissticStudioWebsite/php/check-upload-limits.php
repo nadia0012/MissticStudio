@@ -26,19 +26,19 @@ echo json_encode([
     'upload_max_filesize' => [
         'raw' => ini_get('upload_max_filesize'),
         'bytes' => parseSize(ini_get('upload_max_filesize')),
-        'mb' => round(parseSize(ini_get('upload_max_filesize')) / 1024 / 1024, 2)
+        'mb' => round(parseSize(ini_get('upload_max_filesize')) / 1024 / 1024, 5)
     ],
     'post_max_size' => [
         'raw' => ini_get('post_max_size'),
         'bytes' => parseSize(ini_get('post_max_size')),
-        'mb' => round(parseSize(ini_get('post_max_size')) / 1024 / 1024, 2)
+        'mb' => round(parseSize(ini_get('post_max_size')) / 1024 / 1024, 5)
     ],
     'max_file_uploads' => $max_uploads,
-    'effective_limit_mb' => round(min(parseSize(ini_get('upload_max_filesize')), parseSize(ini_get('post_max_size'))) / 1024 / 1024, 2),
+    'effective_limit_mb' => round(min(parseSize(ini_get('upload_max_filesize')), parseSize(ini_get('post_max_size'))) / 1024 / 1024, 5),
     'memory_limit' => [
         'raw' => ini_get('memory_limit'),
         'bytes' => parseSize(ini_get('memory_limit')),
-        'mb' => round(parseSize(ini_get('memory_limit')) / 1024 / 1024, 2)
+        'mb' => round(parseSize(ini_get('memory_limit')) / 1024 / 1024, 5)
     ]
 ], JSON_PRETTY_PRINT);
 ?>

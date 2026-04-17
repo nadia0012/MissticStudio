@@ -492,7 +492,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // ✅ Détecter UPLOAD_ERR_INI_SIZE correctement
                 if ($_FILES['attachment']['error'][$i] === UPLOAD_ERR_INI_SIZE) {
-                    throw new Exception('File too large (server limit 2MB): ' . $_FILES['attachment']['name'][$i]);
+                    throw new Exception('File too large (limit 5MB): ' . $_FILES['attachment']['name'][$i]);
                 }
                 
                 // Ignorer les slots vides (error != 0 pour d'autres raisons)
@@ -508,10 +508,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     // Vérification de taille
                     if ($fileSize > $maxSize) {
-                        throw new Exception('Fichier trop lourd : ' . $_FILES['attachment']['name'][$i] . ' (max 5MB)');
+                        throw new Exception('File too large : ' . $_FILES['attachment']['name'][$i] . ' (max 5MB)');
                     }
                     if ($totalSize > $maxTotal) {
-                        throw new Exception('Total des fichiers trop lourd (max 15MB)');
+                        throw new Exception('Total files too large (max 15MB)');
                     }
 
                     // Vérification du type MIME - utiliser aussi l'extension
