@@ -1,0 +1,264 @@
+/* ============================================================
+    BASE.CSS — Variables CSS, Reset, Utilitaires Globaux
+    ============================================================
+    
+    ARCHITECTURE VARIABLES :
+    - Toutes les couleurs, gradients, ombres sont des variables CSS
+    - Chaque fichier de jeu (sunrise.css, craftiny.css) surcharge les variables
+    - Les classes CSS restent génériques et réutilisables
+    
+   ============================================================ */
+
+/* ============================================================
+    VARIABLES CSS — Palette par défaut (Misstic Studio)
+   ============================================================ */
+:root {
+  /* ========== TRANSITIONS & TIMING ========== */
+    --transition-base: 0.3s ease;
+    --transition-fast: 0.15s ease;
+
+  /* ========== SPACING & RADIUS ========== */
+    --radius-element: 12px;
+    --radius-box: 20px;
+
+  /* ========== COULEURS PRIMAIRES ========== */
+    --color-primary: #6B3D75;
+    --color-primary-dark: #472952;
+    --color-primary-light: #A077AF;
+    --color-primary-bg: #F5F0F7;
+
+  /* ========== COULEURS SECONDAIRES (pour les jeux) ========== */
+    --color-secondary: #C68749;
+    --color-secondary-dark: #875028;
+    --color-secondary-light: #FFF3E6;
+    
+    --color-tertiary: #E8A8C0;
+    --color-tertiary-dark: #D67FA8;
+    --color-tertiary-light: #FFE5E9;
+
+  /* ========== COULEURS ACCENT ========== */
+    --color-accent-1: #C68749;
+    --color-accent-2: #8B5A7D;
+    --color-accent-3: #5A7D8B;
+
+  /* ========== GRADIENTS RÉUTILISABLES ========== */
+    --gradient-primary: linear-gradient(270deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    --gradient-secondary: linear-gradient(270deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+    --gradient-tertiary: linear-gradient(270deg, var(--color-tertiary) 0%, var(--color-tertiary-dark) 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(255, 243, 230, 0.5) 0%, rgba(198, 135, 73, 0.1) 100%);
+
+  /* ========== OMBRES RÉUTILISABLES ========== */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.2);
+    --shadow-secondary: 0 8px 20px rgba(198, 135, 73, 0.3);
+    --shadow-tertiary: 0 8px 20px rgba(232, 168, 192, 0.3);
+
+  /* ========== COULEURS DE TEXTE ========== */
+    --text-primary: #000;
+    --text-secondary: #666;
+    --text-light: #999;
+    --text-white: #fff;
+
+  /* ========== COULEURS DE FOND ========== */
+    --bg-white: #fff;
+    --bg-light: #f5f5f5;
+    --bg-primary: var(--color-primary-bg);
+}
+
+/* ============================================================
+    RESET / BASE
+   ============================================================ */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100dvh;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-dark) var(--color-primary-bg);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Asap, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-white);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Sélection de texte */
+::selection {
+    background: rgba(107, 61, 117, 0.5);
+    color: var(--color-primary-dark);
+}
+
+::-moz-selection {
+    background: rgba(107, 61, 117, 0.5);
+    color: var(--color-primary-dark);
+}
+
+/* Scrollbar Webkit */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-primary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary-dark);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-dark);
+}
+
+/* ============================================================
+    ÉLÉMENTS GLOBAUX
+   ============================================================ */
+main {
+    margin-top: 65px;
+}
+
+section {
+    margin-bottom: 90px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================================
+    ANIMATIONS GLOBALES
+   ============================================================ */
+
+/* Animation au scroll */
+.scroll-anim {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.scroll-anim.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover scale commun pour tous les boutons */
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-tertiary:hover,
+.btn-dark:hover,
+.btn-light:hover,
+.btn-informations-buy-now:hover,
+.btn-buy-now:hover,
+.btn-add-wishlist:hover,
+.btn-big-buy-now:hover,
+.btn-home-page:hover {
+    transform: translateZ(0) scale(1.02);
+}
+
+/* ============================================================
+    UTILITAIRES
+   ============================================================ */
+.visually-hidden {
+    display: none;
+}
+
+/* Optimisation performance */
+.btn-primary,
+.btn-secondary,
+.btn-tertiary,
+.btn-dark,
+.btn-light,
+.btn-informations-buy-now,
+.btn-buy-now,
+.btn-add-wishlist,
+.btn-big-buy-now,
+.btn-home-page {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* ============================================================
+    CLASSES UTILITAIRES GÉNÉRIQUES
+   ============================================================ */
+
+/* Boîtes de couleur (remplacent .sunrise-box, .craftiny-box) */
+.box-primary {
+    background: var(--color-primary-light);
+}
+
+.box-secondary {
+    background: var(--color-secondary-light);
+}
+
+.box-tertiary {
+    background: var(--color-tertiary-light);
+}
+
+/* Titres de couleur */
+.title-primary {
+    color: var(--color-primary);
+}
+
+.title-secondary {
+    color: var(--color-secondary);
+}
+
+.title-tertiary {
+    color: var(--color-tertiary);
+}
+
+/* Texte de couleur */
+.text-primary {
+    color: var(--color-primary);
+}
+
+.text-secondary {
+    color: var(--color-secondary);
+}
+
+.text-tertiary {
+    color: var(--color-tertiary);
+}
+
+/* Étoiles/icônes avec ombre */
+.star-primary {
+    fill: var(--color-primary);
+    filter: drop-shadow(4px 4px 0 var(--color-primary-dark));
+}
+
+.star-secondary {
+    fill: var(--color-accent-1);
+    filter: drop-shadow(4px 4px 0 var(--color-secondary-dark));
+}
+
+.star-tertiary {
+    fill: var(--color-accent-2);
+    filter: drop-shadow(4px 4px 0 var(--color-accent-3));
+}

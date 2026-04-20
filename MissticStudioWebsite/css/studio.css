@@ -1,0 +1,501 @@
+/* ============================================================
+   STUDIO.CSS — Styles pour Index & Contact
+   ============================================================ */
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 65px);
+  gap: 40px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: "Lilita One";
+  font-size: clamp(32px, 8vw, 72px);
+  font-weight: 400;
+  color: var(--Misstic-Mauve-Dark);
+  margin: 0;
+}
+
+.hero p {
+  font-family: Asap;
+  font-size: clamp(16px, 4vw, 24px);
+  color: #000;
+  max-width: 600px;
+  margin: 0;
+}
+
+/* ============================================================
+   GAMES SECTION
+   ============================================================ */
+
+.games {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 60px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.games h2 {
+  font-family: "Lilita One";
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 400;
+  color: var(--Misstic-Mauve-Dark);
+  text-align: center;
+  margin: 0 0 40px 0;
+}
+
+.game-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.game-card.reverse {
+  direction: rtl;
+}
+
+.game-card.reverse > * {
+  direction: ltr;
+}
+
+.game-card-image {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-box);
+  overflow: hidden;
+}
+
+.game-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.game-card-content h3 {
+  font-family: "Lilita One";
+  font-size: clamp(24px, 5vw, 48px);
+  font-weight: 400;
+  margin: 0;
+}
+
+.game-card-content p {
+  font-family: Asap;
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.6;
+  color: #000;
+  margin: 0;
+}
+
+.game-card-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   ABOUT US SECTION
+   ============================================================ */
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-us h2 {
+  font-family: "Lilita One";
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 400;
+  color: var(--Misstic-Mauve-Dark);
+  text-align: center;
+  margin: 0;
+}
+
+.about-us p {
+  font-family: Asap;
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.8;
+  color: #000;
+  margin: 0;
+}
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contact-container h2 {
+  font-family: "Lilita One";
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 400;
+  color: var(--Misstic-Mauve-Dark);
+  text-align: center;
+  margin: 0;
+}
+
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+
+.contact-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px;
+  background: var(--Contact-Form-Mauve);
+  border-radius: var(--radius-box);
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+  font-family: Asap;
+  font-size: 16px;
+}
+
+.contact-form input {
+  padding: 15px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-element);
+  background: white;
+  transition: border-color var(--transition-fast);
+}
+
+.contact-form input:focus {
+  outline: none;
+  border-color: var(--Misstic-Mauve-1);
+}
+
+.contact-form input.error-state {
+  border-color: #d32f2f;
+  background: #ffebee;
+}
+
+.contact-form textarea {
+  padding: 15px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-element);
+  background: white;
+  resize: vertical;
+  min-height: 150px;
+  transition: border-color var(--transition-fast);
+  font-family: Asap;
+}
+
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--Misstic-Mauve-1);
+}
+
+.contact-form textarea.error-state {
+  border-color: #d32f2f;
+  background: #ffebee;
+}
+
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: -20px;
+}
+
+.field-error svg {
+  color: #d32f2f;
+  flex-shrink: 0;
+}
+
+.submit-wrapper {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.submit-wrapper.form-invalid .btn-mauve {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contact-form button {
+  padding: 15px 40px;
+  border: none;
+  border-radius: var(--radius-element);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.contact-form button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   FORM SUCCESS OVERLAY
+   ============================================================ */
+
+#formSuccessOverlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-box);
+  opacity: 0;
+  z-index: 100;
+  transition: opacity 0.6s ease;
+}
+
+#formSuccessOverlay.visible {
+  display: flex;
+  animation: successCycle 6s ease forwards;
+}
+
+@keyframes successCycle {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  83% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#formSuccessOverlay svg {
+  width: 113px;
+  height: 113px;
+}
+
+.success-title {
+  text-align: center;
+  font-family: "Lilita One";
+  font-size: 35px;
+  font-weight: 400;
+  background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.success-subtitle {
+  color: var(--Misstic-Mauve-1);
+  text-align: center;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #FFF;
+  font-family: "Lilita One";
+  font-size: 25px;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* ============================================================
+   FORM ERROR BANNER
+   ============================================================ */
+
+.form-error-banner {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  background: #ffebee;
+  border: 2px solid #d32f2f;
+  border-radius: var(--radius-element);
+  color: #d32f2f;
+  font-family: Asap;
+  font-size: 16px;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+  max-width: 90%;
+}
+
+.form-error-banner.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.form-error-banner.success {
+  background: #e8f5e9;
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+#formErrorMessage {
+  margin: 0;
+}
+
+/* ============================================================
+   FILE UPLOAD
+   ============================================================ */
+
+.file-upload-area {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border: 2px dashed var(--Misstic-Mauve-1);
+  border-radius: var(--radius-element);
+  background: rgba(160, 119, 175, 0.05);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.file-upload-area:hover {
+  border-color: var(--Misstic-Mauve-Dark);
+  background: rgba(160, 119, 175, 0.1);
+}
+
+.file-upload-area.active {
+  border-color: var(--Misstic-Mauve-Dark);
+  background: rgba(160, 119, 175, 0.15);
+}
+
+#fileInput {
+  display: none;
+}
+
+.upload-label {
+  font-family: "Lilita One";
+  font-size: 16px;
+  color: var(--Misstic-Mauve-Dark);
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-hint {
+  font-family: Asap;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin: 0;
+}
+
+.uploaded-files {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.uploaded-files li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: white;
+  border-radius: var(--radius-element);
+  border: 1px solid var(--Contact-Form-Mauve);
+}
+
+.uploaded-files .content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.uploaded-files .details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.uploaded-files .name {
+  font-family: Asap;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.uploaded-files .size {
+  font-family: Asap;
+  font-size: 12px;
+  color: #666;
+}
+
+.uploaded-files svg {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.uploaded-files svg:hover {
+  transform: scale(1.1);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .game-card {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .game-card.reverse {
+    direction: ltr;
+  }
+
+  .contact-form {
+    padding: 20px;
+  }
+
+  .submit-wrapper {
+    flex-direction: column;
+  }
+
+  .contact-form button {
+    width: 100%;
+  }
+
+  .form-error-banner {
+    top: 70px;
+    max-width: calc(100% - 20px);
+  }
+}

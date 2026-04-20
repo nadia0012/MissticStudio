@@ -85,6 +85,8 @@ function openModal(index) {
     if (modalPrev) modalPrev.disabled = currentIndex === 0;
     if (modalNext) modalNext.disabled = currentIndex === screenshots.length - 1;
     imageModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 }
 
 if (thumbnailContainer) {
@@ -97,6 +99,8 @@ if (thumbnailContainer) {
         if (modalPrev) modalPrev.style.display = 'none';
         if (modalNext) modalNext.style.display = 'none';
         imageModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
     });
 }
 
@@ -124,12 +128,16 @@ if (modalNext) {
 if (modalCloseBtn) {
     modalCloseBtn.addEventListener('click', () => {
         if (imageModal) imageModal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
     });
 }
 
 if (modalBackdrop) {
     modalBackdrop.addEventListener('click', () => {
         if (imageModal) imageModal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
     });
 }
 
@@ -137,7 +145,11 @@ document.addEventListener('keydown', (e) => {
     if (!imageModal || !imageModal.classList.contains('active')) return;
     if (e.key === 'ArrowLeft' && modalPrev && modalPrev.style.display !== 'none') modalPrev.click();
     if (e.key === 'ArrowRight' && modalNext && modalNext.style.display !== 'none') modalNext.click();
-    if (e.key === 'Escape' && imageModal) imageModal.classList.remove('active');
+    if (e.key === 'Escape' && imageModal) {
+        imageModal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+    }
 });
 
 

@@ -1,0 +1,387 @@
+/* ============================================================
+   LAYOUT.CSS — Header, Footer, Navbar, Sidebar
+   ============================================================ */
+
+/* ============================================================
+   HEADER / NAVBAR
+   ============================================================ */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 16px;
+  box-sizing: border-box;
+  z-index: 1000;
+  transition: top var(--transition-base);
+}
+
+.header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+}
+
+.header-logo-wrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#logo-Misstic-header {
+  top: 10%;
+  left: 0.5%;
+  position: absolute;
+  width: 113px;
+  height: auto;
+  aspect-ratio: 140.89 / 58.72;
+  transition: transform var(--transition-fast);
+}
+
+#logo-Misstic-header:hover {
+  transform: scale(0.97);
+}
+
+.tail-header {
+  padding-left: 74px;
+}
+
+.link-pages {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding-left: 160px;
+}
+
+.icon {
+  fill: var(--Misstic-Mauve-Dark);
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.text-pages {
+  gap: 10px;
+  align-items: center;
+  color: #000;
+  font-family: Asap;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+  display: inline-flex;
+}
+
+.text-pages:hover {
+  color: var(--Misstic-Mauve-1);
+}
+
+.list-pages {
+  list-style: none;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+#sidebar {
+  position: fixed;
+  left: -400px;
+  top: 0;
+  width: 400px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(71, 41, 82, 0.95) 0%, rgba(71, 41, 82, 0.85) 100%);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  transition: left 0.3s ease;
+  padding-top: 80px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebarClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+#sidebarClose svg {
+  width: 24px;
+  height: 24px;
+  stroke: white;
+}
+
+#sidebarOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 998;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+#sidebarOverlay.open {
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  color: white;
+  text-decoration: none;
+  font-family: Asap;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color var(--transition-fast);
+  border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--Misstic-Mauve-1);
+}
+
+.sidebar-link-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sidebar-link-arrow {
+  stroke: white;
+  transition: transform var(--transition-fast);
+}
+
+.sidebar-link:hover .sidebar-link-arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   HAMBURGER BUTTON
+   ============================================================ */
+#hamburgerBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+#hamburgerBtn span {
+  width: 24px;
+  height: 2px;
+  background-color: var(--Misstic-Mauve-Dark);
+  transition: all 0.3s ease;
+  display: block;
+}
+
+#hamburgerBtn.open span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+#hamburgerBtn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+#hamburgerBtn.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, rgba(71, 41, 82, 0.20) 100%), linear-gradient(0deg, #FFF 0%, #FDF8FF 100%);
+  margin-top: auto;
+  z-index: 5;
+}
+
+.footer-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  box-sizing: border-box;
+  z-index: 5;
+  padding-left: clamp(10px, 5vw, 180px);
+  padding-right: clamp(10px, 5vw, 180px);
+}
+
+.socials-and-credits {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 60px;
+}
+
+.footer-logo-wrapper {
+  line-height: 0;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  background-color: #472952;
+}
+
+.footer-background {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  flex-shrink: 0;
+  margin-bottom: -1px;
+  transform: translateY(1px);
+  bottom: 0;
+}
+
+.tail-footer {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: auto;
+  flex-shrink: 0;
+  align-self: flex-end;
+  left: 395px;
+  height: 300px;
+}
+
+#logo-Misstic-footer {
+  position: absolute;
+  bottom: 18%;
+  left: 180px;
+  width: 390px;
+  max-width: 480px;
+  min-width: 100px;
+  height: auto;
+  transition: transform 0.3s ease;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+#logo-Misstic-footer:hover {
+  transform: scale(1.02);
+}
+
+#star-footer {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 110px;
+  height: 110px;
+}
+
+.social-media {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.social-media a {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.social-media-icons {
+  width: 64px;
+  height: 64px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  display: block;
+}
+
+.social-media-icons:hover {
+  transform: scale(1.02);
+  opacity: 0.85;
+}
+
+#credits {
+  color: var(--Misstic-Mauve-Dark);
+  text-align: right;
+  font-family: Asap;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin-bottom: 14px;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  #hamburgerBtn {
+    display: flex;
+  }
+
+  .link-pages {
+    display: none;
+  }
+
+  .tail-header {
+    padding-left: 0;
+  }
+
+  .footer-background {
+    max-width: 100%;
+  }
+
+  #logo-Misstic-footer {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .tail-footer {
+    display: none;
+  }
+}
