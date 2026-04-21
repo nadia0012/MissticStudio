@@ -1,281 +1,96 @@
 /* ============================================================
-   CRAFTINY.CSS — Styles spécifiques à Craftiny
-   
-   ARCHITECTURE :
-   - Surcharge les variables CSS définies dans base.css
-   - Utilise les classes génériques de components.css
-   - Aucune classe spécifique à Craftiny (sauf si vraiment nécessaire)
-   
+    CRAFTINY.CSS — Thème Craftiny
+    Misstic Studio
+    
+    Ce fichier définit UNIQUEMENT les variables de couleur
+    et les quelques règles spécifiques à Craftiny.
+    Tout le reste est dans game-pages.css.
+    
+    Pour créer un nouveau jeu : copier ce fichier, changer les
+    valeurs des variables, et ajouter <body class="theme-craftiny">
    ============================================================ */
 
 /* ============================================================
-   VARIABLES CRAFTINY — Surcharge des variables globales
+    VARIABLES THÈME — appliquées sur body.theme-craftiny
    ============================================================ */
-:root {
-  /* Couleurs Craftiny */
-  --color-secondary: #E8A8C0;
-  --color-secondary-dark: #D67FA8;
-  --color-secondary-light: #FFE5E9;
+body.theme-craftiny {
 
-  /* Gradients Craftiny */
-  --gradient-secondary: linear-gradient(270deg, #E8A8C0 0%, #D67FA8 100%);
-  --gradient-hero: linear-gradient(135deg, rgba(255, 229, 233, 0.5) 0%, rgba(232, 168, 192, 0.1) 100%);
+    /* --- Palette Craftiny --- */
+    --game-color-pale:    #FFC2E2;
+    --game-color-light:   #FFE8F4;
+    --game-color-medium:  #784D6E;
+    --game-color-dark:    #784D6E;
 
-  /* Ombres Craftiny */
-  --shadow-secondary: 0 8px 20px rgba(232, 168, 192, 0.3);
+    /* --- Dégradés --- */
+    --game-gradient:       linear-gradient(90deg, #784D6E 0%, #B17C98 100%);
+    --game-gradient-pale:  linear-gradient(270deg, #FFF0F8 0%, #FFE8F4 100%);
 
-  /* Variables spécifiques pour les cartes */
-  --box-background: #FFE5E9;
-  --title-color: #E8A8C0;
-  --overlay-gradient: linear-gradient(135deg, rgba(232, 168, 192, 0.3) 0%, rgba(214, 127, 168, 0.3) 100%);
+    /* --- Couleur accent spécifique Craftiny --- */
+    --game-accent:         #5BABCD;
 
-  /* Accent colors */
-  --color-accent-primary: #E8A8C0;
-  --color-accent-secondary: #D67FA8;
+    /* --- Étoile décoration --- */
+    --game-star-shadow:    #5BABCD;
+
+    /* --- Overlay thumbnail & screenshots --- */
+    --game-thumbnail-overlay:
+        linear-gradient(72deg, rgba(0,0,0,0) -0.02%, rgba(0,0,0,0.30) 99.96%),
+        radial-gradient(57.92% 50.85% at 50% 50%, rgba(49,115,163,0.22) 0%, rgba(218,159,190,0.50) 100%);
+
+    --game-screenshot-overlay:
+        linear-gradient(72deg, rgba(0,0,0,0) -0.02%, rgba(0,0,0,0.30) 99.96%),
+        radial-gradient(57.92% 50.85% at 50% 50%, rgba(49,115,163,0.22) 0%, rgba(218,159,190,0.50) 100%);
+
+    /* --- Ombre texte "Enlarge" --- */
+    --game-text-shadow:
+        -2px -2px 0 #784D6E, 2px -2px 0 #784D6E,
+        -2px  2px 0 #784D6E, 2px  2px 0 #784D6E,
+        -2px  0   0 #784D6E, 2px  0   0 #784D6E,
+        0   -2px 0 #784D6E, 0    2px 0 #784D6E;
+
+    /* --- Dégradé hero cover --- */
+    --game-cover-gradient:
+        linear-gradient(180deg, rgba(255,255,255,0.00) 69.55%, #FFF 100%),
+        radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0.00) 0%, rgba(218,159,190,0.30) 40.87%, rgba(91,171,205,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+        linear-gradient(270deg, rgba(255,255,255,0.00) 47.95%, #5BABCD 68.75%, #DA9FBE 86.06%, #784D6E 100%);
+
+    /* Dégradé cover mobile (::after sur .game-cover) */
+    --game-cover-gradient-mobile:
+        linear-gradient(270deg, rgba(255,255,255,0) 70%, rgba(91,171,205,0.60) 85%, rgba(218,159,190,0.60) 95%, rgba(120,77,110,0.60) 100%);
 }
 
 /* ============================================================
-   HERO SECTION CRAFTINY
+    HERO — Dégradé de la cover (desktop uniquement)
    ============================================================ */
-
-.craftiny-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 65px);
-  gap: 40px;
-  padding: 60px 20px;
-  text-align: center;
-  background: var(--gradient-hero);
+body.theme-craftiny .game-cover-gradient {
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.00) 69.55%, #FFF 100%),
+        radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0.00) 0%, rgba(218,159,190,0.30) 40.87%, rgba(91,171,205,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+        linear-gradient(270deg, rgba(255,255,255,0.00) 47.95%, #5BABCD 68.75%, #DA9FBE 86.06%, #784D6E 100%);
 }
 
-.craftiny-hero h1 {
-  font-family: "Lilita One";
-  font-size: clamp(32px, 8vw, 72px);
-  font-weight: 400;
-  background: var(--gradient-secondary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
-}
-
-.craftiny-hero p {
-  font-family: Asap;
-  font-size: clamp(16px, 4vw, 24px);
-  color: var(--text-primary);
-  max-width: 600px;
-  margin: 0;
+/* Cover mobile */
+@media (max-width: 1024px) {
+    body.theme-craftiny .game-cover::after {
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0) 40%, #FFF 100%),
+            linear-gradient(270deg, rgba(255,255,255,0) 70%, rgba(91,171,205,0.60) 85%, rgba(218,159,190,0.60) 95%, rgba(120,77,110,0.60) 100%);
+    }
 }
 
 /* ============================================================
-   GALLERY SECTION CRAFTINY
+    MODAL — couleurs flèches navigation spécifiques à Craftiny
    ============================================================ */
-
-.craftiny-gallery {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.craftiny-gallery h2 {
-  font-family: "Lilita One";
-  font-size: clamp(28px, 6vw, 56px);
-  font-weight: 400;
-  color: var(--color-accent-primary);
-  text-align: center;
-  margin: 0;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.gallery-item {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-element);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-fast);
-}
-
-.gallery-item:hover img {
-  transform: scale(1.05);
+body.theme-craftiny .modal-nav-btn {
+    border-color: var(--game-color-medium);
 }
 
 /* ============================================================
-   INFORMATIONS SECTION CRAFTINY
+    LOGO CRAFTINY — taille légèrement différente du logo Sunrise
    ============================================================ */
-
-.informations {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  padding: 60px 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-  align-items: start;
-}
-
-.informations-left {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  justify-content: space-between;
-}
-
-.informations-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 30px;
-  justify-content: flex-end;
-}
-
-.informations-left img {
-  width: 100%;
-  max-width: 452px;
-  height: auto;
-  flex-shrink: 0;
-  aspect-ratio: 135 / 158;
-  border-radius: var(--radius-element);
-  cursor: pointer;
-}
-
-/* ============================================================
-   DESCRIPTION SECTION CRAFTINY
-   ============================================================ */
-
-.craftiny-description {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.craftiny-description h2 {
-  font-family: "Lilita One";
-  font-size: clamp(28px, 6vw, 56px);
-  font-weight: 400;
-  color: var(--color-accent-primary);
-  text-align: center;
-  margin: 0;
-}
-
-.craftiny-description p {
-  font-family: Asap;
-  font-size: clamp(14px, 2vw, 18px);
-  line-height: 1.8;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-/* ============================================================
-   FEATURES SECTION CRAFTINY
-   ============================================================ */
-
-.craftiny-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 30px;
-  background: var(--color-secondary-light);
-  border-radius: var(--radius-box);
-  border: 2px solid var(--color-accent-primary);
-}
-
-.feature-card h3 {
-  font-family: "Lilita One";
-  font-size: 24px;
-  font-weight: 400;
-  color: var(--color-accent-primary);
-  margin: 0;
-}
-
-.feature-card p {
-  font-family: Asap;
-  font-size: 16px;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-/* ============================================================
-   VIDEO SECTION CRAFTINY
-   ============================================================ */
-
-.iframe-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: var(--radius-element);
-  margin: 40px 0;
-}
-
-.iframe-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* ============================================================
-   RESPONSIVE CRAFTINY
-   ============================================================ */
-@media (max-width: 768px) {
-  .informations {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .informations-right {
-    align-items: flex-start;
-  }
-
-  .craftiny-gallery {
-    padding: 40px 20px;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-  }
-
-  .craftiny-features {
-    grid-template-columns: 1fr;
-  }
-
-  .feature-card {
-    padding: 20px;
-  }
+body.theme-craftiny .sunrise-content-logo {
+    width: clamp(200px, 25vw, 500px);
+    max-width: 500px;
+    object-fit: contain;
+    object-position: left;
+    margin: 0;
 }

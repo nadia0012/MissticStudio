@@ -1,531 +1,1180 @@
 /* ============================================================
-    COMPONENTS.CSS — Boutons, Cartes, Modal, Formulaires
-    
-    ARCHITECTURE :
-    - Les classes sont GÉNÉRIQUES (pas de suffixes -sunrise ou -craftiny)
-    - Les couleurs et gradients sont contrôlés par des variables CSS
-    - Chaque jeu surcharge les variables dans son fichier CSS
-    
+    COMPONENTS.CSS — Boutons, badges, swiper, modal, formulaire
+    Misstic Studio — Commun à toutes les pages
    ============================================================ */
 
 /* ============================================================
-    BOUTONS GÉNÉRIQUES
+    BOUTONS — BASE COMMUNE
    ============================================================ */
-
-button {
-    font-family: Asap, sans-serif;
-    border: none;
+.card-btn-buy,
+.card-btn-discover,
+.btn-buy-now,
+.btn-add-wishlist,
+.btn-discover,
+.btn-discover-game,
+.btn-home-page,
+.btn-game-buy,
+.btn-big-buy-now,
+.btn-trailer,
+.btn-download,
+.btn-google-drive {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform var(--transition-fast);
+    white-space: nowrap;
+    will-change: transform;
+    transform: translateZ(0);
     cursor: pointer;
-    transition: all var(--transition-fast);
+    border: none;
 }
 
-/* ========== BOUTONS PRIMAIRES ========== */
-
-.btn-primary {
-    background: var(--gradient-primary);
-    color: var(--text-white);
-    padding: 15px 30px;
-    border-radius: var(--radius-element);
-    font-family: "Lilita One";
-    font-size: 16px;
-    font-weight: 400;
+.btn-content {
     display: inline-flex;
-    align-items: center;
     justify-content: center;
-    gap: 10px;
-    text-decoration: none;
-    box-shadow: var(--shadow-sm);
-}
-
-.btn-primary:hover {
-    box-shadow: var(--shadow-md);
-}
-
-/* ========== BOUTONS SECONDAIRES ========== */
-
-.btn-secondary {
-    background: var(--gradient-secondary);
-    color: var(--text-white);
-    padding: 15px 30px;
-    border-radius: var(--radius-element);
-    font-family: "Lilita One";
-    font-size: 16px;
-    font-weight: 400;
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 10px;
-    text-decoration: none;
-    box-shadow: var(--shadow-sm);
 }
 
-.btn-secondary:hover {
-    box-shadow: var(--shadow-secondary);
+/* Hover scale — boutons principaux */
+.btn-buy-now:hover,
+.btn-add-wishlist:hover,
+.btn-big-buy-now:hover,
+.btn-game-buy:hover,
+.btn-home-page:hover {
+    transform: translateZ(0) scale(1.02);
 }
 
-/* ========== BOUTONS TERTIAIRES ========== */
+/* --- Tailles --- */
+.btn-buy-now      { width: 180px; height: 55px; border-radius: var(--radius-btn); }
+.btn-add-wishlist { width: 250px; height: 55px; border-radius: var(--radius-btn); }
+.btn-discover     { width: 250px; height: 55px; border-radius: var(--radius-btn); }
+.btn-discover-game { width: 280px; height: 55px; border-radius: var(--radius-btn); }
+.btn-big-buy-now  { width: 220px; height: 70px; border-radius: var(--radius-btn); }
+.btn-trailer      { width: 280px; height: 70px; border-radius: var(--radius-btn); }
+.btn-game-buy     { width: 100%; max-width: 452px; height: 88px; border-radius: var(--radius-element); }
+.btn-home-page    { width: clamp(340px, 50vw, 380px); height: 70px; border-radius: var(--radius-btn); }
+.btn-download     { width: 190px; height: 50px; border-radius: var(--radius-btn); }
+.btn-google-drive { width: 220px; height: 50px; border-radius: var(--radius-btn); }
 
-.btn-tertiary {
-    background: var(--gradient-tertiary);
-    color: var(--text-white);
-    padding: 15px 30px;
-    border-radius: var(--radius-element);
-    font-family: "Lilita One";
-    font-size: 16px;
-    font-weight: 400;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
-    box-shadow: var(--shadow-sm);
+/* --- Textes boutons blancs (fond foncé) --- */
+.btn-buy-now span,
+.btn-add-wishlist span,
+.btn-big-buy-now span,
+.btn-game-buy span,
+.btn-home-page span {
+    color: #FFF;
+    font-family: Asap, sans-serif;
+    font-size: 22px;
+    font-weight: 900;
 }
 
-.btn-tertiary:hover {
-    box-shadow: var(--shadow-tertiary);
+.btn-big-buy-now span,
+.btn-game-buy span,
+.btn-home-page span {
+    font-size: 30px;
 }
 
-/* ========== VARIANTES DE TAILLE ========== */
+.btn-buy-now svg,
+.btn-add-wishlist svg { width: 28px; height: 28px; }
 
-.btn-small {
-    width: 100%;
-    max-width: 280px;
-    height: 60px;
-    font-size: 20px;
+.btn-big-buy-now svg,
+.btn-trailer svg,
+.btn-home-page svg { width: 40px; height: 40px; }
+
+/* --- Boutons "Découvrir" (fond pâle, texte coloré via thème) --- */
+.btn-discover span,
+.btn-discover-game span {
+    font-family: Asap, sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    /* Couleur définie par le thème du jeu */
+    color: var(--game-color-dark);
 }
 
-.btn-medium {
-    width: 100%;
-    max-width: 350px;
-    height: 75px;
-    font-size: 24px;
+.btn-discover svg,
+.btn-discover-game svg {
+    display: block;
+    margin-top: 4px;
+    transition: transform var(--transition-fast);
 }
 
-.btn-large {
-    width: 100%;
-    max-width: 452px;
-    height: 88px;
-    font-size: 28px;
+.btn-discover:hover svg,
+.btn-discover-game:hover svg { transform: translateX(4px); }
+
+.btn-discover:hover,
+.btn-discover-game:hover { transform: scale(1.02); }
+
+/* --- Bouton Trailer --- */
+.btn-trailer svg {
+    display: block;
+    margin-top: 4px;
+    transition: transform var(--transition-fast);
 }
 
-/* ========== BOUTONS SPÉCIFIQUES (compatibilité) ========== */
+.btn-trailer:hover svg { transform: translateX(4px); }
+.btn-trailer:hover     { transform: scale(1.02); }
 
-.btn-buy-now {
-    @extend .btn-secondary;
-    @extend .btn-small;
+/* --- Boutons Download / Drive --- */
+.btn-download:hover,
+.btn-google-drive:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
 }
 
-.btn-add-wishlist {
-    @extend .btn-secondary;
-    @extend .btn-small;
+.btn-download svg,
+.btn-google-drive svg {
+    display: block;
+    margin-top: 4px;
+    transition: transform var(--transition-fast);
 }
 
-.btn-big-buy-now {
-    @extend .btn-secondary;
-    @extend .btn-large;
+.btn-download:hover svg,
+.btn-google-drive:hover svg { transform: scale(1.10); }
+
+/* Texte boutons Trailer / Download — taille uniquement.
+   La couleur est héritée de .btn-game-light span ou .btn-misstic-light span */
+.btn-trailer span,
+.btn-download span,
+.btn-google-drive span {
+    font-family: Asap, sans-serif;
+    font-weight: 900;
 }
 
-.btn-informations-buy-now {
-    @extend .btn-secondary;
-    @extend .btn-large;
-}
-
-.btn-home-page {
-    @extend .btn-secondary;
-    @extend .btn-small;
-}
-
-/* ========== BOUTONS DARK (pour les thèmes sombres) ========== */
-
-.btn-dark {
-    background: linear-gradient(270deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
-    color: var(--text-white);
-    padding: 15px 30px;
-    border-radius: var(--radius-element);
-    font-family: "Lilita One";
-    font-size: 16px;
-    font-weight: 400;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
-    box-shadow: var(--shadow-sm);
-}
-
-.btn-dark:hover {
-    box-shadow: var(--shadow-md);
-}
-
-/* ========== BOUTONS LIGHT ========== */
-
-.btn-light {
-    background: var(--bg-white);
-    color: var(--text-primary);
-    border: 2px solid var(--color-primary);
-    padding: 13px 28px;
-    border-radius: var(--radius-element);
-    font-family: "Lilita One";
-    font-size: 16px;
-    font-weight: 400;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-.btn-light:hover {
-    background: var(--color-primary-bg);
+/* Trailer et Download : taille 25px, couleur thème si btn-game-light */
+.btn-download span,
+.btn-google-drive span {
+    font-size: 25px;
 }
 
 /* ============================================================
-    CARTES DE JEUX (Factsheet)
+    VARIANTES COULEUR BOUTONS — Misstic Studio (pages studio)
    ============================================================ */
-
-.factsheet {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 50px;
-    padding: 50px 60px;
-    border-radius: var(--radius-box);
-    background: var(--box-background, var(--color-primary-light));
+.btn-misstic-dark {
+    border: 2px solid var(--misstic-light);
+    background: var(--grad-misstic);
 }
 
-.factsheet-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+.btn-misstic-light {
+    border: 2px solid var(--misstic-mid);
+    background: var(--grad-misstic-pale);
 }
 
-.factsheet-text h3,
-.right-info-text h3 {
-    font-family: "Lilita One";
-    font-size: 40px;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0;
-    color: var(--title-color, var(--color-primary));
+.btn-misstic-dark:hover {
+    background: linear-gradient(90deg, #744080 0%, #794f83 100%);
 }
 
-.factsheet-text p {
-    color: var(--text-primary);
-    font-family: Asap;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: normal;
-    margin: 0;
+.btn-misstic-light:hover {
+    background: linear-gradient(90deg, #D1B9DA 0%, #F7E3FF 100%);
+}
+
+/* Texte boutons misstic light */
+.btn-misstic-light .btn-content span {
+    color: var(--misstic-dark);
+    font-family: Asap, sans-serif;
+    font-weight: 900;
 }
 
 /* ============================================================
-    CARTES D'INFORMATIONS (Right Info)
+    VARIANTES COULEUR BOUTONS — Pages jeux (via variables thème)
+    Ces classes lisent les variables --game-* définies dans
+    sunrise.css / craftiny.css (ou tout futur thème de jeu)
    ============================================================ */
+.btn-game-dark {
+    border: 2px solid var(--game-color-pale);
+    background: var(--game-gradient);
+}
 
-.right-info {
-    display: flex;
-    width: 790px;
-    max-width: 100%;
-    padding: 30px 60px;
-    flex-direction: column;
+.btn-game-light {
+    border: 2px solid var(--game-color-dark);
+    background: var(--game-gradient-pale);
+}
+
+.btn-game-dark:hover {
+    filter: brightness(1.08);
+}
+
+.btn-game-light:hover {
+    filter: brightness(0.96);
+}
+
+/* Texte boutons game dark */
+.btn-game-dark span {
+    color: #FFF;
+    font-family: Asap, sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+/* Texte boutons game light */
+.btn-game-light span {
+    background: var(--game-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap, sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+/* Tailles spécifiques selon le contexte du bouton */
+.btn-trailer span,
+.btn-big-buy-now.btn-game-dark span,
+.btn-game-buy.btn-game-dark span,
+.btn-home-page.btn-game-dark span {
+    font-size: 30px;
+}
+
+.btn-trailer.btn-game-light span,
+.btn-download.btn-game-light span,
+.btn-google-drive.btn-game-light span {
+    background: var(--game-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+    BADGES "AVAILABLE NOW" / "COMING SOON" — grands (hero)
+   ============================================================ */
+.available-now,
+.coming-soon {
+    width: clamp(180px, 13vw, 190px);
+    height: clamp(33px, 2.5vw, 35px);
+    padding: 5px 15px;
+    display: inline-flex;
     justify-content: center;
-    align-items: flex-start;
-    border-radius: var(--radius-box);
-    background: var(--box-background, var(--color-primary-light));
-}
-
-.right-info-text {
-    width: 100%;
-}
-
-.right-info-text h3,
-.right-info-text p {
-    margin: 15px;
-}
-
-.right-info-text p,
-.right-info-text ul li {
-    color: var(--text-primary);
-    font-family: Asap;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.right-info-title {
-    display: flex;
-    height: 60px;
     align-items: center;
-    justify-content: start;
-    gap: 10px;
-    flex-shrink: 0;
-    align-self: start;
+    user-select: none;
+    white-space: nowrap;
+    border-radius: 10px;
+}
+
+.available-now { background: #82E8FF; box-shadow: -3px 3px 0 0 #006FBF; }
+.coming-soon   { background: #F4D937; box-shadow: -3px 3px 0 0 var(--orange); }
+
+.available-now-content,
+.coming-soon-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.available-now-text,
+.coming-soon-text {
+    font-size: clamp(18px, 1.5vw, 20px);
+    font-family: Asap, sans-serif;
+    font-weight: 900;
+    color: #000;
+    white-space: nowrap;
+}
+
+.available-now-content svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+/* --- Petits badges (game cards) --- */
+.available-now-small,
+.coming-soon-small {
+    border-radius: 7px;
+    padding: 3px 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.available-now-small { background: #82E8FF; box-shadow: -2px 2px 0 0 #006FBF; }
+.coming-soon-small   { background: #F4D937; box-shadow: -2px 2px 0 0 var(--orange); }
+
+.available-now-small-content,
+.coming-soon-small-content { display: flex; align-items: center; gap: 4px; }
+
+.available-now-small-text,
+.coming-soon-small-text {
+    font-family: Asap, sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    color: #000;
 }
 
 /* ============================================================
-    IMAGES & THUMBNAILS
+    CARROUSEL HERO (Swiper)
    ============================================================ */
-
-.thumbnail-container {
+#game-carousel {
     position: relative;
     width: 100%;
-    max-width: 452px;
-    aspect-ratio: 135 / 158;
-    border-radius: var(--radius-element);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: clamp(60px, 8vw, 100px);
     overflow: hidden;
-    cursor: pointer;
 }
 
-.thumbnail-image {
+.swiper.mySwiper {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    overflow: hidden;
+    height: auto;
+}
+
+.swiper-slide {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+    display: grid;
+    grid-template-rows: auto;
+}
+
+/* --- Covers --- */
+.game-cover {
+    position: relative;
+    width: 70%;
+    margin-left: auto;
+    overflow: hidden;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.game-cover img {
+    width: 100%;
+    height: auto;
     display: block;
 }
 
-.thumbnail-overlay {
+/* --- Overlay dégradé cover (défini via thème) --- */
+.game-cover-gradient {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
-    height: 100%;
-    background: var(--overlay-gradient, linear-gradient(135deg, rgba(198, 135, 73, 0.3) 0%, rgba(135, 80, 40, 0.3) 100%));
-    opacity: 0;
-    transition: opacity var(--transition-fast);
+    background: var(--game-cover-gradient);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --- Wrapper contenu logo + boutons --- */
+.game-logo-wrapper {
+    position: absolute;
+    top: clamp(20px, 8%, 80px);
+    left: 8%;
+    right: 8%;
+    min-width: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(6px, 1vw, 12px);
+    overflow: visible;
+}
+
+.game-logo {
+    width: clamp(100px, 18vw, 400px);
+    max-width: 400px;
+    height: auto;
+}
+
+.game-description {
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap, sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    width: 100%;
+    max-width: 650px;
+    min-width: 0;
     pointer-events: none;
 }
 
-.thumbnail-container:hover .thumbnail-overlay {
-    opacity: 1;
-}
-
-.thumbnail-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.game-buttons {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    pointer-events: none;
+    gap: clamp(20px, 2.5vw, 26px);
+    margin-top: clamp(4px, 0.8vw, 8px);
 }
 
-.thumbnail-container:hover .thumbnail-content {
-    opacity: 1;
-}
-
-.enlarge-text-container {
-    display: flex;
-    flex-direction: column;
+/* --- Pagination Swiper --- */
+.pagination-wrapper {
+    position: relative;
+    z-index: 10;
+    display: inline-flex;
     align-items: center;
     gap: 10px;
+    background: rgba(71, 41, 82, 0.12);
+    border: 1px solid var(--misstic-light);
+    border-radius: 20px;
+    padding: 6px 12px;
+    white-space: nowrap;
+    margin: 5px auto 0 auto;
+    align-self: center;
 }
 
-.enlarge-text {
-    font-family: "Lilita One";
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--text-white);
+.swiper-pagination {
+    position: static !important;
+    width: auto !important;
 }
 
-.enlarge-icon {
-    width: 30px;
-    height: 30px;
-    transition: transform var(--transition-fast);
-    color: var(--text-white);
-}
-
-.thumbnail-container:hover .enlarge-icon {
-    transform: scale(1.1);
-}
-
-.download-btn {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+.swiper-pagination-bullet-active {
     width: 50px;
-    height: 50px;
+    border-radius: 4px;
+    background: rgba(71, 41, 82, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.swiper-pagination-bullet-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--misstic-dark);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: fill-bullet 10s linear forwards;
+    animation-play-state: var(--animation-state, running);
+}
+
+@keyframes fill-bullet {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+.pause-btn {
+    background: none;
+    border: 1px solid rgba(71, 41, 82, 0.5);
     border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: var(--misstic-dark);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-white);
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity var(--transition-fast);
+}
+
+.pause-btn:hover { opacity: 1; }
+.pause-btn svg   { transition: transform var(--transition-fast); }
+.pause-btn:hover svg { transform: scale(1.08); }
+.pause-btn.is-paused svg { transform: translateX(1px); }
+.pause-btn.is-paused:hover svg { transform: translateX(1px) scale(1.08); }
+
+/* --- Boutons nav Swiper --- */
+.swiper-button-prev,
+.swiper-button-next {
+    width: 42px;
+    height: 42px;
+    background: rgb(190, 190, 190);
+    border: 1px solid rgba(255, 255, 255);
+    border-radius: 50%;
     opacity: 0;
-    transition: opacity var(--transition-fast), transform var(--transition-fast);
-    pointer-events: none;
-    border: none;
-    cursor: pointer;
+    transition: opacity var(--transition-base), background var(--transition-fast), box-shadow var(--transition-base);
+    --swiper-navigation-color: white;
+    --swiper-navigation-sides-offset: 3%;
 }
 
-.thumbnail-container:hover .download-btn {
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
     opacity: 1;
-    pointer-events: auto;
+    box-shadow: 0 0 40px rgba(71, 41, 82, 0.5);
 }
 
-.download-btn:hover {
-    transform: scale(1.1);
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled { display: none !important; }
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    opacity: 1;
+    background: rgba(175, 175, 175, 1);
+}
+
+.swiper-button-next svg,
+.swiper-button-prev svg {
+    width: 12px;
+    height: 12px;
+    transition: width var(--transition-fast), height var(--transition-fast);
 }
 
 /* ============================================================
-    MODAL
+    MODAL AGRANDISSEMENT IMAGE
    ============================================================ */
-
-#imageModal {
+.image-modal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
+    inset: 0;
+    z-index: 1000;
+    animation: fadeIn var(--transition-base) ease-in-out;
 }
 
-#imageModal.active {
+.image-modal.active {
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .modal-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    cursor: pointer;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    cursor: default;
 }
 
 .modal-content {
     position: relative;
-    z-index: 2001;
-    max-width: 90vw;
-    max-height: 90vh;
+    z-index: 1001;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
+    background: transparent;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 90vw;
+    max-height: 90vh;
+    animation: slideUp 0.4s ease-in-out;
 }
 
-#modalImage {
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
+@keyframes slideUp {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1002;
+    background: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+    border: 2px solid var(--game-color-dark, var(--misstic-dark));
+}
+
+.modal-prev { left: 5%; }
+.modal-next { right: 5%; }
+
+.modal-nav-btn:hover { transform: translateY(-50%) scale(1.08); }
+.modal-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    transform: translateY(-50%);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    border-radius: 42.5px;
+    background: #FFF;
+    cursor: pointer;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-base);
+    border: 2px solid var(--game-color-dark, var(--misstic-dark));
+}
+
+.modal-close-btn:hover { transform: scale(1.1); }
+.modal-close-btn svg   { width: 100%; height: 100%; }
+
+.modal-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80vw;
+    max-height: 70vh;
+    overflow: visible;
     border-radius: var(--radius-element);
 }
 
-.modal-controls {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    justify-content: center;
+.modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: var(--radius-element);
+    animation: zoomIn 0.4s ease-in-out;
 }
 
-#modalPrev,
-#modalNext,
-#modalCloseBtn,
-#modalDownloadBtn {
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* --- Bouton téléchargement thumbnail/screenshot --- */
+.download-btn {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    background: var(--bg-white);
     border: none;
+    background: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-fast);
+    transition: transform var(--transition-base);
+    display: block;
 }
 
-#modalPrev:hover:not(:disabled),
-#modalNext:hover:not(:disabled),
-#modalCloseBtn:hover,
-#modalDownloadBtn:hover {
-    transform: scale(1.1);
-    box-shadow: var(--shadow-md);
+.download-btn:hover { transform: scale(1.15); }
+.download-btn svg   { width: 100%; height: 100%; }
+.download-btn:hover path { transform: translateY(3px); transition: transform var(--transition-base); }
+
+.thumbnail-container .download-btn,
+.screenshot-container .download-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 0;
+    transition: opacity var(--transition-base), transform var(--transition-fast);
+    pointer-events: auto;
+    z-index: 4;
 }
 
-#modalPrev:disabled,
-#modalNext:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+.thumbnail-container:hover .download-btn,
+.screenshot-container:hover .download-btn { opacity: 1; }
 
 /* ============================================================
-    FORMULAIRES
+    FORMULAIRE CONTACT
    ============================================================ */
+.contact-title {
+    text-align: start;
+    font-family: "Lilita One", cursive;
+    font-size: 70px;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 .email-section {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 150px;
+    padding: 0 2vw;
 }
 
-.form-group {
+.email-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.mail-to {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    width: 350px;
+    gap: 0;
 }
 
-.form-group label {
-    font-family: "Lilita One";
+.mail-to p {
+    margin: 0;
+    color: var(--orange);
+    font-family: "Lilita One", cursive;
     font-size: 18px;
     font-weight: 400;
-    color: var(--color-primary-dark);
+    line-height: normal;
 }
 
-.form-group input,
-.form-group textarea {
-    padding: 15px;
-    border: 2px solid var(--color-primary-bg);
+.mail-to a {
+    font-family: "Lilita One", cursive;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
     border-radius: var(--radius-element);
-    font-family: Asap;
-    font-size: 16px;
-    transition: border-color var(--transition-fast);
+    background: var(--misstic-surface);
+    margin-top: -30px;
+    padding: 40px 60px;
+    position: relative;
+    overflow: hidden;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-primary-light);
+.gradient-contact {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 95%;
+    background: radial-gradient(50% 50% at 50% 50%, #6B3D75 0%, var(--misstic-light) 36.54%, rgba(255,255,255,0) 100%);
+    filter: blur(60px);
+    z-index: -1;
+    pointer-events: none;
 }
 
-.form-group textarea {
+.input-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
+
+.input-title svg { margin-bottom: 10px; }
+
+.input-title label {
+    font-family: Asap, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-input input {
+    display: flex;
+    width: 100%;
+    height: 45px;
+    align-items: center;
+    border-radius: var(--radius-btn);
+    background: var(--misstic-pale);
+}
+
+.contact-input textarea {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    padding: 10px 0 0 10px;
+    border-radius: var(--radius-btn);
+    background: var(--misstic-pale);
     resize: vertical;
-    min-height: 120px;
 }
+
+.contact-input input::placeholder,
+textarea::placeholder {
+    padding: 0;
+    font-family: Asap, sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: normal;
+    opacity: 1;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-input input:not(.choose-file) {
+    padding-left: 10px;
+    width: 100%;
+}
+
+.contact-input { flex: 1; }
+
+.name-and-email {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 60px;
+    width: 100%;
+}
+
+.contact-input input,
+.contact-input textarea { border: none; }
+
+.choose-file {
+    font-family: Asap, sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    color: var(--misstic-dark);
+}
+
+.choose-file::file-selector-button {
+    border-radius: var(--radius-btn);
+    padding: 5px 30px;
+    border: 1px solid var(--misstic-light);
+    background: var(--grad-misstic);
+    color: #FFF;
+    font-family: Asap, sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform var(--transition-base);
+}
+
+.choose-file::file-selector-button:hover {
+    transform: scale(1.02);
+}
+
+.contact-input input:focus,
+.contact-input textarea:focus {
+    outline: 2px solid var(--misstic-dark);
+    outline-offset: 0;
+}
+
+#attachment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px 45px 10px;
+}
+
+.contact-form button {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: var(--radius-btn);
+    max-width: 260px;
+    height: 65px;
+    padding: 20px 25px;
+    color: #FFF;
+    font-family: Asap, sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0 auto;
+    transition: transform var(--transition-base);
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    transform: scale(1.03);
+    background: linear-gradient(270deg, rgba(238,238,238,0.20) 0%, rgba(250,239,255,0.20) 100%),
+                var(--grad-misstic);
+}
+
+.contact-form button.disabled {
+    position: relative;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.contact-form button.disabled::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius-btn);
+    pointer-events: none;
+}
+
+.submit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    position: relative;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submit-wrapper.form-invalid { cursor: not-allowed; }
+
+.submit-wrapper.form-invalid::before {
+    content: 'Form invalid or incomplete';
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    font-family: Asap, sans-serif;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+    z-index: 10;
+}
+
+.submit-wrapper.form-invalid:hover::before { opacity: 1; }
+
+/* --- Overlay succès --- */
+.form-success-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-element);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.form-success-overlay.visible {
+    display: flex !important;
+    animation: fadeInThenOut 3s ease forwards;
+}
+
+@keyframes fadeInThenOut {
+    0%   { opacity: 0; }
+    10%  { opacity: 1; pointer-events: auto; }
+    90%  { opacity: 1; pointer-events: auto; }
+    100% { opacity: 0; pointer-events: none; }
+}
+
+.form-success-overlay svg { width: 113px; height: 113px; filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.1)); }
+
+.form-success-overlay .success-title {
+    text-align: center;
+    font-family: "Lilita One", cursive;
+    font-size: 35px;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.form-success-overlay .success-subtitle {
+    color: var(--misstic-light);
+    text-align: center;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: var(--misstic-dark);
+    font-family: "Lilita One", cursive;
+    font-size: 25px;
+    margin: 0;
+}
+
+/* --- Fichiers uploadés --- */
+.uploaded-area {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.uploaded-area .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--misstic-pale);
+    border-radius: var(--radius-btn);
+    padding: 10px 15px;
+}
+
+.uploaded-area .row .content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.uploaded-area .row .details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.uploaded-area .row .details .name {
+    font-family: Asap, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uploaded-area .row .details .size {
+    font-family: Asap, sans-serif;
+    font-size: 11px;
+    color: var(--misstic-light);
+}
+
+/* --- Validation --- */
+.contact-input input.error-state,
+.contact-input textarea.error-state {
+    outline: 2px solid #E24B4A;
+    outline-offset: 0;
+}
+
+.field-error {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    color: #A32D2D;
+    font-family: Asap, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.form-error-banner {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: var(--radius-btn);
+    padding: 14px 18px;
+    font-family: Asap, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 16px;
+}
+
+.form-error-banner.visible { display: flex; }
+.form-error-banner.error   { background: #FCEBEB; color: #791F1F; border: 1px solid #F7C1C1; }
+.form-error-banner.warning { background: #FAEEDA; color: #633806; border: 1px solid #FAC775; }
 
 /* ============================================================
-    RESPONSIVE
+    MEDIA QUERIES — COMPONENTS
    ============================================================ */
+
+/* 1024px */
+@media (max-width: 1024px) {
+    #game-carousel {
+        overflow-x: hidden;
+        overflow-y: visible;
+        padding-bottom: 0;
+    }
+
+    .swiper.mySwiper { overflow: hidden; width: 100%; }
+
+    .swiper-slide {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .game-cover {
+        width: 100%;
+        margin-left: 0;
+        height: 40vh;
+        overflow: visible;
+        display: block;
+        position: relative;
+        line-height: 0;
+    }
+
+    .game-cover img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .game-cover::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 100%;
+        height: calc(100% + 7px);
+        z-index: 1;
+        pointer-events: none;
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0) 40%, #FFF 100%),
+            var(--game-cover-gradient-mobile, linear-gradient(270deg, rgba(255,255,255,0) 70%, rgba(200,200,200,0.6) 100%));
+    }
+
+    .game-cover-gradient { display: none; }
+
+    .game-logo-wrapper {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 20px;
+        width: 100%;
+        margin-top: -120px;
+        z-index: 2;
+        line-height: 1;
+    }
+
+    .game-logo { width: 220px; min-width: unset; }
+
+    .game-description { text-align: center; width: 100%; max-width: 700px; font-size: 22px; }
+
+    .game-buttons { flex-wrap: wrap; justify-content: center; }
+
+    .swiper-button-next,
+    .swiper-button-prev { display: none; }
+
+    .modal-nav-btn { position: static; top: auto; }
+    .modal-content { flex-direction: column; }
+
+    .modal-footer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+/* 768px */
 @media (max-width: 768px) {
-    .btn-small,
-    .btn-medium,
-    .btn-large {
-    max-width: 100%;
-    }
+    .email-title { flex-direction: column; justify-content: center; align-items: center; }
+    .contact-title { margin-bottom: 5px; text-align: center; }
+    .contact-form  { margin-top: 30px; padding: 40px 20px; }
+    .mail-to { align-items: center; margin-top: 10px; }
+    .mail-to a { font-size: 25px; }
 
-    .btn-large {
-    height: 70px;
-    font-size: 20px;
-    }
+    .name-and-email { flex-direction: column; gap: 20px; }
 
-    .factsheet {
-    padding: 30px 20px;
-    gap: 30px;
-    }
+    .modal-nav-btn { position: static; width: 35px; height: 35px; }
+    .modal-nav-btn svg { width: 8px; height: 14px; }
 
-    .right-info {
-    padding: 20px;
-    }
+    .modal-content { padding: 5px; gap: 20px; }
+    .modal-close-btn { top: -55px; width: 45px; height: 45px; }
+    .modal-image-container { max-width: 95vw; max-height: 60vh; }
+    .modal-image { max-height: 60vh; }
 
-    .thumbnail-container {
-    max-width: 100%;
-    }
+    .game-description { width: 100%; max-width: 100%; font-size: 22px; }
+    .game-logo-wrapper { left: 20px; right: 20px; }
+    .game-buttons { flex-wrap: wrap; justify-content: center; }
 }

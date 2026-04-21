@@ -1,0 +1,799 @@
+/* ============================================================
+    GAME-PAGES.CSS — Code partagé entre toutes les pages de jeux
+    Misstic Studio
+    Utilisé par : sunrise-order.html, craftiny.html, et tout futur jeu
+    Les couleurs sont lues depuis les variables --game-* définies
+    dans le fichier thème du jeu (ex: sunrise.css, craftiny.css)
+   ============================================================ */
+
+/* ============================================================
+    HERO PAGE JEU
+   ============================================================ */
+.game-cover-content {
+    position: relative;
+    width: 100%;
+}
+
+.game-page-cover {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.game-page-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Fondu bas de la cover */
+.game-page-cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
+    pointer-events: none;
+}
+
+/* Wrapper logo + boutons superposé à la cover */
+.game-content-wrapper {
+    position: absolute;
+    left: 8%;
+    bottom: 120px;
+    min-width: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(10px, 5vw, 12px);
+    padding: 20px;
+    width: 84%;
+    margin-top: -120px;
+    line-height: 1;
+    pointer-events: auto;
+    overflow: hidden;
+}
+
+.game-content-logo {
+    width: clamp(300px, 30vw, 450px);
+    max-width: 450px;
+    height: auto;
+}
+
+/* ============================================================
+    SECTION INFORMATIONS (factsheet + blocs droite)
+   ============================================================ */
+.informations {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(10px, 8vw, 30px);
+    margin-top: 100px;
+    padding: 0 2vw;
+}
+
+.informations-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.informations-left img {
+    width: 100%;
+    max-width: 452px;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: var(--radius-element);
+    cursor: pointer;
+}
+
+.informations-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+/* Thumbnail cover verticale */
+.thumbnail-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-element);
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-base);
+}
+
+.thumbnail-container:hover .thumbnail-image {
+    transform: scale(1.08);
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+    z-index: 2;
+    background: var(--game-thumbnail-overlay);
+}
+
+.thumbnail-container:hover .thumbnail-overlay {
+    opacity: 1;
+}
+
+.thumbnail-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.thumbnail-container:hover .thumbnail-content {
+    opacity: 1;
+}
+
+.enlarge-text-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.enlarge-text {
+    color: #FFF;
+    text-align: center;
+    font-family: Asap, sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: normal;
+    text-shadow: var(--game-text-shadow);
+}
+
+.enlarge-icon {
+    fill: #FFF;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* --- Factsheet --- */
+.game-factsheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    padding: 50px 60px;
+    border-radius: var(--radius-box);
+    background: var(--game-color-pale);
+}
+
+.factsheet-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.factsheet-text h3,
+.right-info-text h3 {
+    font-family: "Lilita One", cursive;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--game-color-medium);
+    margin: 0;
+}
+
+.factsheet-text p {
+    color: #000;
+    font-family: Asap, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+}
+
+/* --- Blocs droite (About, Key Features, Trailer, Logo) --- */
+.right-info {
+    display: flex;
+    width: 920px;
+    max-width: 100%;
+    padding: 30px 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: var(--radius-box);
+    background: var(--game-color-pale);
+}
+
+.right-info-text {
+    width: 100%;
+}
+
+.right-info-text p,
+.right-info-text ul li {
+    color: #000;
+    font-family: Asap, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.right-info-text p {
+    margin: 15px;
+}
+
+.right-info-text ul li {
+    margin: 5px 15px;
+}
+
+.right-info-title {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    flex-shrink: 0;
+    align-self: start;
+}
+
+/* Étoile décorative titre */
+.game-star {
+    position: relative;
+    fill: var(--game-color-dark);
+    filter: drop-shadow(4px 4px 0 var(--game-star-shadow));
+}
+
+/* Titre de section */
+.section-title-game {
+    text-align: center;
+    font-family: "Lilita One", cursive;
+    font-size: 70px;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--game-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 20px 0;
+}
+
+/* Header titre + bouton download (Trailer, Logo) */
+.title-and-download {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* --- Vidéo Trailer --- */
+.iframe-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 20px 0 0 0;
+    max-height: 400px;
+}
+
+.iframe-wrapper.video-container {
+    padding-bottom: 56.25%;
+    max-height: 350px;
+}
+
+.iframe-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 95%;
+    height: 95%;
+    border: 0;
+    border-radius: 12px;
+    background-color: #000;
+    transform: translateX(-50%);
+}
+
+/* --- Logo du jeu --- */
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    min-height: 150px;
+}
+
+.logo-image {
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ============================================================
+    SECTION MEDIA (screenshots)
+   ============================================================ */
+.media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2vw;
+}
+
+.images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 100%;
+    margin: 0 auto 30px auto;
+    justify-content: center;
+}
+
+.screenshot-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-element);
+    max-width: 440px;
+    width: 100%;
+}
+
+.screenshot-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-base);
+}
+
+.screenshot-container:hover .screenshot-image {
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.screenshot-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+    z-index: 2;
+    background: var(--game-screenshot-overlay);
+}
+
+.screenshot-container:hover .screenshot-overlay {
+    opacity: 1;
+}
+
+.screenshot-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.screenshot-container:hover .screenshot-content {
+    opacity: 1;
+}
+
+/* ============================================================
+    SECTION AVIS JOUEURS
+   ============================================================ */
+.player-reviews {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-review {
+    flex: 0 0 auto;
+    border-radius: var(--radius-box);
+    display: flex;
+    width: 500px;
+    height: auto;
+    padding: 30px;
+    flex-direction: column;
+    align-items: start;
+    background: var(--game-color-pale);
+}
+
+.player-review h3 {
+    font-family: "Lilita One", cursive;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--game-color-medium);
+    margin: 15px;
+}
+
+.player-review p {
+    color: #000;
+    font-family: Asap, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 15px;
+}
+
+.carousel-reviews {
+    overflow: hidden;
+    width: 100%;
+}
+
+.reviews-top,
+.reviews-bottom {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    gap: 20px;
+    animation: scroll 30s linear infinite;
+}
+
+.reviews-bottom {
+    animation-direction: reverse;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.carousel-reviews:hover .reviews-top,
+.carousel-reviews:hover .reviews-bottom {
+    animation-play-state: paused;
+}
+
+.reviews-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(270deg, #FFF 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 75%, #FFF 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================================
+    SECTION MORE GAMES
+   ============================================================ */
+.more-games {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2vw;
+}
+
+.more-games-container {
+    display: flex;
+    max-width: 900px;
+    height: 280px;
+    padding: 10px 40px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: var(--radius-box);
+    background: var(--game-color-pale);
+}
+
+.more-games-container img {
+    width: 400px;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: var(--radius-element);
+    border: 2px solid var(--game-color-medium);
+}
+
+.more-games-description {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.more-games-description h3 {
+    font-family: "Lilita One", cursive;
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--game-color-medium);
+    margin: 5px;
+}
+
+.more-games-description p {
+    color: #000;
+    font-family: Asap, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 5px;
+}
+
+/* Bouton retour accueil */
+.back-home-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 90px;
+}
+
+/* ============================================================
+    MEDIA QUERIES — GAME PAGES
+   ============================================================ */
+
+/* 1400px */
+@media (max-width: 1400px) {
+
+    .informations-left,
+    .informations-right {
+        max-width: 790px;
+        align-items: stretch;
+    }
+
+    .informations-left img,
+    .btn-game-buy {
+        max-width: 100%;
+    }
+
+    .right-info,
+    .game-factsheet {
+        width: 100%;
+    }
+}
+
+/* 1205px — passage en colonne unique, centré avec marges latérales */
+@media (max-width: 1205px) {
+    .right-info-title {
+        margin: 0 30px;
+    }
+
+    .title-and-download {
+        margin: 0 30px 0 0;
+    }
+
+    .informations {
+        flex-direction: column;
+    }
+
+    .informations-left,
+    .informations-right {
+        /* Prend toute la largeur disponible du conteneur centré */
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .informations-right {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .informations-left img,
+    .btn-game-buy {
+        width: 100%;
+        max-width: 452px;
+    }
+
+    .game-factsheet {
+        width: 100%;
+        padding: 30px 40px;
+        gap: 40px;
+        box-sizing: border-box;
+    }
+
+    .factsheet-text {
+        padding: 0;
+    }
+
+    .right-info {
+        width: 100%;
+        padding: 25px 40px;
+        box-sizing: border-box;
+    }
+
+    .right-info-text p,
+    .right-info-text ul li {
+        padding: 0;
+    }
+
+    .right-info-text ul {
+        list-style-position: inside;
+        padding-left: 0;
+    }
+
+    .informations-left img,
+    .btn-game-buy,
+    .thumbnail-container {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* 1024px */
+@media (max-width: 1024px) {
+    .more-games-container {
+        flex-direction: column;
+        height: auto;
+        padding: 30px;
+    }
+
+    .more-games-container img {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .more-games-description {
+        text-align: center;
+        align-items: center;
+    }
+
+    .images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sunrise-content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* 768px */
+@media (max-width: 768px) {
+    .informations {
+        flex-direction: column;
+        padding: 40px clamp(16px, 4vw, 40px);
+        gap: 15px;
+        max-width: 100%;
+    }
+
+    .informations-left,
+    .informations-right {
+        width: 100%;
+        gap: 20px;
+    }
+
+    .informations-left img,
+    .btn-game-buy,
+    .thumbnail-container {
+        max-width: 100%;
+    }
+
+    .btn-game-buy span {
+        font-size: 25px;
+    }
+
+    .game-factsheet {
+        width: 100%;
+        padding: 25px 20px;
+        gap: 30px;
+    }
+
+    .factsheet-text h3 {
+        font-size: 30px;
+    }
+
+    .factsheet-text p {
+        font-size: 20px;
+    }
+
+    .right-info {
+        width: 100%;
+        padding: 20px 20px;
+    }
+
+    .right-info-text h3 {
+        font-size: 30px;
+    }
+
+    .right-info-text p,
+    .right-info-text ul li {
+        font-size: 20px;
+    }
+
+    .game-star {
+        width: 30px;
+        height: 30px;
+    }
+
+    .right-info-title {
+        height: 50px;
+        gap: 8px;
+    }
+
+    .iframe-wrapper.video-container {
+        max-height: 200px;
+    }
+
+    .btn-download span {
+        font-size: 20px;
+    }
+
+    .enlarge-text {
+        font-size: 20px;
+    }
+
+    .modal-close-btn {
+        width: 40px;
+        height: 40px;
+        top: -20px;
+        right: -20px;
+    }
+
+    .modal-image-container {
+        max-height: 70vh;
+    }
+
+    .modal-image {
+        max-height: 70vh;
+    }
+
+    .images {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .screenshot-container {
+        max-width: 100%;
+    }
+
+    .more-games {
+        padding: 0 2vw;
+    }
+
+    .more-games-container {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .player-review {
+        width: 400px;
+        height: 450px;
+    }
+}
+
+/* 540px */
+@media (max-width: 540px) {
+    .title-and-download {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-download {
+        margin-left: 30px;
+    }
+
+    .sunrise-cover-content {
+        margin-bottom: 70px;
+    }
+}

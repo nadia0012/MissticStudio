@@ -1,281 +1,87 @@
 /* ============================================================
-   SUNRISE.CSS — Styles spécifiques à Sunrise's Order
-   
-   ARCHITECTURE :
-   - Surcharge les variables CSS définies dans base.css
-   - Utilise les classes génériques de components.css
-   - Aucune classe spécifique à Sunrise (sauf si vraiment nécessaire)
-   
+    SUNRISE.CSS — Thème Sunrise's Order
+    Misstic Studio
+    
+    Ce fichier définit UNIQUEMENT les variables de couleur
+    et les quelques règles spécifiques à Sunrise's Order.
+    Tout le reste est dans game-pages.css.
+    
+    Pour créer un nouveau jeu : copier ce fichier, changer les
+    valeurs des variables, et ajouter <body class="theme-sunrise">
    ============================================================ */
 
 /* ============================================================
-   VARIABLES SUNRISE — Surcharge des variables globales
+    VARIABLES THÈME — appliquées sur body.theme-sunrise
    ============================================================ */
-:root {
-  /* Couleurs Sunrise */
-  --color-secondary: #C68749;
-  --color-secondary-dark: #875028;
-  --color-secondary-light: #FFF3E6;
+body.theme-sunrise {
 
-  /* Gradients Sunrise */
-  --gradient-secondary: linear-gradient(270deg, #C68749 0%, #875028 100%);
-  --gradient-hero: linear-gradient(135deg, rgba(255, 243, 230, 0.5) 0%, rgba(198, 135, 73, 0.1) 100%);
+    /* --- Palette Sunrise --- */
+    --game-color-pale:    #FEEBDC;
+    --game-color-light:   #FDD6A7;
+    --game-color-medium:  #9D6437;
+    --game-color-dark:    #875028;
 
-  /* Ombres Sunrise */
-  --shadow-secondary: 0 8px 20px rgba(198, 135, 73, 0.3);
+    /* --- Dégradés --- */
+    --game-gradient:       linear-gradient(270deg, #C68749 0%, #875028 100%);
+    --game-gradient-pale:  linear-gradient(270deg, #FFFBF6 0%, #FFF3E8 100%);
 
-  /* Variables spécifiques pour les cartes */
-  --box-background: #FFF3E6;
-  --title-color: #C68749;
-  --overlay-gradient: linear-gradient(135deg, rgba(198, 135, 73, 0.3) 0%, rgba(135, 80, 40, 0.3) 100%);
+    /* --- Étoile décoration --- */
+    --game-star-shadow:    #C68749;
 
-  /* Accent colors */
-  --color-accent-primary: #C68749;
-  --color-accent-secondary: #875028;
+    /* --- Overlay thumbnail & screenshots --- */
+    --game-thumbnail-overlay:
+        linear-gradient(72deg, rgba(0,0,0,0) -0.02%, rgba(0,0,0,0.30) 99.96%),
+        radial-gradient(57.92% 50.85% at 50% 50%, rgba(254,235,220,0.15) 0%, rgba(135,80,40,0.50) 100%);
+
+    --game-screenshot-overlay:
+        linear-gradient(72deg, rgba(0,0,0,0) -0.02%, rgba(0,0,0,0.30) 99.96%),
+        radial-gradient(57.92% 50.85% at 50% 50%, rgba(254,235,220,0.15) 0%, rgba(135,80,40,0.50) 100%);
+
+    /* --- Ombre texte "Enlarge" --- */
+    --game-text-shadow:
+        -2px -2px 0 #875028, 2px -2px 0 #875028,
+        -2px  2px 0 #875028, 2px  2px 0 #875028,
+        -2px  0   0 #875028, 2px  0   0 #875028,
+        0   -2px 0 #875028, 0    2px 0 #875028;
+
+    /* --- Dégradé hero cover --- */
+    --game-cover-gradient:
+        linear-gradient(180deg, rgba(255,255,255,0.00) 62.81%, #FFF 100%),
+        radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0.00) 0%, rgba(198,135,73,0.30) 40.87%, rgba(253,214,167,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+        linear-gradient(270deg, rgba(255,255,255,0.00) 47.95%, #FDD6A7 68.75%, #F9B36E 86.06%, #875028 100%);
+
+    /* Dégradé cover mobile (::after sur .game-cover) */
+    --game-cover-gradient-mobile:
+        linear-gradient(270deg, rgba(255,255,255,0) 70%, rgba(221,182,134,0.60) 85%, rgba(249,179,110,0.60) 95%, rgba(135,80,40,0.60) 100%);
 }
 
 /* ============================================================
-   HERO SECTION SUNRISE
+    HERO — Dégradé de la cover (desktop uniquement)
+    Le dégradé latéral ne peut pas être défini via une variable
+    car il utilise une syntaxe non supportée dans custom properties
+    sur certains navigateurs, on le surcharge ici directement.
    ============================================================ */
-
-.sunrise-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 65px);
-  gap: 40px;
-  padding: 60px 20px;
-  text-align: center;
-  background: var(--gradient-hero);
+body.theme-sunrise .game-cover-gradient {
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.00) 62.81%, #FFF 100%),
+        radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0.00) 0%, rgba(198,135,73,0.30) 40.87%, rgba(253,214,167,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+        linear-gradient(270deg, rgba(255,255,255,0.00) 47.95%, #FDD6A7 68.75%, #F9B36E 86.06%, #875028 100%);
 }
 
-.sunrise-hero h1 {
-  font-family: "Lilita One";
-  font-size: clamp(32px, 8vw, 72px);
-  font-weight: 400;
-  background: var(--gradient-secondary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
-}
-
-.sunrise-hero p {
-  font-family: Asap;
-  font-size: clamp(16px, 4vw, 24px);
-  color: var(--text-primary);
-  max-width: 600px;
-  margin: 0;
+/* Cover mobile */
+@media (max-width: 1024px) {
+    body.theme-sunrise .game-cover::after {
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0) 40%, #FFF 100%),
+            linear-gradient(90deg, rgba(0,0,0,0) 85%, rgba(198,135,73,0.60) 100%),
+            radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0) 0%, rgba(198,135,73,0.30) 40.87%, rgba(253,214,167,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+            linear-gradient(270deg, rgba(255,255,255,0) 70%, rgba(221,182,134,0.60) 85%, rgba(249,179,110,0.60) 95%, rgba(135,80,40,0.60) 100%);
+    }
 }
 
 /* ============================================================
-   GALLERY SECTION SUNRISE
+    MODAL — couleurs flèches navigation spécifiques à Sunrise
    ============================================================ */
-
-.sunrise-gallery {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.sunrise-gallery h2 {
-  font-family: "Lilita One";
-  font-size: clamp(28px, 6vw, 56px);
-  font-weight: 400;
-  color: var(--color-accent-primary);
-  text-align: center;
-  margin: 0;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.gallery-item {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-element);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-fast);
-}
-
-.gallery-item:hover img {
-  transform: scale(1.05);
-}
-
-/* ============================================================
-   INFORMATIONS SECTION SUNRISE
-   ============================================================ */
-
-.informations {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  padding: 60px 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-  align-items: start;
-}
-
-.informations-left {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  justify-content: space-between;
-}
-
-.informations-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 30px;
-  justify-content: flex-end;
-}
-
-.informations-left img {
-  width: 100%;
-  max-width: 452px;
-  height: auto;
-  flex-shrink: 0;
-  aspect-ratio: 135 / 158;
-  border-radius: var(--radius-element);
-  cursor: pointer;
-}
-
-/* ============================================================
-   DESCRIPTION SECTION SUNRISE
-   ============================================================ */
-
-.sunrise-description {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.sunrise-description h2 {
-  font-family: "Lilita One";
-  font-size: clamp(28px, 6vw, 56px);
-  font-weight: 400;
-  color: var(--color-accent-primary);
-  text-align: center;
-  margin: 0;
-}
-
-.sunrise-description p {
-  font-family: Asap;
-  font-size: clamp(14px, 2vw, 18px);
-  line-height: 1.8;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-/* ============================================================
-   FEATURES SECTION SUNRISE
-   ============================================================ */
-
-.sunrise-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 30px;
-  background: var(--color-secondary-light);
-  border-radius: var(--radius-box);
-  border: 2px solid var(--color-accent-primary);
-}
-
-.feature-card h3 {
-  font-family: "Lilita One";
-  font-size: 24px;
-  font-weight: 400;
-  color: var(--color-accent-primary);
-  margin: 0;
-}
-
-.feature-card p {
-  font-family: Asap;
-  font-size: 16px;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-/* ============================================================
-   VIDEO SECTION SUNRISE
-   ============================================================ */
-
-.iframe-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: var(--radius-element);
-  margin: 40px 0;
-}
-
-.iframe-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* ============================================================
-   RESPONSIVE SUNRISE
-   ============================================================ */
-@media (max-width: 768px) {
-  .informations {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .informations-right {
-    align-items: flex-start;
-  }
-
-  .sunrise-gallery {
-    padding: 40px 20px;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-  }
-
-  .sunrise-features {
-    grid-template-columns: 1fr;
-  }
-
-  .feature-card {
-    padding: 20px;
-  }
+body.theme-sunrise .modal-nav-btn {
+    border-color: #C68749;
 }

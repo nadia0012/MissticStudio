@@ -1,501 +1,672 @@
 /* ============================================================
-   STUDIO.CSS — Styles pour Index & Contact
+    STUDIO.CSS — Pages Index & Contact
+    Misstic Studio
+    Contient les styles propres à la page d'accueil (index.html)
+    et à la page contact (contact.html)
    ============================================================ */
 
 /* ============================================================
-   HERO SECTION
+    SECTION JEUX — CARDS (index.html)
    ============================================================ */
-
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 65px);
-  gap: 40px;
-  padding: 60px 20px;
-  text-align: center;
+#games {
+    scroll-margin-top: 0px;
 }
 
-.hero h1 {
-  font-family: "Lilita One";
-  font-size: clamp(32px, 8vw, 72px);
-  font-weight: 400;
-  color: var(--Misstic-Mauve-Dark);
-  margin: 0;
+.game-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
 
-.hero p {
-  font-family: Asap;
-  font-size: clamp(16px, 4vw, 24px);
-  color: #000;
-  max-width: 600px;
-  margin: 0;
+.section-games {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 0 1vw;
 }
 
-/* ============================================================
-   GAMES SECTION
-   ============================================================ */
-
-.games {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-  padding: 60px 20px;
-  max-width: 1400px;
-  margin: 0 auto;
+/* Titre de section (index) */
+.section-title {
+    text-align: center;
+    font-family: "Lilita One", cursive;
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.games h2 {
-  font-family: "Lilita One";
-  font-size: clamp(28px, 6vw, 56px);
-  font-weight: 400;
-  color: var(--Misstic-Mauve-Dark);
-  text-align: center;
-  margin: 0 0 40px 0;
-}
-
+/* --- Game Card --- */
+/* max-width: 600px pour 2 jeux par ligne
+   Passer à 450px si vous voulez 3 jeux par ligne */
 .game-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+    flex: 1 1 0;
+    max-width: 600px;
+    min-width: 0;
+    height: auto;
+    min-height: 620px;
+    border-radius: var(--radius-card);
+    border: 2px solid var(--misstic-mid);
+    background: var(--misstic-surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    cursor: pointer;
+    align-items: flex-start;
 }
 
-.game-card.reverse {
-  direction: rtl;
+.game-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(71, 41, 82, 0.15);
 }
 
-.game-card.reverse > * {
-  direction: ltr;
+.game-card-img-wrapper {
+    width: 100%;
+    height: 310px;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-.game-card-image {
-  width: 100%;
-  max-width: 500px;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-box);
-  overflow: hidden;
+.game-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform var(--transition-base);
 }
 
-.game-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.game-card:hover .game-card-img { transform: scale(1.05); }
 
 .game-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 18px;
+    gap: 12px;
+    flex: 1;
 }
 
-.game-card-content h3 {
-  font-family: "Lilita One";
-  font-size: clamp(24px, 5vw, 48px);
-  font-weight: 400;
-  margin: 0;
+.game-card-title {
+    height: 42px;
+    font-family: "Lilita One", cursive;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: normal;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
 }
 
-.game-card-content p {
-  font-family: Asap;
-  font-size: clamp(14px, 2vw, 18px);
-  line-height: 1.6;
-  color: #000;
-  margin: 0;
+.game-card-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.game-card-price {
+    font-family: Asap, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.game-card-description {
+    font-family: Asap, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
 }
 
 .game-card-buttons {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-self: start;
+    margin-top: auto;
+    margin-bottom: 15px;
 }
+
+/* Boutons dans les cards */
+.card-btn-buy {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: var(--radius-btn-sm);
+}
+
+.card-btn-buy span {
+    color: #FFF;
+    font-family: Asap, sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.card-btn-buy svg { width: 20px; height: 20px; }
+.card-btn-buy:hover { transform: translateZ(0) scale(1.02); }
+
+.card-btn-discover {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: var(--radius-btn-sm);
+}
+
+.card-btn-discover span {
+    color: var(--misstic-dark);
+    font-family: Asap, sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.card-btn-discover svg {
+    display: block;
+    margin-top: 2px;
+    transition: transform var(--transition-fast);
+}
+
+.card-btn-discover:hover svg { transform: translateX(3px); }
+.card-btn-discover:hover     { transform: translateZ(0) scale(1.02); }
 
 /* ============================================================
-   ABOUT US SECTION
+    HERO CARROUSEL — Spécifiques à index.html
+    (Le reste du carrousel est dans components.css)
    ============================================================ */
 
-.about-us {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.about-us h2 {
-  font-family: "Lilita One";
-  font-size: clamp(28px, 6vw, 56px);
-  font-weight: 400;
-  color: var(--Misstic-Mauve-Dark);
-  text-align: center;
-  margin: 0;
-}
-
-.about-us p {
-  font-family: Asap;
-  font-size: clamp(14px, 2vw, 18px);
-  line-height: 1.8;
-  color: #000;
-  margin: 0;
-}
-
-/* ============================================================
-   CONTACT SECTION
-   ============================================================ */
-
-.contact-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.contact-container h2 {
-  font-family: "Lilita One";
-  font-size: clamp(28px, 6vw, 56px);
-  font-weight: 400;
-  color: var(--Misstic-Mauve-Dark);
-  text-align: center;
-  margin: 0;
-}
-
-/* ============================================================
-   CONTACT FORM
-   ============================================================ */
-
-.contact-form {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 40px;
-  background: var(--Contact-Form-Mauve);
-  border-radius: var(--radius-box);
-}
-
-.contact-form input,
-.contact-form textarea,
-.contact-form button {
-  font-family: Asap;
-  font-size: 16px;
-}
-
-.contact-form input {
-  padding: 15px;
-  border: 2px solid transparent;
-  border-radius: var(--radius-element);
-  background: white;
-  transition: border-color var(--transition-fast);
-}
-
-.contact-form input:focus {
-  outline: none;
-  border-color: var(--Misstic-Mauve-1);
-}
-
-.contact-form input.error-state {
-  border-color: #d32f2f;
-  background: #ffebee;
-}
-
-.contact-form textarea {
-  padding: 15px;
-  border: 2px solid transparent;
-  border-radius: var(--radius-element);
-  background: white;
-  resize: vertical;
-  min-height: 150px;
-  transition: border-color var(--transition-fast);
-  font-family: Asap;
-}
-
-.contact-form textarea:focus {
-  outline: none;
-  border-color: var(--Misstic-Mauve-1);
-}
-
-.contact-form textarea.error-state {
-  border-color: #d32f2f;
-  background: #ffebee;
-}
-
-.field-error {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #d32f2f;
-  font-size: 14px;
-  margin-top: -20px;
-}
-
-.field-error svg {
-  color: #d32f2f;
-  flex-shrink: 0;
-}
-
-.submit-wrapper {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-}
-
-.submit-wrapper.form-invalid .btn-mauve {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.contact-form button {
-  padding: 15px 40px;
-  border: none;
-  border-radius: var(--radius-element);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.contact-form button.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* ============================================================
-   FORM SUCCESS OVERLAY
-   ============================================================ */
-
-#formSuccessOverlay {
-  position: absolute;
-  inset: 0;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: var(--radius-box);
-  opacity: 0;
-  z-index: 100;
-  transition: opacity 0.6s ease;
-}
-
-#formSuccessOverlay.visible {
-  display: flex;
-  animation: successCycle 6s ease forwards;
-}
-
-@keyframes successCycle {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  83% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-#formSuccessOverlay svg {
-  width: 113px;
-  height: 113px;
-}
-
-.success-title {
-  text-align: center;
-  font-family: "Lilita One";
-  font-size: 35px;
-  font-weight: 400;
-  background: linear-gradient(270deg, #6B3D75 0%, #472952 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
-}
-
-.success-subtitle {
-  color: var(--Misstic-Mauve-1);
-  text-align: center;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #FFF;
-  font-family: "Lilita One";
-  font-size: 25px;
-  font-weight: 400;
-  margin: 0;
-}
-
-/* ============================================================
-   FORM ERROR BANNER
-   ============================================================ */
-
-.form-error-banner {
-  position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 15px 30px;
-  background: #ffebee;
-  border: 2px solid #d32f2f;
-  border-radius: var(--radius-element);
-  color: #d32f2f;
-  font-family: Asap;
-  font-size: 16px;
-  z-index: 500;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-fast);
-  max-width: 90%;
-}
-
-.form-error-banner.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.form-error-banner.success {
-  background: #e8f5e9;
-  border-color: #4caf50;
-  color: #4caf50;
-}
-
-#formErrorMessage {
-  margin: 0;
-}
-
-/* ============================================================
-   FILE UPLOAD
-   ============================================================ */
-
-.file-upload-area {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
-  border: 2px dashed var(--Misstic-Mauve-1);
-  border-radius: var(--radius-element);
-  background: rgba(160, 119, 175, 0.05);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.file-upload-area:hover {
-  border-color: var(--Misstic-Mauve-Dark);
-  background: rgba(160, 119, 175, 0.1);
-}
-
-.file-upload-area.active {
-  border-color: var(--Misstic-Mauve-Dark);
-  background: rgba(160, 119, 175, 0.15);
-}
-
-#fileInput {
-  display: none;
-}
-
-.upload-label {
-  font-family: "Lilita One";
-  font-size: 16px;
-  color: var(--Misstic-Mauve-Dark);
-  text-align: center;
-  cursor: pointer;
-}
-
-.upload-hint {
-  font-family: Asap;
-  font-size: 14px;
-  color: #666;
-  text-align: center;
-  margin: 0;
-}
-
-.uploaded-files {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.uploaded-files li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  background: white;
-  border-radius: var(--radius-element);
-  border: 1px solid var(--Contact-Form-Mauve);
-}
-
-.uploaded-files .content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-}
-
-.uploaded-files .details {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.uploaded-files .name {
-  font-family: Asap;
-  font-size: 14px;
-  font-weight: 600;
-  color: #000;
-}
-
-.uploaded-files .size {
-  font-family: Asap;
-  font-size: 12px;
-  color: #666;
-}
-
-.uploaded-files svg {
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  transition: transform var(--transition-fast);
-}
-
-.uploaded-files svg:hover {
-  transform: scale(1.1);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 768px) {
-  .game-card {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .game-card.reverse {
-    direction: ltr;
-  }
-
-  .contact-form {
-    padding: 20px;
-  }
-
-  .submit-wrapper {
-    flex-direction: column;
-  }
-
-  .contact-form button {
+/* Dégradé cover Sunrise dans le carrousel */
+.game-gradient-sunrise {
+    position: absolute;
+    inset: 0;
     width: 100%;
-  }
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.00) 62.81%, #FFF 100%),
+        radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0.00) 0%, rgba(198,135,73,0.30) 40.87%, rgba(253,214,167,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+        linear-gradient(270deg, rgba(255,255,255,0.00) 47.95%, #FDD6A7 68.75%, #F9B36E 86.06%, #875028 100%);
+    pointer-events: none;
+    z-index: 1;
+}
 
-  .form-error-banner {
-    top: 70px;
-    max-width: calc(100% - 20px);
-  }
+/* Dégradé cover Craftiny dans le carrousel */
+.game-gradient-craftiny {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.00) 69.55%, #FFF 100%),
+        radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0.00) 0%, rgba(218,159,190,0.30) 40.87%, rgba(91,171,205,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+        linear-gradient(270deg, rgba(255,255,255,0.00) 47.95%, #5BABCD 68.75%, #DA9FBE 86.06%, #784D6E 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Wrappers logo hero carrousel */
+.sunrise-logo-wrapper,
+.craftiny-logo-wrapper {
+    position: absolute;
+    top: clamp(20px, 8%, 80px);
+    left: 8%;
+    right: 8%;
+    min-width: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(6px, 1vw, 12px);
+    overflow: visible;
+}
+
+.craftiny-logo-wrapper {
+    top: clamp(8%, 10vw, 30%);
+    gap: clamp(4px, 0.6vw, 8px);
+}
+
+.sunrise-logo {
+    width: clamp(100px, 18vw, 400px);
+    max-width: 400px;
+    height: auto;
+}
+
+.craftiny-logo {
+    width: clamp(150px, 20vw, 500px);
+    height: auto;
+    object-fit: contain;
+    object-position: left;
+    margin: 0;
+}
+
+/* Covers hero carrousel */
+.sunrise-cover,
+.craftiny-cover {
+    position: relative;
+    width: 70%;
+    margin-left: auto;
+    overflow: hidden;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.sunrise-cover img,
+.craftiny-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Texte description hero */
+.hero-description {
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap, sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    width: 100%;
+    max-width: 650px;
+    min-width: 0;
+    pointer-events: none;
+}
+
+/* ============================================================
+    SECTION ABOUT US (index.html)
+   ============================================================ */
+.section-about-us {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 150px;
+    padding: 0 1vw;
+}
+
+.aura-bubble {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.bubble {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #8c44ff 0%, transparent 90%);
+}
+
+.founders {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.founder-wrapper {
+    display: flex;
+    width: 530px;
+    align-items: flex-start;
+    position: relative;
+    text-decoration: none;
+}
+
+.founder-img-pink,
+.founder-img-blue {
+    width: 130px;
+    height: 130px;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 155px;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    transition: transform var(--transition-fast);
+}
+
+.founder-img-pink { border: 4px solid #E327C8; }
+.founder-img-blue { border: 4px solid #4BA5E7; }
+
+.founder-wrapper:hover .founder-img-blue,
+.founder-wrapper:hover .founder-img-pink { transform: translateX(-5px); }
+.founder-wrapper:hover .founder-star-pink { transform: rotate(-40deg); }
+.founder-wrapper:hover .founder-star-blue { transform: rotate(5deg); }
+
+.founder-tag-container {
+    width: 390px;
+    height: 170px;
+    position: absolute;
+    left: 65px;
+    bottom: -17px;
+}
+
+.founder-tag-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.founder-star-pink {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    transform: rotate(1deg);
+    z-index: 2;
+    fill: #E327C8;
+    filter: drop-shadow(4px 4px 0 #991B87);
+    transition: transform var(--transition-fast);
+}
+
+.founder-star-blue {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    transform: rotate(-35deg);
+    z-index: 2;
+    fill: #4BA5E7;
+    filter: drop-shadow(4px 4px 0 #3173A3);
+    transition: transform var(--transition-fast);
+}
+
+.founder-tag-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 90px;
+    z-index: 1;
+}
+
+.founder-text-group {
+    display: flex;
+    width: 333px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.founder-name {
+    align-self: stretch;
+    font-family: "Lilita One", cursive;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.founder-name-pink { color: #E327C8; }
+.founder-name-blue { color: #4BA5E7; }
+
+.founder-role {
+    align-self: stretch;
+    color: var(--misstic-dark);
+    font-family: Asap, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.about-text-column {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.about-us-description {
+    background: var(--grad-misstic);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Asap, sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    width: 100%;
+    max-width: 650px;
+    min-width: 0;
+    pointer-events: none;
+}
+
+/* ============================================================
+    MEDIA QUERIES — STUDIO
+   ============================================================ */
+
+/* 1205px */
+@media (max-width: 1205px) {
+    .bubble { width: 100%; height: 20%; }
+
+    .section-about-us {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .founders {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-bottom: 60px;
+        width: 100%;
+    }
+
+    .founder-wrapper {
+        align-items: center;
+        position: relative;
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 50%;
+        gap: 12px;
+        border-radius: var(--radius-card);
+        background-color: white;
+    }
+
+    .founder-tag-container {
+        width: 100%;
+        height: 170px;
+        position: relative;
+        left: 0;
+        bottom: 0;
+    }
+
+    .founder-tag-content {
+        position: relative;
+        inset: unset;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .founder-tag-bg { display: none; }
+
+    .founder-img-pink,
+    .founder-img-blue { margin-left: 30px; }
+
+    .about-text-column {
+        gap: 40px;
+        text-align: center;
+        align-items: center;
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .about-us-description { max-width: 100%; }
+
+    .founder-star-pink,
+    .founder-star-blue { visibility: hidden; }
+}
+
+/* 1024px */
+@media (max-width: 1024px) {
+    .section-games {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 2vw;
+    }
+
+    .game-card {
+        flex: 0;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .game-card-img        { object-position: center; }
+    .game-card-img-wrapper { height: auto; }
+
+    /* Hero carrousel mobile */
+    .sunrise-cover,
+    .craftiny-cover {
+        width: 100%;
+        line-height: 0;
+        min-width: unset;
+        margin-left: 0;
+        height: 40vh;
+        overflow: visible;
+        display: block;
+        position: relative;
+    }
+
+    .sunrise-cover img,
+    .craftiny-cover img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .sunrise-cover::after,
+    .craftiny-cover::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 100%;
+        height: calc(100% + 7px);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .sunrise-cover::after {
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0) 40%, #FFF 100%),
+            linear-gradient(90deg, rgba(0,0,0,0) 85%, rgba(198,135,73,0.60) 100%),
+            radial-gradient(50.08% 50.07% at 62.76% 49.93%, rgba(0,0,0,0) 0%, rgba(198,135,73,0.30) 40.87%, rgba(253,214,167,0.30) 68.27%, rgba(255,255,255,0.50) 100%),
+            linear-gradient(270deg, rgba(255,255,255,0) 70%, rgba(221,182,134,0.60) 85%, rgba(249,179,110,0.60) 95%, rgba(135,80,40,0.60) 100%);
+    }
+
+    .craftiny-cover::after {
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0) 40%, #FFF 100%),
+            linear-gradient(270deg, rgba(255,255,255,0) 70%, rgba(91,171,205,0.60) 85%, rgba(218,159,190,0.60) 95%, rgba(120,77,110,0.60) 100%);
+    }
+
+    .game-gradient-sunrise,
+    .game-gradient-craftiny { display: none; }
+
+    .sunrise-logo-wrapper,
+    .craftiny-logo-wrapper {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 20px;
+        width: 100%;
+        margin-top: -120px;
+        z-index: 2;
+        line-height: 1;
+    }
+
+    .sunrise-logo   { width: 220px; min-width: unset; }
+    .craftiny-logo  { width: 300px; min-width: unset; margin: 0; object-fit: unset; }
+
+    .section-about-us {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .about-text-column {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+}
+
+/* 768px */
+@media (max-width: 768px) {
+    .section-title { margin-bottom: 10px; }
+    .section-about-us { padding-top: 0; margin-bottom: 30px; }
+
+    .founders { flex-direction: column; padding-bottom: 0; gap: 30px; }
+
+    .founder-wrapper {
+        flex-direction: column;
+        gap: 0;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .founder-img-pink,
+    .founder-img-blue {
+        margin-left: 0;
+        margin-top: 20px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .founder-tag-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .founder-text-group { width: auto; }
+    .founder-name  { align-self: center; }
+    .founder-role  { align-self: center; }
+
+    .founder-star-pink,
+    .founder-star-blue { visibility: hidden; }
+
+    .bubble { margin: 20px; width: 100%; height: 120%; }
+
+    /* Hero carrousel */
+    .sunrise-logo-wrapper,
+    .craftiny-logo-wrapper { left: 20px; right: 20px; }
+
+    .hero-description { width: 100%; max-width: 100%; font-size: 22px; }
 }
