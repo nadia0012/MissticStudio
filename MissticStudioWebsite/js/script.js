@@ -32,34 +32,40 @@ document.addEventListener('DOMContentLoaded', function() {
     animatedElements.forEach(el => observer.observe(el));
 });
 
-// MP4 Video autoplay/pause on scroll
-const trailerVideo = document.getElementById('trailer-video');
+// YouTube IFrame Player API
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(tag);
 
-console.log('Video element trouvé:', trailerVideo);
+let player;
 
-if (trailerVideo) {
-    trailerVideo.muted = true;
+window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('youtube-player', {
+        events: {
+            onReady: function(event) {
+                event.target.mute();
+                observePlayer();
+            }
+        }
+    });
+};
+
+function observePlayer() {
+    const playerElement = document.getElementById('youtube-player');
 
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            console.log('ratio:', entry.intersectionRatio, '| intersecting:', entry.isIntersecting);
             if (entry.isIntersecting) {
-                trailerVideo.play().then(() => {
-                    console.log('✅ Video playing');
-                }).catch(err => {
-                    console.error('❌ Play bloqué:', err);
-                });
+                player.playVideo();
+                console.log('▶️ playing');
             } else {
-                trailerVideo.pause();
-                console.log('⏸ Video paused');
+                player.pauseVideo();
+                console.log('⏸ paused');
             }
         });
-    }, {
-        threshold: [0, 0.1]
-    });
+    }, { threshold: 0.1 });
 
-    videoObserver.observe(trailerVideo);
-    console.log('Observer attaché à:', trailerVideo.id);
+    videoObserver.observe(playerElement);
 }
 
 // Image Modal - Click to Enlarge

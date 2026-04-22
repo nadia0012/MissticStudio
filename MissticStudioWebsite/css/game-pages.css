@@ -300,7 +300,7 @@
     max-height: 350px;
 }
 
-.iframe-wrapper video {
+.iframe-wrapper iframe {
     position: absolute;
     top: 0;
     left: 50%;
