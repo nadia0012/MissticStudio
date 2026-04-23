@@ -17,3 +17,17 @@ php_value max_execution_time 60
 
 # Mémoire max pour un script
 php_value memory_limit 256M
+
+RewriteEngine On
+
+# Redirige /index.html vers / (URL propre pour la page d'accueil)
+RewriteRule ^index\.html$ https://www.missticstudio.com/ [R=301,L]
+
+# Redirige les .html vers l'URL sans extension
+RewriteCond %{THE_REQUEST} \s/(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Affiche le bon fichier .html sans changer l'URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
