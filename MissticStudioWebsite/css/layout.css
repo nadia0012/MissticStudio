@@ -211,7 +211,7 @@
 /* --- Logo dans sidebar --- */
 .sidebar-logo-wrapper {
     position: relative;
-    height: 70px;
+    height: 65px;
     flex-shrink: 0;
     margin: -20px -20px 0 -20px;
 }
