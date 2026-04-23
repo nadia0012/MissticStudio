@@ -472,6 +472,9 @@
     animation-play-state: paused;
 }
 
+.carousel-reviews.paused .reviews-top,
+.carousel-reviews.paused .reviews-bottom { animation-play-state: paused; }
+
 .reviews-gradient {
     position: absolute;
     inset: 0;
@@ -780,6 +783,8 @@
         width: 400px;
         height: 450px;
     }
+
+    .game-content-wrapper { align-items: center; }
 }
 
 /* 540px */

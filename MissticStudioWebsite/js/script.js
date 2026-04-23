@@ -3,12 +3,16 @@ var navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", function() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop) {
-        navbar.style.top = "-80px";
+    
+    if (scrollTop <= 0) {
+        navbar.style.top = "0"; // Toujours visible tout en haut
+    } else if (scrollTop > lastScrollTop) {
+        navbar.style.top = "-80px"; // Cache en scrollant vers le bas
     } else {
-        navbar.style.top = "0";
+        navbar.style.top = "0"; // Montre en scrollant vers le haut
     }
-    lastScrollTop = scrollTop;
+    
+    lastScrollTop = Math.max(scrollTop, 0); // Évite les valeurs négatives (bounce mobile)
 });
 
 // Scroll animations with Intersection Observer
@@ -230,21 +234,41 @@ const hamburgerBtn = document.getElementById('hamburgerBtn');
 const sidebar = document.getElementById('sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 const sidebarClose = document.getElementById('sidebarClose');
+let scrollY = 0;
+
+function lockScroll() {
+    scrollY = window.scrollY;
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+}
+
+function unlockScroll() {
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollY);
+}
 
 if (hamburgerBtn && sidebar && sidebarOverlay && sidebarClose) {
     hamburgerBtn.addEventListener('click', () => {
         sidebar.classList.add('open');
         sidebarOverlay.classList.add('open');
+        lockScroll();
     });
 
     sidebarClose.addEventListener('click', () => {
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('open');
+        unlockScroll();
     });
 
     sidebarOverlay.addEventListener('click', () => {
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('open');
+        unlockScroll();
     });
 }
 
@@ -254,6 +278,7 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
 
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('open');
+        unlockScroll();
 
         if (href && href.startsWith('#')) {
             e.preventDefault();
@@ -266,6 +291,34 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
         }
     });
 });
+
+// =============================================
+// Player reviews carousel - pause on touch (mobile)
+// =============================================
+const carousel = document.querySelector('.carousel-reviews');
+const reviewsTracks = document.querySelectorAll('.reviews-top, .reviews-bottom');
+
+if (carousel) {
+    let touchStartX, touchStartY;
+    let isPaused = false;
+
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+
+        if (dx < 10 && dy < 10) {
+            isPaused = !isPaused;
+            reviewsTracks.forEach(track => {
+                track.style.animationPlayState = isPaused ? 'paused' : 'running';
+            });
+        }
+    }, { passive: true });
+}
 
 
 // =============================================
